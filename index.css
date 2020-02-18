@@ -1,0 +1,52 @@
+/*
+	Filename: index.css
+	Filename: index.html
+	Author: Glenn Abastillas
+	Date: February 18, 2020
+
+	CSS definitions for the base style across all pages in the domain
+	www.glennabastillas.com
+
+*/
+
+
+html, head, body 
+{
+	background: #efefef;
+
+	font-family: Helvetica, Arial, sans-serif;
+
+	padding: 0;
+	margin: 0;
+
+	height: 100%;
+	width: 100%;
+}
+
+#content
+{
+	box-shadow: -0.5em -0.5em 1em 0.1em #fff, 0.5em 0.5em 1em 0.1em #ccc;
+	border-radius: 1em;
+
+	background: #f1f1f1;
+
+	display: block;
+	margin: auto;
+
+	position: relative;
+	top: 50%;
+	transform: translateY(-75%);
+
+	text-align: center;
+
+	height: 50%;
+	width: 50%;
+}
+
+#visual
+{
+	display: block;
+
+	height: 50%;
+	width: 100%;
+}
