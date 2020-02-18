@@ -1,36 +1,105 @@
 <!DOCTYPE html>
 <!-- 
-	Filename: index.html
-	Author: Glenn Abastillas
-	Date: February 18, 2020
+    Filename: index.html
+    Author: Glenn Abastillas
+    Date: February 18, 2020
 
-	HTML code for the main page of the domain www.glennabastillas.com
+    HTML code for the main page of the domain www.glennabastillas.com
 -->
 <html>
 <head>
-	<title>Abastillas</title>
-	<link type="text/css" href="index.css" rel="stylesheet" />
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"
+    <title>Abastillas</title>
+    <link type="text/css" href="index.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
-	<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
-	<script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
 </head>
 <body>
-	<div id="content">
-		<div id="visual">
-			
-		</div>
-		<div id="title">
-			<h1>Glenn Abastillas</h1>
-			<ul id="menu">
-				<li><a href="" target="blank">LinkedId</a></li>
-				<li><a href="" target="blank">Azure Repo</a></li>
-				<li><a href="" target="blank">GitHub</a></li>
-				<li><a href="" target="blank">CV</a></li>
-			</ul>
-		</div>
-	</div>
+    <div id="p1" class="page">
+        <div id="content">
+            <div id="visual">
+                
+            </div>
+            <div id="title">
+                <h1>Glenn Abastillas</h1>
+                <ul id="menu">
+                    <li><span id="linkedin" class="nav">LinkedIn</span></li>
+                    <li><span id="cv" class="nav">CV</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="navigation">
+        <ul>
+            <li>Background</li>
+            <li>Experience</li>
+            <li>Skills</li>
+            <li>Publications</li>
+        </ul>
+    </div>
+
+    <div id="p2" class="page">
+        <div class="resume">
+            <h2>Background.</h2>
+
+            <span id="background">Experienced multilingual data scientist with 7 years of experience working with health and medical  related programs and services at the National Cancer Institute and the Department of Veterans  Affairs. He specializes in artificial intelligence technologies such as natural language processing  (NLP), machine learning (ML) and developing data visualizations. He is also a computational linguist  and polyglot and speaks multiple languages.  
+            </span>
+
+            <table id="skills">
+                <tr>
+                    <td class="header">Programming</td>
+                    <td class="header">Markup and Data Formats</td>
+                    <td class="header">Development IDEs</td>
+                </tr>
+                <tr>
+                    <td class="content">Python, R, SQL, JavaScript, Lua, Java, PHP, Visual Basic</td>
+                    <td class="content"></td>
+                    <td class="content"></td>
+                </tr>
+                <tr>
+                    <td class="header">Databases</td>
+                    <td class="header">Distributed Computing</td>
+                    <td class="header">Platforms and Environments</td>
+                </tr>
+                <tr>
+                    <td class="content"></td>
+                    <td class="content"></td>
+                    <td class="content"></td>
+                </tr>
+                <tr>
+                    <td class="header">Dashboards</td>
+                    <td class="header">Visual Editing</td>
+                    <td class="header">Office Software</td>
+                </tr>
+                <tr>
+                    <td class="content"></td>
+                    <td class="content"></td>
+                    <td class="content"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="p3" class="page">
+        <div class="resume">
+            <h2>Professional Experience.</h2>
+        </div>
+    </div>
+
+    <div id="p4" class="page">
+        <div class="resume">
+            <h2>Publications.</h2>
+        </div>
+    </div>
+
+    <div id="p5" class="page">
+        <div class="resume">
+            <h2>Projects.</h2>
+        </div>
+    </div>
 
 </body>
 </html>
