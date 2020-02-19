@@ -109,6 +109,11 @@ html, head, body
     background: #fff;
 }
 
+/* Page 2 and Resume Section
+ * 
+ * 
+ */
+
 .page
 {
     padding: 0;
@@ -116,11 +121,22 @@ html, head, body
     height: 95%;
     overflow: hidden;
     text-align: center;
+    position: relative;
 }
 
 .page-extended
 {
     height:  190%;
+}
+
+.remote
+{
+    display: block;
+    width: 5em;
+    height: 10em;
+    position: absolute;
+    background: red;
+    visibility: hidden;
 }
 
 .resume
@@ -131,8 +147,9 @@ html, head, body
     padding: 0;
 
     text-align: left;
+    position: relative;
 
-    width: 60%;
+    width: 45%;
     height: 100%;
 
     cursor: default;
@@ -140,12 +157,23 @@ html, head, body
     -webkit-user-select: none;
 }
 
+.resume h2 span
+{
+    font-size: 0.25em;
+}
+
 .resume h2 a
 {
     text-decoration: none;
     font-weight: 100;
-    font-size: 0.25em;
     color: #888;
+}
+
+.resume h2 a:hover
+{
+    color: #111;
+    transition: all 1s ease;
+    position: relative;
 }
 
 #p2 .resume span
@@ -156,6 +184,13 @@ html, head, body
     text-align: left;
 
     width: 100%;
+}
+
+#p2 .resume h2 span
+{
+    font-size: 0.25em;
+    font-weight: 100;
+    color:  #9a9a9a;
 }
 
 #p2 table#skills
@@ -191,6 +226,8 @@ html, head, body
 #p3
 {
     height:  auto;
+    padding-bottom: auto;
+    position: relative;
 }
 
 #p3 .resume
@@ -201,7 +238,6 @@ html, head, body
 
 #p3 .resume h2
 {
-    /* font-size: 1.5em; */
 }
 
 #p3 .resume h3 span
@@ -213,4 +249,30 @@ html, head, body
 #p3 .resume li:hover
 {
     font-weight: 400;
+    transition: all 1s;
+}
+
+/* Page 4 — Resume */
+
+#p4
+{
+    height: auto;
+    padding-bottom: 1em;
+}
+
+#p4 .resume
+{
+    font-weight: 100;
+}
+
+#p4 .resume h2 span
+{
+    font-size: 0.25em;
+}
+
+/* Page 7 - Resume */
+
+#p7
+{
+    height: auto;
 }

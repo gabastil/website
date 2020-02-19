@@ -21,4 +21,25 @@
         window.scrollTo(0, cv_background_top);
     });
 
+    $(document).scroll(function(){
+        var cv_y = $("#p3").position().top;
+        var pg_y = window.pageYOffset;
+        var cv_menu = $(".remote");
+
+        if (pg_y > cv_y + 10) {
+            cv_menu.css("visibility", "visible");
+        } else {
+            cv_menu.css("visibility", "hidden");
+        }
+
+    });
+
  })
+
+
+// Functions
+
+function showExperienceMenu(){
+    var doc = window;
+    alert(doc.pageYOffset);
+}
