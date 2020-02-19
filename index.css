@@ -23,37 +23,6 @@ html, head, body
     width: 100%;
 }
 
-.page
-{
-    padding: 0;
-    margin: 0;
-    height: 95%;
-    overflow: hidden;
-    text-align: center;
-}
-
-.page-extended
-{
-    height:  190%;
-}
-
-.resume
-{
-    font-family: "Garamond", "Bell MT", serif;
-    font-weight: 200;
-    margin: 0 auto;
-    padding: 0;
-
-    text-align: left;
-
-    width: 80%;
-    height: 100%;
-
-    cursor: default;
-    user-select: none;
-    -webkit-user-select: none;
-}
-
 #p1{}
 
 #content
@@ -82,9 +51,7 @@ html, head, body
     position: fixed;
     top: 10%;
     right: 5%;
-
     width: 7em;
-
     visibility: hidden;
 }
 
@@ -142,14 +109,51 @@ html, head, body
     background: #fff;
 }
 
+.page
+{
+    padding: 0;
+    margin: 0;
+    height: 95%;
+    overflow: hidden;
+    text-align: center;
+}
+
+.page-extended
+{
+    height:  190%;
+}
+
+.resume
+{
+    font-family: "Helvetica", "Arial", "Bell MT", serif;
+    font-weight: 200;
+    margin: 0 auto;
+    padding: 0;
+
+    text-align: left;
+
+    width: 60%;
+    height: 100%;
+
+    cursor: default;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.resume h2 a
+{
+    text-decoration: none;
+    font-weight: 100;
+    font-size: 0.25em;
+    color: #888;
+}
+
 #p2 .resume span
 {
     font-size: 1.5em;
     font-family: "Helvetica", "Arial", sans-serif;
 
     text-align: left;
-
-    margin-bottom: 3em;
 
     width: 100%;
 }
@@ -180,4 +184,33 @@ html, head, body
 {
     font-weight: 200;
     vertical-align: top;
+}
+
+/* Page 3 — Resume */
+
+#p3
+{
+    height:  auto;
+}
+
+#p3 .resume
+{
+    font-size: 1em;
+    font-weight: 200;
+}
+
+#p3 .resume h2
+{
+    /* font-size: 1.5em; */
+}
+
+#p3 .resume h3 span
+{
+    font-weight: 100;
+    color:  #9a9a9a;
+}
+
+#p3 .resume li:hover
+{
+    font-weight: 400;
 }
