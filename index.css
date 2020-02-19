@@ -134,7 +134,7 @@ html, head, body
     display: block;
     width: 5em;
     height: 10em;
-    position: absolute;
+    position: fixed;
     background: red;
     visibility: hidden;
 }
@@ -252,12 +252,15 @@ html, head, body
     transition: all 1s;
 }
 
-/* Page 4 — Resume */
+/* Page 4 — Publications
+ * 
+ * 
+ */
 
 #p4
 {
     height: auto;
-    padding-bottom: 1em;
+    padding-bottom: 2em;
 }
 
 #p4 .resume
@@ -268,6 +271,47 @@ html, head, body
 #p4 .resume h2 span
 {
     font-size: 0.25em;
+}
+
+#p4 li
+{
+    color: #555;
+}
+
+#p4 li:hover
+{
+    color: #000;
+}
+
+#p4 .publication-title
+{
+    color: #000;
+    font-weight: 400;
+}
+
+/* Page 5 - Education
+ *
+ *
+ */
+
+#p5
+{
+    height: auto;
+    padding-bottom: 2em;
+}
+
+#p5 li
+{
+    font-size: 1.25em;
+    list-style-type: none;
+    font-weight: 100;
+    color: #aaa;
+}
+
+#p5 .university-name
+{
+    font-weight: 600;
+    color: #000;
 }
 
 /* Page 7 - Resume */
