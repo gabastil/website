@@ -8,7 +8,7 @@
 */
 
 
-html, head, body 
+html, head, body
 {
     background: #efefef;
 
@@ -32,6 +32,11 @@ html, head, body
     text-align: center;
 }
 
+.page-extended
+{
+    height:  190%;
+}
+
 .resume
 {
     font-family: "Garamond", "Bell MT", serif;
@@ -39,19 +44,22 @@ html, head, body
     margin: 0 auto;
     padding: 0;
 
+    text-align: left;
+
     width: 80%;
     height: 100%;
 
-    /*background: white;*/
+    cursor: default;
     user-select: none;
+    -webkit-user-select: none;
 }
 
 #p1{}
 
 #content
 {
-    box-shadow: -0.5em -0.5em 1em 0.1em #fff, 
-                 0.5em 0.5em 1em 0.1em #ddd;
+    box-shadow: -0.5em -0.5em 0.5em 0.01em #fff,
+                 0.5em 0.5em 0.5em 0.01em #ddd;
     border-radius: 1em;
 
     background: #f1f1f1;
@@ -134,24 +142,31 @@ html, head, body
     background: #fff;
 }
 
-#p2 span#background
+#p2 .resume span
 {
     font-size: 1.5em;
     font-family: "Helvetica", "Arial", sans-serif;
+
     text-align: left;
+
+    margin-bottom: 3em;
+
+    width: 100%;
 }
 
 #p2 table#skills
 {
     /*display: block;*/
+    border: 1px solid black;
     margin: auto;
     font-family: "Arial", sans-serif;
-    width: 50%;
-    height: 80%;
+    width: 75%;
+    /* height: 80%; */
 }
 
 #p2 td
 {
+    border:  1px solid black;
     width: 5em;
 }
 
