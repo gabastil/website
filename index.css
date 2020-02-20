@@ -242,10 +242,11 @@ html, head, body
     width: 100%;
 }
 
-#p2 table#skills
+#p2 table
 {
     /*display: block;*/
     border: 1px solid black;
+    padding-top: 1em;
     margin: auto;
     font-family: "Arial", sans-serif;
     width: 75%;
