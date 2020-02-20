@@ -245,7 +245,8 @@ html, head, body
 #p2 table
 {
     /*display: block;*/
-    border: 1px solid black;
+    /*border: 1px solid black;*/
+    /*background: #efefef;*/
     padding-top: 1em;
     margin: auto;
     font-family: "Arial", sans-serif;
@@ -253,24 +254,31 @@ html, head, body
     /* height: 80%; */
 }
 
+#p2 th
+{
+    font-style: "Helvetica", "Arial", sans-serif;
+    text-align: center;
+}
+
 #p2 td
 {
-    border:  1px solid black;
+    /*border: none;*/
+    /*border:  1px solid black;*/
+    background: #eee;
     width: 5em;
-}
-
-#p2 td.header
-{
-    font-weight: 600;
-    height: 1em;
-}
-
-#p2 td.content
-{
-    font-weight: 200;
+    padding: 0;
+    margin: 0;
+    text-align: left;
     vertical-align: top;
 }
 
+#p2 .rating
+{
+    font-size: 1.25em;
+    text-align: left;
+    vertical-align: middle;
+    color: #ffcc00;
+}
 
 /* * * * * * * * * * * * */
 /*  Page 3 - Experience  */

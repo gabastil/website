@@ -10,9 +10,11 @@
 <head>
     <title>Abastillas</title>
     <link type="text/css" href="index.css" rel="stylesheet" />
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+
+    <!-- JQuery Script Import -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+    <!-- D3 Script Import -->
     <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
     <script type="text/javascript" src="index.js"></script>
 </head>
@@ -23,13 +25,13 @@
         <div id="content">
             <div id="header"><h1>Glenn Abastillas</h1></div>
             <div id="icons">
-                <a class="icon" title="LinkedIn" target="blank" href="https://www.linkedin.com/in/glennabastillas/" ><img class="icon" src="https://simpleicon.com/wp-content/uploads/linkedin.png" /></a>
+                <a class="icon" title="LinkedIn" target="blank" href="https://www.linkedin.com/in/glennabastillas/" ><img class="icon" src="./resources/svg/icon-linkedin.svg" /></a>
 
-                <a class="icon" title="GitHub" target="blank" href="https://github.com/gabastil"><img class="icon" src="https://cdn2.iconfinder.com/data/icons/social-icons-circular-color/512/github-512.png" /></a>
+                <a class="icon" title="GitHub" target="blank" href="https://github.com/gabastil"><img class="icon" src="./resources/svg/icon-github.svg" /></a>
 
-                <a class="icon" title="Resume" href="#background"><img class="icon" src="https://img.icons8.com/plasticine/2x/resume.png" /></a>
+                <a class="icon" title="Resume" href="#background"><img class="icon" src="./resources/svg/icon-cv.svg" /></a>
 
-                <a class="icon" title="Publication" target="blank" href=""><img class="icon" src="https://cdn2.iconfinder.com/data/icons/book-22/210/1461-512.png" /></a>
+                <a class="icon" title="Publication" target="blank" href=""><img class="icon" src="./resources/svg/icon-cv-2.svg" /></a>
             </div>
         </div>
     </div>
@@ -55,73 +57,160 @@
                     </span>
                 </h2>
 
-                <span id="background">Data scientist, natural language processing (NLP) developer, and computational linguist with over seven years of experience developing NLP and machine learning (ML) algorithms, dashboards,data visualizations, and supporting research in the health domain. He takes a human-centered design approach to developing solutions and software for clients.
+                <span id="background"><span class="term"><a href="https://datascience.berkeley.edu/about/what-is-data-science/" target="blank">Data scientist</a></span>, natural language processing (NLP) developer, and computational linguist with over seven years of experience developing NLP and machine learning (ML) algorithms, dashboards,data visualizations, and supporting research in the health domain. He takes a human-centered design approach to developing solutions and software for clients.
                 </span>
+
+                <table>
+                    <tr>
+                        <th>Programming</th>
+                        <th>Formats</th>
+                        <th>Development IDEs</th>
+                    </tr>
+                    <tr>
+                        <td>Python, R, SQL, JavaScript, Java, Lua, PHP, VBA</td>
+                        <td>HTML, XML, YAML, CSS, Markdown, JSON, HL7, FHIR</td>
+                        <td>Anaconda, Spyder, Jupyter, SageMaker, RStudio, I2E, IntelliJ, Eclipse</td>
+                    </tr>
+                    <tr>
+                        <th>Distributed Computing</th>
+                        <th>Environments and Repos</th>
+                        <th>Dashboards</th>
+                    </tr>
+                    <tr>
+                        <td>Multithreading, multiprocessing, Spark, Hadoop</td>
+                        <td>Docker, Anaconda, GitHub, Azure, AWS</td>
+                        <td>Power BI, Tableau</td>
+                    </tr>
+                    <tr>
+                        <th>Visual Editing</th>
+                        <th>Office Software</th>
+                        <th>Certifications</th>
+                    </tr>
+                    <tr>
+                        <td>Visio, Draw.io, Photoshop, Vegas, Corel, Illustrator</td>
+                        <td>Word, PowerPoint, Excel, Access, Outlook, Visio</td>
+                        <td>Registered Nurse, Basic Life Support, Translator, Scrum Master</td>
+                    </tr>
+                </table>
+
+
+
+<!--            
+                OLD TABLE OF SKILLS FORMAT THAT HAD STARS FOR EACH SKILL
 
                 <table id="skills">
                     <tr>
                         <th colspan="2">Programming</th>
-                        <th>Markup and Data Formats</th>
+                        <th colspan="2">Markup and Data Formats</th>
                         <th>Development IDEs</th>
                     </tr>
                     <tr>
                         <td>Python</td>
-                        <td>&#9733; &#9733; &#9733; &#9733; &#9733;</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
 
-                        <td></td>
-                        <td></td>
+                        <td>HTML</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+
+                        <td>Anaconda</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
                     </tr>
                     <tr>
                         <td>R</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+
+                        <td>XML</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+
+                        <td>Spyder</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
                     </tr>
                     <tr>
                         <td>SQL</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+
+                        <td>YAML</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+
+                        <td>Jupyter</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
                     </tr>
                     <tr>
                         <td>JavaScript</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Lua</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
+
+                        <td>CSS</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+
+                        <td>SageMaker</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
                     </tr>
                     <tr>
                         <td>Java</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9734;&#9734;</td>
+
+                        <td>Markdown</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+                    </tr>
+                    <tr>
+                        <td>Lua</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9734;&#9734;</td>
+
+                        <td>JSON</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
                     </tr>
                     <tr>
                         <td>PHP</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td class="rating">&#9733;&#9733;&#9734;&#9734;&#9734;</td>
+
+                        <td>HL7</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
                     </tr>
                     <tr>
                         <td>VBA</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td class="rating">&#9733;&#9733;&#9734;&#9734;&#9734;</td>
+
+                        <td>FHIR</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
                     </tr>
                     <tr>
-                        <th colspan="2">Databases</th>
-                        <th>Distributed Computing</th>
-                        <th>Platforms and Environments</th>
+                        <th colspan="2">Distributed Computing</th>
+                        <th colspan="2">Environments and Repos</th>
+                        <th colspan="2">Platforms and Environments</th>
+                    </tr>
+                    <tr>
+                        <td>Multithreading</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+
+                        <td>Anaconda</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+                    </tr>
+                    <tr>
+                        <td>Multiprocessing</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+                        
+                        <td>Docker</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
+                    </tr>
+                    <tr>
+                        <td>Spark</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9734;&#9734;</td>
+                        
+                        <td>GitHub</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+                    </tr>
+                    <tr>
+                        <td>Hadoop</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9734;&#9734;</td>
+                        
+                        <td>Azure</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td></td>
-                        <td></td>
+                        <td class="rating"></td>
+                        
+                        <td>AWS</td>
+                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
                     </tr>
                     <tr>
                         <th colspan="2">Dashboards</th>
@@ -133,7 +222,7 @@
                         <td></td>
                         <td></td>
                     </tr>
-                </table>
+                </table> -->
             </div>
         </div>
 
