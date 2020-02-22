@@ -169,7 +169,7 @@ html, head, body
     height: 100%;
     width: 100%;
     z-index: 0;
-    filter:  blur(0.5rem);
+    filter:  blur(1rem);
 }
 
 
@@ -350,6 +350,11 @@ html, head, body
  *
  *
  */
+
+ #p5
+ {
+    background: #efefef;
+ }
 
 #p5 li
 {
