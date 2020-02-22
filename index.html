@@ -16,24 +16,30 @@
 
     <!-- D3 Script Import -->
     <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+    <!-- Custom Script Import -->
     <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="./js/animation.js"></script>
+    <a id="top"></a>
 </head>
 <body>
-    <a id="top"></a>
 
     <div id="p1" class="page">
         <div id="content">
-            <div id="header"><h1>Glenn Abastillas</h1></div>
+            <div id="header">
+                <h1>Glenn Abastillas</h1>
+            </div>
             <div id="icons">
-                <a class="icon" title="LinkedIn" target="blank" href="https://www.linkedin.com/in/glennabastillas/" ><img class="icon" src="./resources/svg/icon-linkedin.svg" /></a>
+                <a class="icon" title="LinkedIn" target="blank" href="https://www.linkedin.com/in/glennabastillas/" ><img class="icon" src="./resources/svg/icon-linkedin-2.svg" /></a>
 
-                <a class="icon" title="GitHub" target="blank" href="https://github.com/gabastil"><img class="icon" src="./resources/svg/icon-github.svg" /></a>
+                <a class="icon" title="GitHub" target="blank" href="https://github.com/gabastil"><img class="icon" src="./resources/svg/icon-github-octopus.svg" /></a>
 
-                <a class="icon" title="Resume" href="#background"><img class="icon" src="./resources/svg/icon-cv.svg" /></a>
+                <a class="icon" title="Resume" href="#background"><img class="icon" src="./resources/svg/icon-person-page.svg" /></a>
 
-                <a class="icon" title="Publication" target="blank" href=""><img class="icon" src="./resources/svg/icon-cv-2.svg" /></a>
+                <a class="icon" title="Publication" target="blank" href=""><img class="icon" src="./resources/svg/icon-book.svg" /></a>
             </div>
         </div>
+        <svg></svg>
     </div>
 
 <!--     <div id="navigation">
@@ -60,6 +66,15 @@
                 <span id="background"><span class="term"><a href="https://datascience.berkeley.edu/about/what-is-data-science/" target="blank">Data scientist</a></span>, natural language processing (NLP) developer, and computational linguist with over seven years of experience developing NLP and machine learning (ML) algorithms, dashboards,data visualizations, and supporting research in the health domain. He takes a human-centered design approach to developing solutions and software for clients.
                 </span>
 
+
+                <!--
+                    SKILLS TABLE
+                    THIS TABLE contains skills for the resume
+
+                    Star HTML Entity codes are
+                    &#9733; for a full star ★
+                    &#9734; for an empty star ☆
+                -->
                 <table>
                     <tr>
                         <th>Programming</th>
@@ -93,136 +108,6 @@
                     </tr>
                 </table>
 
-
-
-<!--            
-                OLD TABLE OF SKILLS FORMAT THAT HAD STARS FOR EACH SKILL
-
-                <table id="skills">
-                    <tr>
-                        <th colspan="2">Programming</th>
-                        <th colspan="2">Markup and Data Formats</th>
-                        <th>Development IDEs</th>
-                    </tr>
-                    <tr>
-                        <td>Python</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-
-                        <td>HTML</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-
-                        <td>Anaconda</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-                    </tr>
-                    <tr>
-                        <td>R</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-
-                        <td>XML</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-
-                        <td>Spyder</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-                    </tr>
-                    <tr>
-                        <td>SQL</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-
-                        <td>YAML</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-
-                        <td>Jupyter</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-                    </tr>
-                    <tr>
-                        <td>JavaScript</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
-
-                        <td>CSS</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-
-                        <td>SageMaker</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-                    </tr>
-                    <tr>
-                        <td>Java</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9734;&#9734;</td>
-
-                        <td>Markdown</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-                    </tr>
-                    <tr>
-                        <td>Lua</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9734;&#9734;</td>
-
-                        <td>JSON</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-                    </tr>
-                    <tr>
-                        <td>PHP</td>
-                        <td class="rating">&#9733;&#9733;&#9734;&#9734;&#9734;</td>
-
-                        <td>HL7</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-                    </tr>
-                    <tr>
-                        <td>VBA</td>
-                        <td class="rating">&#9733;&#9733;&#9734;&#9734;&#9734;</td>
-
-                        <td>FHIR</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
-                    </tr>
-                    <tr>
-                        <th colspan="2">Distributed Computing</th>
-                        <th colspan="2">Environments and Repos</th>
-                        <th colspan="2">Platforms and Environments</th>
-                    </tr>
-                    <tr>
-                        <td>Multithreading</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-
-                        <td>Anaconda</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-                    </tr>
-                    <tr>
-                        <td>Multiprocessing</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-                        
-                        <td>Docker</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
-                    </tr>
-                    <tr>
-                        <td>Spark</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9734;&#9734;</td>
-                        
-                        <td>GitHub</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-                    </tr>
-                    <tr>
-                        <td>Hadoop</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9734;&#9734;</td>
-                        
-                        <td>Azure</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td class="rating"></td>
-                        
-                        <td>AWS</td>
-                        <td class="rating">&#9733;&#9733;&#9733;&#9733;&#9734;</td>
-                    </tr>
-                    <tr>
-                        <th colspan="2">Dashboards</th>
-                        <th>Visual Editing</th>
-                        <th>Office Software</th>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </table> -->
             </div>
         </div>
 
@@ -320,7 +205,7 @@
                 </h2>
 
                 <ol>
-                    <li><span class="publication">Abastillas, G (2018). <span class="publication-title">“You are what you tweet: A Divergence in code-switching practices in Cebuano and English speakers in the Philippines”. </span>Language & Literature in a Glocal World. Singapore: Springer.</span></li>
+                    <li><span class="publication"><a href="" target="blank">Abastillas, G (2018). <span class="publication-title">“You are what you tweet: A Divergence in code-switching practices in Cebuano and English speakers in the Philippines”. </span>Language & Literature in a Glocal World. Singapore: Springer.</a></span></li>
 
                     <li><span class="publication">Abastillas, G. L.; Morris, S. D.; Boten, J. A.; Tumurchudur, T.; Vora, K.; Fearn, P. F. (2017). <span class="publication-title">Characterizing a Learning Curve for Annotating Data for Training and Validation of Natural Language Processing Systems. </span>Poster presented at: American Medical Informatics Association Annual Symposium; 2017 November 4 – 8: Washington, DC.</span></li>
 
@@ -378,6 +263,11 @@
                         <a href="#top">to top</a>
                     </span>
                 </h2>
+
+                <ul>
+                    <li><a href="">LinkedIn</a></li>
+                    <li><a href="">GitHub</a></li>
+                </ul>
             </div>
         </div>
     </div>
