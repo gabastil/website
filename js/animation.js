@@ -12,12 +12,16 @@
 const datasets = {
                   precipitation : "https://www1.ncdc.noaa.gov/pub/data/cdo/samples/PRECIP_HLY_sample_csv.csv", // Valid link but only 3 samples
                   // poverty : "http://api.worldbank.org/v2/en/indicator/SI.POV.DDAY?downloadformat=csv",
-                  // adult : "https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data",
+                  adult : "https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data",
                   // drug : "https://data.ct.gov/api/views/rybz-nyjw/rows.csv?accessType=DOWNLOAD",
                   // child : "https://data.ok.gov/sites/default/files/res_child_mental_health_treatment_-_line_chart_fkvh-8k7q.csv",
                   fertility : "https://api.worldbank.org/v2/en/country/all/indicator/SP.DYN.TFRT.Q2?format=json&per_page=20000&source=39"
-                 }
+                 };
 
+// const local_data = {
+//                      letters : "../letters.json",
+//                      letters2 : "../letters.csv",
+//                     };
 
 // const data = d3.json(datasets['fertility']);
 
@@ -64,14 +68,8 @@ const $DATA = [
  */
 
 $(document).ready(function(){
-    sandbox();
 
-    $("rect").hover(function() {
-        $(this).attr("old_fill", $(this).attr("fill"));
-        $(this).attr("fill", "red");
-    }, function() {
-        $(this).attr("fill", $(this).attr("old_fill"));
-    });
+    sandbox();
 
 })
 
@@ -84,6 +82,8 @@ $(document).ready(function(){
  */
 
  function sandbox(){
+
+    d3.csv(local_data.letters2, function(data){alert(data)});
 
     let svg = d3.select("svg");
 
@@ -173,6 +173,10 @@ $(document).ready(function(){
      * ----------
      *      d (JSON): Input data
      */
+ }
+
+ function keys(obj){
+    return Object.keys(obj)
  }
 
  function processFertilityData(d){
