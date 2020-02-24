@@ -7,6 +7,7 @@ Contents
   1. [HTML](#html)
   2. [CSS](#css)
   3. [JavaScript](#javascript)
+  4. [File Structure](#file_structure)
 
 
 ## HTML <a id="html"></a>
@@ -34,4 +35,24 @@ name | purpose
 index.js | Contains JavaScript, JQuery, and D3 references
 animation.js | Contains scripts to animate SVG elements in the splash page
 
+
+## File Structure <a id="file_structure"></a>
+
+This website has the following structure:
+
+```
+	`- root
+		`- index.html		// Main website
+		`- js
+			`- index.js		// Main JavaScript file
+			`- animation.js	// JavaScript file for D3 animations
+
+		`- css
+			`- index.css	// Main CSS file
+
+		`- resources
+			`- data			// Datasets used by this site
+			`- svg			// SVG graphics
+			`- txt			// Text documents
+```
 
