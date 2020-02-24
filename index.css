@@ -8,7 +8,7 @@
 */
 
 
-html, head, body 
+html, head, body
 {
     background: #efefef;
 
@@ -39,6 +39,8 @@ html, head, body
     margin: 0 auto;
     padding: 0;
 
+    text-align: left;
+
     width: 80%;
     height: 100%;
 
@@ -50,7 +52,7 @@ html, head, body
 
 #content
 {
-    box-shadow: -0.5em -0.5em 1em 0.1em #fff, 
+    box-shadow: -0.5em -0.5em 1em 0.1em #fff,
                  0.5em 0.5em 1em 0.1em #ddd;
     border-radius: 1em;
 
@@ -138,31 +140,37 @@ html, head, body
 {
     font-size: 1.5em;
     font-family: "Helvetica", "Arial", sans-serif;
-    text-align: left;
 }
 
-#p2 table#skills
+#p2 #skills
 {
     /*display: block;*/
+    /*padding-top: 1em;*/
+    padding: 0;
     margin: auto;
     font-family: "Arial", sans-serif;
-    width: 50%;
-    height: 80%;
+    width: 90%;
+    height: 10%;
 }
 
 #p2 td
 {
-    width: 5em;
+    /*width: 7em;*/
+    font-weight: 200;
+    /*vertical-align: middle;*/
+    background: red;
 }
 
-#p2 td.header
+#p2 th
 {
     font-weight: 600;
     height: 1em;
+    /*width: 5em;*/
+    background: blue;
 }
 
-#p2 td.content
+.p3
 {
-    font-weight: 200;
-    vertical-align: top;
+    background: blue;
+    height: 1em;
 }
