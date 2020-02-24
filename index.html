@@ -7,6 +7,7 @@
     HTML code for the main page of the domain www.glennabastillas.com
 -->
 <html>
+<!-- <a id="top"></a> -->
 <head>
     <title>Abastillas</title>
     <link type="text/css" href="index.css" rel="stylesheet" />
@@ -20,7 +21,6 @@
     <!-- Custom Script Import -->
     <script type="text/javascript" src="index.js"></script>
     <script type="text/javascript" src="./js/animation.js"></script>
-    <a id="top"></a>
 </head>
 <body>
 
@@ -28,24 +28,27 @@
         <div id="content">
             <div id="header">
                 <h1>Glenn Abastillas</h1>
-
-<!--                 <ul>
-                    <li>CV / Resume</li>
-                    <li>Check out data</li>
-                </ul> -->
-
+                <ul>
+                    <li>
+                        <a id="about">About</a>
+                        <ul id='pulldown'>
+                            <li><a href="#background">Background</a></li>
+                            <li><a href="#experience">Experience</a></li>
+                            <li><a href="#publications">Publications</a></li>
+                            <li><a href="#education">Education</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="https://www.linkedin.com/in/glennabastillas/" target="blank">LinkedIn</a></li>
+                    <li><a href="https://github.com/gabastil" target="blank">GitHub</a></li>
+                    <li><a href="https://doi.org/10.1007/978-981-10-8468-3" target="blank">Research</a></li>
+                    <!-- <li>Visualization Sample</li> -->
+                </ul>
             </div>
-            <div id="icons">
-                <a class="icon" title="LinkedIn" target="blank" href="https://www.linkedin.com/in/glennabastillas/" ><img class="icon" src="./resources/svg/icon-linkedin-2.svg" /></a>
-
-                <a class="icon" title="GitHub" target="blank" href="https://github.com/gabastil"><img class="icon" src="./resources/svg/icon-github-octopus.svg" /></a>
-
-                <a class="icon" title="Resume" href="#background"><img class="icon" src="./resources/svg/icon-person-page.svg" /></a>
-
-                <a class="icon" title="Publication" target="blank" href=""><img class="icon" src="./resources/svg/icon-book.svg" /></a>
-            </div>
+            <div id="header-screen"></div>
         </div>
-        <svg></svg>
+        <svg id="first"></svg>
+        <svg id="second"></svg>
+        <svg id="third"></svg>
     </div>
 
 <!--     <div id="navigation">
@@ -69,7 +72,9 @@
                     </span>
                 </h2>
 
-                <span id="background"><span class="term"><a href="https://datascience.berkeley.edu/about/what-is-data-science/" target="blank">Data scientist</a></span>, natural language processing (NLP) developer, and computational linguist with over seven years of experience developing NLP and machine learning (ML) algorithms, dashboards,data visualizations, and supporting research in the health domain. He takes a human-centered design approach to developing solutions and software for clients.
+                <span id="background"><span class="term">
+                    <!-- <a href="https://datascience.berkeley.edu/about/what-is-data-science/" target="blank"> --><!-- </a> -->
+                    Data scientist</span>, natural language processing (NLP) developer, and computational linguist with over seven years of experience developing NLP and machine learning (ML) algorithms, dashboards,data visualizations, and supporting research in the health domain. He takes a human-centered design approach to developing solutions and software for clients.
                 </span>
 
 
@@ -228,21 +233,24 @@
                     Education.
                     <span>
                         <a href="#top">to top</a> &bull;
-                        <a href="#projects">to Projects</a>
+                        <a href="#publications">to Publications</a>
                     </span>
                 </h2>
                 <ul>
                     <li>
                         <span class="university-name">
                             Georgetown University
-                        </span>
+                        </span><br/>
                             Masters Degree in Linguistics, 2013 – 2015
                         <br/>
-                        <span class="university-projects">
+                        <span class="university-projects">&rightarrow;
                             <a href="https://repository.library.georgetown.edu/handle/10822/760907">Thesis Repository and Data</a>
                         </span>
+                        <!-- <img src="https://seeklogo.com/images/G/georgetown-university-logo-7CC01223FE-seeklogo.com.png" /> -->
                     </li>
-                    <li><span class="university-name">Rutgers, the State University of New Jersey</span>, Bachelor’s Degree in Science, 2006 – 2010</li>
+                    <li><span class="university-name">Rutgers, the State University of New Jersey</span><br/>Bachelor’s Degree in Science, 2006 – 2010
+                        <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Rutgers_Scarlet_Knights_logo.svg/1153px-Rutgers_Scarlet_Knights_logo.svg.png" /> -->
+                    </li>
                 </ul>
             </div>
         </div>
@@ -270,10 +278,15 @@
                     </span>
                 </h2>
 
-                <ul>
-                    <li><a href="https://www.linkedin.com/in/glennabastillas/">LinkedIn</a></li>
-                    <li><a href="https://github.com/gabastil">GitHub</a></li>
-                </ul>
+                <div id="icons">
+                    <a class="icon" title="LinkedIn" target="blank" href="https://www.linkedin.com/in/glennabastillas/" ><img class="icon" src="./resources/svg/icon-linkedin-2.svg" /></a>
+
+                    <a class="icon" title="GitHub" target="blank" href="https://github.com/gabastil"><img class="icon" src="./resources/svg/icon-github-octopus.svg" /></a>
+
+                    <a class="icon" title="Resume" href="#background"><img class="icon" src="./resources/svg/icon-person-page.svg" /></a>
+
+                    <a class="icon" title="Publication" target="blank" href=""><img class="icon" src="./resources/svg/icon-book.svg" /></a>
+                </div>
             </div>
         </div>
     </div>

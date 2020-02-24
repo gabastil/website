@@ -5,73 +5,37 @@
  * JavaScript for D3 animation on splashpage for
  * www.glennabastillas.com
  *
- */
-
-
-// Data URLs from data.gov and kaggle.com
-const datasets = {
-                  precipitation : "https://www1.ncdc.noaa.gov/pub/data/cdo/samples/PRECIP_HLY_sample_csv.csv", // Valid link but only 3 samples
-                  // poverty : "http://api.worldbank.org/v2/en/indicator/SI.POV.DDAY?downloadformat=csv",
-                  adult : "https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data",
-                  // drug : "https://data.ct.gov/api/views/rybz-nyjw/rows.csv?accessType=DOWNLOAD",
-                  // child : "https://data.ok.gov/sites/default/files/res_child_mental_health_treatment_-_line_chart_fkvh-8k7q.csv",
-                  fertility : "https://api.worldbank.org/v2/en/country/all/indicator/SP.DYN.TFRT.Q2?format=json&per_page=20000&source=39"
-                 };
-
-// const local_data = {
-//                      letters : "../letters.json",
-//                      letters2 : "../letters.csv",
-//                     };
-
-// const data = d3.json(datasets['fertility']);
-
-// data.then(processFertilityData);
-
-// var data_ = data.then(
-//     function(d){
-//         console.log(d);
-//         alert(d.columns);
-//         alert("Number of rows " + d.length);
-//         return d[0];
-//     },
-//     function(){
-//         alert("No data");
-//     }
-//     );
-
-const $DATA = [
-{
-     x : "20%",
-     y : 100,
-     z : 13,
- },
-{
-     x : '40%',
-     y : 870,
-     z : 90,
- },
-{
-     x : 400,
-     y : 120,
-     z : 5,
- },
-{
-     x : 700,
-     y : 340,
-     z : 5,
- }
-];
-
-
-/*
- * SANDBOX FOR D3
+ * This script will generate a random sequence of dots for the splash page.
+ *
+ *
  */
 
 $(document).ready(function(){
 
-    sandbox();
+    /* Draw circles all over the splash screen */
+    let number = [100, 50, 10];
+    let svgs = ['third', 'second', 'first'];
+    let blurs = ['blur(1.00rem)', 'blur(0.30rem)', 'blur(0.05rem)'];
+    let svg, circle;
 
-})
+    for (let i = 0; i < 3; i++) {
+        svg = d3.select("svg#" + svgs[i]);
+        circle = generate_circle_attributes(number[i]);
+
+        draw_circles(svg, circle);
+        svg.style('filter', blurs[i]);
+    }
+
+    /* Enable hover action */
+    // $("svg circle").hover(function(){
+    //     $(this).animate(
+    //     {
+    //         cx : $(this).attr('cx'),
+    //         cy : parseInt($(this).attr('cy')) + 10,
+    //     })
+    // });
+
+});
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Plot Function Definitions for D3 data
@@ -81,121 +45,214 @@ $(document).ready(function(){
  * - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 
- function sandbox(){
-
-    d3.csv(local_data.letters2, function(data){alert(data)});
-
-    let svg = d3.select("svg");
-
-    svg
-      .append("text")
-      .attr("x", 500)
-      .attr("y", 500)
-      .text("Hello");
-
-    // svg
-    //   .append("circle")
-    //   .attr("cx", 300)
-    //   .attr("cy", 200)
-    //   .attr("r", 100)
-    //   .attr("fill", "none")
-    //   .attr("stroke", "black")
-    //   .attr("stroke-width", 10)
-    //   .transition()
-    //   .duration(1000)
-    //   .attr("cx", 400)
-    //   .attr("cy", 400);
-
-
-    // Test adding shapes to the document
-    svg
-        .selectAll("circle")
-        .data($DATA)
-        .enter()
-        .append('circle')
-        .attr("cx", function(d){return d.x})
-        .attr("cy", function(d){return d.y})
-        .attr("r", function(d){return d.z})
-        .attr("stroke", "black")
-        .attr("fill", "none")
-        .attr("stroke-width", 3);
-
-
-    let data = [100, 150, 200, 211, 311, 342, 410, 691, 789];
-    let colors = ['red', 'blue', 'green', 'cornflowerblue', 'orange', 'black', 'white'];
-
-    svg.selectAll("rect")
-       .data(data)
-       .enter()
-       .append("rect")
-       .attr("x", 0)
-       .attr("y", function(d){return data.indexOf(d) * Math.sqrt(d)})
-       .attr("height", function(d){return Math.sqrt(d)})
-       .transition()
-       .duration(5000)
-       .attr("width", function(d){return d})
-       .style("filter", "blur(0)")
-       .attr("fill", function(d){return colors[(d % colors.length)]})
-       .text(function(d){return d});
-
-
-
-    // svg
-    //   .transition()
-    //   .duration(10000)
-    //   .style("filter", "blur(0)");
-
- }
-
-
- function scatterplot(d){
-    /* Function to create a scatterplot for input data
+ function generate_numbers(max, how = "floor", n = 100){
+    /* Generate an array of random numbers. Default array size is 100.
      *
      * Parameters
      * ----------
-     *      d (JSON): Input data
+     *      max (integer) : Maximum size of each value in the array.
+     *      how (string) : Type of rounding function to use. 'ceil' or 'floor'
+     *      n (integer) : Size of array to generate
      */
+     let array = [];
+     let floor = "floor";
+     let ceil = "ceil";
+     let value;
+
+     how = how.toLowerCase();
+
+     while (n > 0){
+
+        value = Math.random() * max;
+
+        // Round the random number based on the function indicated in 'how'
+        if (how === floor) {
+            value = Math.floor(value);
+        } else if (how === ceil) {
+            value = Math.ceil(value);
+        } else {
+            alert("`generate_random_number` function requires " +
+                   "you to indicate 'floor' or 'ceil' for the " +
+                   "'how' argument.");
+            break;
+        }
+
+        array.push(value);
+
+        n -= 1;
+     }
+
+     return array;
  }
 
- function heatmap(d){
-    /* Function to create a heatmap for input data
+ function generate_circle_dimensions(n = 100, how = "floor"){
+    /* Generate two arrays with x- and y-coordinates. Default n is 100.
      *
      * Parameters
      * ----------
-     *      d (JSON): Input data
+     *      how (string) : Type of rounding function to use. 'ceil' or 'floor'
+     *      n (integer) : Number of (x, y) pairs to generate
      */
+     let window_ = $(window);
+     let x_coordinates = generate_numbers(window_.width(), how, n);
+     let y_coordinates = generate_numbers(window_.height(), how, n);
+     let radii = generate_numbers(window_.width() / 100, how, n);
+
+     let dimensions = [];
+     let circle;
+
+     while (n > 0) {
+        circle = {
+                  cx : x_coordinates[n - 1],
+                  cy : y_coordinates[n - 1],
+                  r : radii[n - 1],
+                 };
+
+        dimensions.push(circle);
+        n--;
+     }
+
+     return dimensions;
  }
 
- function histogram(d){
-    /* Function to create a histogram for input data
+function generate_styles(style, n = 100){
+    /* Return different arrays of values for different css styles.
      *
      * Parameters
      * ----------
-     *      d (JSON): Input data
-     */
- }
-
- function keys(obj){
-    return Object.keys(obj)
- }
-
- function processFertilityData(d){
-    /* Preprocess fertility data from the World Bank to generate a single data set
-     * Link: https://api.worldbank.org/v2/en/country/all/indicator/SP.DYN.TFRT.Q2?format=json&per_page=20000&source=39
-     *
-     * Parameters
-     * ----------
-     *      d (Array) : Lenght of 2, the second entry contains all the data
+     *      style (string) : Type of style to return
+     *      n (integer) : Number of style elements to generate
      *
      * Notes
      * -----
-     *      The input data is a nested dictionary of dictionaries with a lot of data.
-     *      The most relevant data elements to collect are 'date', 'value', 'country', and 'indicator'
+     *      The available styles to select from are:
+     *          - fill
+     *          - stroke
+     *          - blur
+     *
+     */
+     let max_decimal = 16777215; // This is equal to a hex of 0xffffff
+     let max_blur = 1;
+
+     style = style.toLowerCase();
+
+     let styles_array = [];
+     let style_uses_color = style == 'fill' | style == 'stroke';
+
+     let max_value, current_value;
+
+
+     if (style_uses_color) {
+        max_value = max_decimal;
+     } else if (style in ['blur']) {
+        max_value = max_blur;
+     } else {
+        alert("Indicate 'fill', 'stroke', or 'blur'");
+        return;
+     }
+
+     while (n > 0) {
+        current_value = Math.random() * max_value;
+        current_value = Math.floor(current_value);
+
+        if (style_uses_color) {
+            current_value = "#" + current_value.toString(16);
+        }
+
+        styles_array.push(current_value);
+        n--;
+     }
+
+     return styles_array;
+}
+
+function generate_circle_attributes(n, how = 'floor'){
+    /* Return an object with circle dimensions and styels
+     *
+     * Parameters
+     * ----------
+     *      how (string) : Type of rounding function to use. 'ceil' or 'floor'
+     *      n (integer) : Size of array to generate
+     *
+     * Notes
+     * -----
+     *
      */
 
-     let data = d[1]; // All data stored in second array element
+     let dimensions = generate_circle_dimensions(n, how);
+     let fills = generate_styles('fill', n);
+     let strokes = generate_styles('stroke', n);
 
-     alert(data);
+     while (n > 0){
+        dimensions[n - 1]['fill'] = fills[n - 1];
+        dimensions[n - 1]['stroke'] = strokes[n - 1];
+        n--;
+     }
+
+     return dimensions;
+}
 
 
- };
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Functions to draw shapes onto the svg frames
+ *
+ * D3 functions to draw different shapes
+ * - - - - - - - - - - - - - - - - - - - - - - - - - -
+ */
+
+ function draw_circles(svg, data){
+    /* Draw circles onto the specified svg canvas
+     *
+     * Parameters
+     * ----------
+     *      svg (d3 selection) : SVG object
+     *      data (object) : Object with circle attributes
+     *
+     */
+    svg.selectAll('circle')
+        .data(data)
+        .enter()
+        .append('circle')
+        .attr('cx', get_cx)
+        .attr('cy', get_cy)
+        .attr('fill', '#666')
+        // .attr('stroke', get_stroke)
+        .attr('stroke-width', 1)
+        .transition()
+        .duration(1000)
+        .attr('r', get_r)
+        ;
+
+ }
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Function definitions for retrieving shape attributes
+ *
+ * D3 function definitions for different shapes
+ * - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+
+// Circle functions
+ function get_cx(obj){return obj.cx;}
+ function get_cy(obj){return obj.cy;}
+ function get_r(obj){return obj.r;}
+
+ // Style functions
+ function get_fill(obj){return obj.fill;}
+ function get_stroke(obj){return obj.stroke;}
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Function definitions for animating drawn shapes
+ * - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+
+ function jitter(event){
+    let shape = $(this);
+    let mouse_xy = {x : event.pageX, y : event.pageY};
+    let shape_xy = {x : shape.attr('cx'), y : shape.attr('cy')};
+
+    if (shape_xy.x < mouse_xy.x) {
+        shape.attr('x', shape_xy.x + 10).transition().duration(1000);
+    }
+
+ }
