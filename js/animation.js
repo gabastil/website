@@ -28,82 +28,10 @@ $(document).ready(function(){
         svgs.push(svg);
     }
 
+    /* Draw the lines that connect circles all over the splash screen */
     let connections = generate_circle_connections(circles.flat());
-
     draw_circle_connections(connections, circles, svgs);
 
-    // console.log(Object.keys(connections).length);
-
-    // let widths = [10, 5, 1];
-
-    // for (key in connections){
-    //     let point1 = JSON.parse(key),
-    //         point2 = connections[key];
-
-    //     let layer = detect_layer(circles, point1);
-    //     console.log(layer);
-
-    //     svgs[layer].append("path")
-    //        .attr("stroke", "black")
-    //        .attr("opacity", 0.5)
-    //        .attr('stroke-width', widths[layer])
-    //        .transition()
-    //        .duration(5000)
-    //        .attr("d", "M" + point1.cx +
-    //                   "," + point1.cy +
-    //                   " L" + point2.cx +
-    //                   "," + point2.cy);
-
-    // }
-
-    // let one = {a : 1, b : 2, c : 3};
-    // let two = {a : 1, b : 2, c : 3};
-
-    // console.log("one is equal " + (one == two));
-    // console.log(objects_match(one, two));
-
-
-    // let connections = pair(circles.flat());
-    // let maximum_distance = $(window).width() / 30;
-    // let shortest_connections = {};
-    // let shortest_distances = {};
-
-    // // console.log(connections.slice(0, 5));
-    // console.log(connections.length + " pairs found");
-    // console.log(connections[0][0]);
-
-    // for (p of connections) {
-    //     let point1 = p[0];
-    //     let key = JSON.stringify(point1);
-    //     let point2 = p[1];
-
-    //     let value = distance(point1, point2);
-
-    //     let new_point_found = !(key in shortest_connections);
-    //     let closer_point_found = shortest_distances[key] > value;
-    //     let point_within_maximum_distance = value <= maximum_distance;
-
-    //     if ((new_point_found | closer_point_found) & point_within_maximum_distance){
-    //         shortest_connections[key] = point2;
-    //         shortest_distances[key] = value;
-    //     }
-    // }
-
-    // console.log(shortest_connections);
-    // console.log(Object.keys(shortest_connections));
-    // console.log(shortest_distances);
-
-    // circles = circles.flat();
-
-    /* Enable hover action */
-    // $("svg circle").hover(function(){
-    //     $(this).animate(
-    //     {
-    //         cx : $(this).attr('cx'),
-    //         cy : parseInt($(this).attr('cy')) + 10,
-    //     })
-    // });
-    // alert(circles[0].slice(0, 3));
 
 
 
@@ -264,12 +192,14 @@ function generate_styles(style, n = 100){
      return dimensions;
  }
 
- function generate_circle_connections(circles){
+ function generate_circle_connections(circles, minimum_length){
     /* Return a list of circles that are close enough to warrant a connection
      *
      * Parameters
      * ----------
      *      circles (array) : List of circle objects to join
+     *      minimum_length (integer) : The number of segments the width of the
+     *                                 screen should be divided into.
      *
      * Notes
      * -----
@@ -278,7 +208,7 @@ function generate_styles(style, n = 100){
      */
 
     let connections = pair(circles.flat());
-    let maximum_distance = $(window).width() / 30;
+    let maximum_distance = $(window).width() / 20;
     let shortest_connections = {},
         shortest_distances = {};
 
