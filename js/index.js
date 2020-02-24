@@ -34,12 +34,7 @@
 
     });
 
-    $("rect").hover(function() {
-        $(this).attr("old_fill", $(this).attr("fill"));
-        $(this).attr("fill", "red");
-    }, function() {
-        $(this).attr("fill", $(this).attr("old_fill"));
-    });
+    // d3.select("body").append("svg");
 
  })
 
