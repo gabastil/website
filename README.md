@@ -32,5 +32,6 @@ The JavaScript files contained within this repo include:
 name | purpose
 --- | ---
 index.js | Contains JavaScript, JQuery, and D3 references
+animation.js | Contains scripts to animate SVG elements in the splash page
 
 

@@ -34,7 +34,31 @@
 
     });
 
-    // d3.select("body").append("svg");
+    $("rect").hover(function() {
+        $(this).attr("old_fill", $(this).attr("fill"));
+        $(this).attr("fill", "red");
+    }, function() {
+        $(this).attr("fill", $(this).attr("old_fill"));
+    });
+
+    let about_menu = $("#pulldown");
+
+    // Toggle 'about' menu visibility
+    $('a[id="about"]').hover(function(){
+        about_menu.slideDown();
+    },
+    function(){
+        about_menu.hover(function(){
+            $(this).stop();
+        }, function(){
+            $(this).slideUp();
+            });
+        });
+
+    // Scroll to Top
+    $("a[href='top']").click(function(){
+        $("html, body").animate({scrollTop: 0}, 1000);
+    });
 
  })
 
