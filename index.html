@@ -12,132 +12,292 @@
         - Link to external sources (e.g., book, github, GA)
 -->
 <html>
+<!-- <a id="top"></a> -->
 <head>
     <title>Abastillas</title>
     <link type="text/css" href="index.css" rel="stylesheet" />
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+
+    <!-- JQuery Script Import -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+    <!-- D3 Script Import -->
     <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+    <!-- Custom Script Import -->
     <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="./js/animation.js"></script>
 </head>
 <body>
+
     <div id="p1" class="page">
         <div id="content">
-            <div id="visual">
 
-            </div>
-            <div id="title">
+            <div id="header">
                 <h1>Glenn Abastillas</h1>
-                <ul id="menu">
-                    <li><span id="linkedin" class="nav">LinkedIn</span></li>
-                    <li><span id="cv" class="nav">CV</span></li>
+                <ul>
+                    <li>
+                        <a id="about">About</a>
+                        <ul id='pulldown'>
+                            <li><a href="#background">Background</a></li>
+                            <li><a href="#experience">Experience</a></li>
+                            <li><a href="#publications">Publications</a></li>
+                            <li><a href="#education">Education</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="https://www.linkedin.com/in/glennabastillas/" target="blank">LinkedIn</a></li>
+                    <li><a href="https://github.com/gabastil" target="blank">GitHub</a></li>
+                    <li><a href="https://doi.org/10.1007/978-981-10-8468-3" target="blank">Research</a></li>
+                    <!-- <li>Visualization Sample</li> -->
                 </ul>
             </div>
+            <div id="header-screen"></div>
         </div>
+        <svg id="first"></svg>
+        <svg id="second"></svg>
+        <svg id="third"></svg>
     </div>
 
-    <div id="navigation">
+<!--     <div id="navigation">
         <ul>
             <li>Background</li>
             <li>Experience</li>
             <li>Skills</li>
             <li>Publications</li>
         </ul>
-    </div>
+    </div> -->
 
-    <div id="p2" class="page">
-        <div class="resume">
-            <h2>Background.</h2>
+    <div id="resume">
+        <div id="p2" class="page">
+            <a id="background"></a>
+            <div class="resume">
+                <h2>
+                    Background.
+                    <span>
+                        <a href="#top">to top</a> &bull;
+                        <a href="#experience">to Experience</a>
+                    </span>
+                </h2>
 
-            <span id="background">Experienced multilingual data scientist with 7 years of experience working with health and medical related programs and services at the National Cancer Institute and the Department of Veterans Affairs. He specializes in artificial intelligence technologies such as natural language processing (NLP), machine learning (ML) and developing data visualizations. He is also a computational linguist and polyglot and speaks multiple languages.
-            </span>
 
-            <table id="skills">
-                <tr>
-                    <th colspan="2">Programming</th>
-                    <th colspan="2">Markup and Data Formats</th>
-                    <th colspan="2">Development IDEs</th>
-                </tr>
-                <tr>
-                    <td>Python</td>
-                    <td>&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+                <span id="background"><span class="term">
+                    <!-- <a href="https://datascience.berkeley.edu/about/what-is-data-science/" target="blank"> --><!-- </a> -->
+                    Data scientist</span>, natural language processing (NLP) developer, and computational linguist with over seven years of experience developing NLP and machine learning (ML) algorithms, dashboards,data visualizations, and supporting research in the health domain. He takes a human-centered design approach to developing solutions and software for clients.
+                </span>
 
-                    <td>Markdown</td>
-                    <td>&#9733;&#9733;&#9733;&#9733;&#9733;</td>
 
-                    <td>Sublime</td>
-                    <td>&#9733;&#9733;&#9733;&#9733;&#9733;</td>
-                </tr>
-                <tr>
-                    <td>
-                        R
-                    </td>
-                    <td>
-                        &#9733;&#9733;&#9733;&#9733;&#9733;
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>
-                        SQL
-                    </td>
-                    <td>
-                        &#9733;&#9733;&#9733;&#9733;&#9733;
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>
-                        JavaScript
-                    </td>
-                    <td>
-                        &#9733;&#9733;&#9733;&#9733;&#9733;
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>
-                        Visual Basic
-                    </td>
-                    <td>
-                        &#9733;&#9733;&#9733;&#9734;&#9734;
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
+                <!--
+                    SKILLS TABLE
+                    THIS TABLE contains skills for the resume
+
+                    Star HTML Entity codes are
+                    &#9733; for a full star ★
+                    &#9734; for an empty star ☆
+                -->
+                <table>
+                    <tr>
+                        <th>Programming</th>
+                        <th>Formats</th>
+                        <th>Development IDEs</th>
+                    </tr>
+                    <tr>
+                        <td>Python, R, SQL, JavaScript, Java, Lua, PHP, VBA</td>
+                        <td>HTML, XML, YAML, CSS, Markdown, JSON, HL7, FHIR</td>
+                        <td>Anaconda, Spyder, Jupyter, SageMaker, RStudio, I2E, IntelliJ, Eclipse</td>
+                    </tr>
+                    <tr>
+                        <th>Distributed Computing</th>
+                        <th>Environments and Repos</th>
+                        <th>Dashboards</th>
+                    </tr>
+                    <tr>
+                        <td>Multithreading, multiprocessing, Spark, Hadoop</td>
+                        <td>Docker, Anaconda, GitHub, Azure, AWS</td>
+                        <td>Power BI, Tableau</td>
+                    </tr>
+                    <tr>
+                        <th>Visual Editing</th>
+                        <th>Office Software</th>
+                        <th>Certifications</th>
+                    </tr>
+                    <tr>
+                        <td>Visio, Draw.io, Photoshop, Vegas, Corel, Illustrator</td>
+                        <td>Word, PowerPoint, Excel, Access, Outlook, Visio</td>
+                        <td>Registered Nurse, Basic Life Support, Translator, Scrum Master</td>
+                    </tr>
+                </table>
+
+            </div>
+
+        </div>
+
+        <div id="p3" class="page">
+            <a id="experience"></a>
+            <div class="remote"></div>
+            <div class="resume">
+                <h2>
+                    Professional Experience.
+                    <span>
+                        <a href="#top">to top</a> &bull;
+                        <a href="#publications">to Publications</a>
+                    </span>
+                </h2>
+
+                <h3>Booz Allen Hamilton <span>/ Sr. Data Scientist / Washington, DC / 2018 &rightarrow; Present</span></h3>
+                Management Consulting firm where I work with cross-functional teams to deliver NLP, ML, and design thinking solutions to meet client needs at the National Institutes of Health (NIH) and Veterans Affairs (VA).
+
+                <ul>
+                    <li>Lead data science efforts in collaboration with human centered design teams</li>
+                    <li>Plan projects, elicit requirements, iterate on deliverables, and present reports to client</li>
+                    <li>Develop NLP and machine learning algorithms, topic models, and automated pipelines</li>
+                    <li>Develop browser-based tools for workshops, presentations, and client engagement</li>
+                    <li>Conduct design thinking and requirements gathering workshops with stakeholders</li>
+                    <li>Founded and led rapid response team to address urgent, ad-hoc client needs</li>
+                </ul>
+
+                <h3>Information Management Services, Inc. <span>/ NLP Query Specialist / Calverton, MD / 2016 &rightarrow; 2018</span></h3>
+                Technology consulting firm where I worked with cross-functional teams at the NIH to identify client needs and develop NLP and ML solutions and presented results at conferences in the US and Canada.
+
+                <ul>
+                    <li>Developed NLP algorithms for information extraction of data elements from pathology reports</li>
+                    <li>Developed data pipelines for ETL procedures and for structuring unstructured pathology data</li>
+                    <li>Provided Arabic language support for cancer data capture from the Middle East</li>
+                    <li>Trained annotators and custom-built annotation tools to curate custom datasets for each project</li>
+                </ul>
+
+                <h3>3M Health Information Systems <span>/ Computational Linguist / Silver Spring, MD / 2015 &rightarrow; 2016</span></h3>
+                Technology firm where I worked with cross-functional teams across the US to develop clinical decision support functionality for enterprise electronic medical record software developed by the firm.
+
+                <ul>
+                    <li>Developed NLP algorithms for clinical decision support modules in electronic medical records</li>
+                    <li>Employed NLP for information extraction on medical reports to develop knowledge resources</li>
+                    <li>Created clinical language ontologies used to detect medical entities</li>
+                    <li>Ran unit tests for clinical decision support modules written by other developers</li>
+                </ul>
+
+                <h3>Center for Applied Linguistics <span>/ Program Associate / Washington, DC / 2013 &rightarrow; 2015</span></h3>
+                Linguist research and development firm where I worked with test developers and other linguists to develop high-quality language assessment data items for heritage language speakers across the US.
+
+                <ul>
+                    <li>Developed Python scripts for various projects to streamline ETL of language data</li>
+                    <li>Conducted unit tests on interactive web-based test items and visuals</li>
+                    <li>Reviewed language test items in English and Spanish to test item visuals, language, and difficulty</li>
+                </ul>
+
+                <h3>Screiber Translations, Inc. <span>/ Spanish and German Translator / Rockville, MD / 2013 &rightarrow; Present</span></h3>
+                Worked to provide high-fidelity English translations of various types of sensitive documents.
+
+                <ul>
+                    <li>Translated sensitive legal documents to English from source languages for federal clients</li>
+                    <li>Reviewed translations performed by other translations for linguistic streamlining of narrative</li>
+                </ul>
+
+                <h3>Mathematica Policy Research <span>/ Multilingual Field Interviewer / Princeton, NJ / 2011 &rightarrow; 2013</span></h3>
+                Public policy research firm where I worked to collect data for various monitoring and evaluation projects.
+
+                <ul>
+                    <li>Interviewed hard to reach populations across the US who are recipients of federal programmes</li>
+                    <li>Educated participants of surveys evaluating federal programmes on tracking and gathering programme-specific data such as tracking food purchases and consumption</li>
+                    <li>Located hard to reach respondents with tools such as Accurint to ensure studies and surveys maintain adequate responses for analysis</li>
+                </ul>
+
+                <h3>Hackensack University Medical Center  <span>/ Registered Nurse / Hackensack, NJ / 2010 &rightarrow; 2011</span></h3>
+                Regional trauma center where I worked with multi-disciplinary teams to provide high quality nursing to improve patient health outcomes and ensured continuity of care for patients and family members.
+
+                <ul>
+                    <li>Admitted ambulatory, acute, and transfer patients to the epilepsy monitoring unit</li>
+                    <li>Administered medications via various routes of administration</li>
+                    <li>Coordinate care with healthcare providers and provide nursing care to patients and family</li>
+                    <li>Educated patients and family members on home care and medication upon discharge</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div id="p4" class="page">
+            <a id="publications"></a>
+            <div class="resume">
+                <h2>
+                    Publications.
+                    <span>
+                        <a href="#top">to top</a> &bull;
+                        <a href="#education">to Education</a>
+                    </span>
+                </h2>
+
+                <ol>
+                    <li><span class="publication"><a href="" target="blank">Abastillas, G (2018). <span class="publication-title">“You are what you tweet: A Divergence in code-switching practices in Cebuano and English speakers in the Philippines”. </span>Language & Literature in a Glocal World. Singapore: Springer.</a></span></li>
+
+                    <li><span class="publication">Abastillas, G. L.; Morris, S. D.; Boten, J. A.; Tumurchudur, T.; Vora, K.; Fearn, P. F. (2017). <span class="publication-title">Characterizing a Learning Curve for Annotating Data for Training and Validation of Natural Language Processing Systems. </span>Poster presented at: American Medical Informatics Association Annual Symposium; 2017 November 4 – 8: Washington, DC.</span></li>
+
+                    <li><span class="publication">Abastillas, G.; Lam, C.; Petkov, V.; Adamo, P.; Coyle, L.; Stevens, J.; Wu, X. C.; Hsieh, M. C.; Negoita, S (2017). <span class="publication-title">Data Quality Audit on Melanoma Tumor Depth with Rule-Based Natural Language Processing. </span>Poster presented at: North American Association of Central Cancer Registries (NAACCR) Annual Conference; 2017 June 19 – 22; Albuquerque, NM.</span></li>
+
+                    <li><span class="publication">Abastillas, G.; Lam, C. (2017). <span class="publication-title">Data Quality Audits with Rule-Based Natural Language Processing. </span>Presented at: Georgetown NLP Summit; 2017 June 28; Washington, DC.</span></li>
+                </ol>
+            </div>
+        </div>
+        <div id="p5" class="page">
+            <a id="education"></a>
+            <div class="resume">
+                <h2>
+                    Education.
+                    <span>
+                        <a href="#top">to top</a> &bull;
+                        <a href="#publications">to Publications</a>
+                    </span>
+                </h2>
+                <ul>
+                    <li>
+                        <span class="university-name">
+                            Georgetown University
+                        </span><br/>
+                            Masters Degree in Linguistics, 2013 – 2015
+                        <br/>
+                        <span class="university-projects">&rightarrow;
+                            <a href="https://repository.library.georgetown.edu/handle/10822/760907">Thesis Repository and Data</a>
+                        </span>
+                        <!-- <img src="https://seeklogo.com/images/G/georgetown-university-logo-7CC01223FE-seeklogo.com.png" /> -->
+                    </li>
+                    <li><span class="university-name">Rutgers, the State University of New Jersey</span><br/>Bachelor’s Degree in Science, 2006 – 2010
+                        <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Rutgers_Scarlet_Knights_logo.svg/1153px-Rutgers_Scarlet_Knights_logo.svg.png" /> -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+<!--
+        <div id="p6" class="page">
+            <a id="projects"></a>
+            <div class="resume">
+                <h2>
+                    Projects.
+                    <span>
+                        <a href="#top">to top</a> &bull;
+                        <a href="#contact">to Contact</a>
+                    </span>
+                </h2>
+            </div>
+        </div> -->
+
+        <div id="p7" class="page">
+            <a id="contact"></a>
+            <div class="resume">
+                <h2>
+                    Contact.
+                    <span>
+                        <a href="#top">to top</a>
+                    </span>
+                </h2>
+
+                <div id="icons">
+                    <a class="icon" title="LinkedIn" target="blank" href="https://www.linkedin.com/in/glennabastillas/" ><img class="icon" src="./resources/svg/icon-linkedin-2.svg" /></a>
+
+                    <a class="icon" title="GitHub" target="blank" href="https://github.com/gabastil"><img class="icon" src="./resources/svg/icon-github-octopus.svg" /></a>
+
+                    <a class="icon" title="Resume" href="#background"><img class="icon" src="./resources/svg/icon-person-page.svg" /></a>
+
+                    <a class="icon" title="Publication" target="blank" href=""><img class="icon" src="./resources/svg/icon-book.svg" /></a>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div id="p3" class="page p3">
-        <div class="resume">
-            <h2>Professional Experience.</h2>
-        </div>
-    </div>
-
-    <div id="p4" class="page">
-        <div class="resume">
-            <h2>Publications.</h2>
-        </div>
-    </div>
-
-    <div id="p5" class="page">
-        <div class="resume">
-            <h2>Projects.</h2>
-        </div>
-    </div>
-
 </body>
 </html>

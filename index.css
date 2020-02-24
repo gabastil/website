@@ -23,154 +23,410 @@ html, head, body
     width: 100%;
 }
 
+/* * * * * * * * * * * * * */
+/*  General   Definitions  */
+/* * * * * * * * * * * * * */
+
 .page
 {
-    padding: 0;
-    margin: 0;
-    height: 95%;
-    overflow: hidden;
-    text-align: center;
+    height: auto;
+    padding:  0;
+    margin:  0;
+    height:  auto;
+}
+
+.page h2
+{
+    font-family:  "Garamond", "Bell MT", sans-serif;
+    font-size: 3em;
+    font-weight: 200;
+}
+
+.page h2 span
+{
+    font-size: 0.25em;
+}
+
+.page h2 a
+{
+    text-decoration: none;
+    font-weight: 100;
+    color: #888;
+}
+
+.page h2 a:hover
+{
+    color: #111;
+    transition: all 1s ease;
+    position: relative;
+}
+
+#resume
+{
+    background: #fff;
 }
 
 .resume
 {
-    font-family: "Garamond", "Bell MT", serif;
+    font-family: "Helvetica", "Arial", sans-serif;
     font-weight: 200;
     margin: 0 auto;
     padding: 0;
 
     text-align: left;
 
-    width: 80%;
+    width: 60%;
     height: 100%;
 
-    /*background: white;*/
+    cursor: default;
     user-select: none;
+    -webkit-user-select: none;
 }
 
-#p1{}
+.resume li
+{
+    color: #555;
+}
+
+.resume li:hover
+{
+
+    color: #000;
+    font-weight: 400;
+}
+
+.resume h2 span
+{
+    font-family: "Helvetica", "Arial", sans-serif;
+    font-size: 0.3em;
+    font-weight: 100;
+    color:  #9a9a9a;
+}
+
+.remote
+{
+    display: block;
+    width: 5em;
+    height: 10em;
+    position: fixed;
+    background: red;
+    visibility: hidden;
+}
+
+/* * * * * * * * * * * * */
+/* Page 1 - Landing Page */
+/* * * * * * * * * * * * */
+
+#p1
+{
+    background: #efefef;
+    height: 90%;
+    text-align: center;
+    /* text-shadow: 0.2em  0.2em 0.05em #fff, */
+                /* -0.2em -0.2em 0.05em #ddd; */
+}
+
+#p1 .icon
+{
+    /* border-radius: 5em; */
+    width: 3em;
+    height: 3em;
+    /* background: red; */
+    padding-right:  1em;
+    object-fit: cover;
+    filter:  opacity(50%);
+}
+
+#p1 .icon:hover
+{
+    filter:  opacity(100%);
+    transition: 1s;
+}
+
+#p1 #header
+{
+    z-index: 100;
+    /* background: red; */
+}
+
+#p1 #header-screen
+{
+    border-radius: 1em;
+    opacity: 0.75;
+    display: block;
+    width: 100%;
+    height: 110%;
+    top:  -0.5%;
+    position:  absolute;
+    background: white;
+    z-index: -1;
+}
+
+#p1 h1
+{
+    display: block;
+    position:  relative;
+    font-size:  5em;
+    color:  #222;
+    user-select: none;
+    -webkit-user-select:  none;
+}
+
+#p1 svg
+{
+    position: absolute;
+    display: block;
+    margin:  auto;
+    top:  0;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+    filter:  blur(0.05rem);
+}
+
+#p1 ul, #p1 li
+{
+    display: inline;
+    margin-right: 1em;
+    font-size:  1.2em;
+    text-align: left;
+    /* background: red; */
+}
+
+
+#p1 a
+{
+    text-decoration: none;
+    font-family: "Helvetica", "Arial", sans-serif;
+    color:  #555;
+    left: -2em;
+}
+
+#p1 a:hover
+{
+    color:  #000;
+    /* text-shadow: 0em 0em 1em #00abab; */
+}
+
+#p1 #pulldown
+{
+    display: none;
+    border-radius: 0.5em;
+    width:  10em;
+    background: white;
+    /* border:  1px solid black; */
+    position: absolute;
+    left:  10%;
+    font-size: 0.75em;
+}
 
 #content
 {
-    box-shadow: -0.5em -0.5em 1em 0.1em #fff,
-                 0.5em 0.5em 1em 0.1em #ddd;
     border-radius: 1em;
-
-    background: #f1f1f1;
 
     display: block;
     margin: auto;
 
     position: relative;
     top: 50%;
-    transform: translateY(-75%);
+    transform: translateY(-50%);
 
     text-align: center;
 
-    height: 50%;
     width: 50%;
+
+    z-index: 1;
 }
 
-#navigation
+/* * * * * * * * * * * * */
+/*  Page 2 - Background  */
+/* * * * * * * * * * * * */
+
+#p2
 {
-    position: fixed;
-    top: 10%;
-    right: 5%;
-
-    width: 7em;
-
-    visibility: hidden;
-}
-
-#navigation ul
-{
-    background: none;
-    list-style: none;
-    width: 100%;
-}
-
-#navigation li
-{
-    background: #454545;
-    cursor: pointer;
-
-    text-align: center;
-    vertical-align: middle;
-
-    height: 3em;
-    line-height: 3em;
-}
-
-#navigation li:hover
-{
-    background: blue;
-}
-
-#navigation li:active
-{
-    background: red;
-}
-
-#visual
-{
-    display: block;
-
-    height: 50%;
-    width: 100%;
-}
-
-
-#p2, #p4, #p6
-{
-    background: #eaeaea;
-}
-
-#p2 h2, #p4 h2, #p6 h2,
-#p3 h2, #p5 h2, #p7 h2
-{
-    font-size: 3em;
-}
-
-#p3, #p5, #p7
-{
+    height:  95vh;
     background: #fff;
 }
+
 
 #p2 span#background
 {
     font-size: 1.5em;
     font-family: "Helvetica", "Arial", sans-serif;
+
+    text-align: left;
+
+    width: 100%;
 }
 
-#p2 #skills
+#p2 span a
+{
+    text-decoration: none;
+}
+
+#p2 table
 {
     /*display: block;*/
-    /*padding-top: 1em;*/
-    padding: 0;
+    /*border: 1px solid black;*/
+    /*background: #efefef;*/
+    padding-top: 1em;
     margin: auto;
     font-family: "Arial", sans-serif;
-    width: 90%;
-    height: 10%;
-}
-
-#p2 td
-{
-    /*width: 7em;*/
-    font-weight: 200;
-    /*vertical-align: middle;*/
-    background: red;
+    width: 75%;
+    /* height: 80%; */
 }
 
 #p2 th
 {
-    font-weight: 600;
-    height: 1em;
-    /*width: 5em;*/
-    background: blue;
+    font-style: "Helvetica", "Arial", sans-serif;
+    text-align: center;
+    width:  5em;
 }
 
-.p3
+#p2 td
 {
-    background: blue;
-    height: 1em;
+    /*border: none;*/
+    /*border:  1px solid black;*/
+    border-radius: 1em;
+    background: #eee;
+
+    padding: 1em;
+
+    text-align: left;
+    vertical-align: top;
+
+    width: 5em;
+    height: 5em;
 }
+
+#p2 .rating
+{
+    font-size: 1.25em;
+    text-align: left;
+    vertical-align: middle;
+    color: #ffcc00;
+}
+
+/* * * * * * * * * * * * */
+/*  Page 3 - Experience  */
+/* * * * * * * * * * * * */
+
+#p3
+{
+    background: #eee;
+}
+
+#p3 h3 span
+{
+    font-weight: 100;
+    color:  #9a9a9a;
+}
+
+/* * * * * * * * * * * * * */
+/*  Page 4 - Publications  */
+/* * * * * * * * * * * * * */
+
+#p4
+{
+    height: 100vh;
+}
+
+#p4 .resume
+{
+    font-weight: 100;
+}
+
+#p4 li a
+{
+    text-decoration: none;
+    color: #777;
+}
+
+#p4 li a:hover
+{
+    color: #00abab;
+}
+
+#p4 li a:hover span
+{
+    color:  #00abdc;
+}
+
+#p4 ol
+{
+    font-size: 1.25em;
+}
+
+#p4 li
+{
+    color: #777;
+    padding-bottom: 3em;
+}
+
+#p4 li:hover
+{
+    color: #000;
+    font-weight: 100;
+}
+
+#p4 .publication-title
+{
+    color: #000;
+    font-weight: 400;
+}
+
+/* Page 5 - Education
+ *
+ *
+ */
+
+ #p5
+ {
+    height:  50vh;
+    background: #efefef;
+ }
+
+#p5 img
+{
+    position:  relative;
+    left:  0;
+    width: 2em;
+}
+
+#p5 li a
+{
+    text-decoration: none;
+    color: #555;
+}
+
+#p5 li a:hover
+{
+    color: #000;
+}
+
+#p5 li
+{
+    font-size: 1.5em;
+    list-style-type: none;
+    font-weight: 100;
+    color: #aaa;
+    margin-bottom: 2em;
+}
+
+#p5 .university-name
+{
+    font-size:  1.5em;
+    font-weight: 600;
+    color: #000;
+}
+
+
+/* Page 7 - Contact
+ *
+ *
+ */
+
+ #p7
+ {
+    height: 75vh;
+ }
