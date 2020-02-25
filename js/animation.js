@@ -13,9 +13,9 @@
 $(document).ready(function(){
 
     /* Draw circles all over the splash screen */
-    let number = [100, 50, 50];
+    let number = [75, 30, 20];
     let layers = ['third', 'second', 'first'];
-    let blurs = ['blur(1.00rem)', 'blur(0.30rem)', 'blur(0.05rem)'];
+    let blurs = ['blur(1.00rem)', 'blur(0.30rem)', 'blur(0.10rem)'];
     let svg, circle, circles = [], svgs = [];
 
     for (let i = 0; i < 3; i++) {
@@ -31,9 +31,6 @@ $(document).ready(function(){
     /* Draw the lines that connect circles all over the splash screen */
     let connections = generate_circle_connections(circles.flat());
     draw_circle_connections(connections, circles, svgs);
-
-
-
 
 });
 
@@ -192,13 +189,13 @@ function generate_styles(style, n = 100){
      return dimensions;
  }
 
- function generate_circle_connections(circles, minimum_length){
+ function generate_circle_connections(circles, max_size = 20){
     /* Return a list of circles that are close enough to warrant a connection
      *
      * Parameters
      * ----------
      *      circles (array) : List of circle objects to join
-     *      minimum_length (integer) : The number of segments the width of the
+     *      max_size (integer) : The number of segments the width of the
      *                                 screen should be divided into.
      *
      * Notes
@@ -208,7 +205,7 @@ function generate_styles(style, n = 100){
      */
 
     let connections = pair(circles.flat());
-    let maximum_distance = $(window).width() / 20;
+    let maximum_distance = $(window).width() / max_size;
     let shortest_connections = {},
         shortest_distances = {};
 

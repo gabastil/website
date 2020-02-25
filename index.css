@@ -90,7 +90,6 @@ html, head, body
 
 .resume li:hover
 {
-
     color: #000;
     font-weight: 400;
 }
@@ -428,28 +427,18 @@ html, head, body
 
  #p7
  {
-    height: 50vh;
- }
-
- #p7 h2
- {
-    margin:  0;
-    padding:  0;
+    height: 75vh;
+    background: blue;
  }
 
  #p7 #content
  {
     display: flex;
-    flex-direction: row;
-    align-content: space-evenly;
+    flex-direction: column;
     background: red;
-    width:  100%;
-    margin: 0;
-    padding: 0;
  }
 
  #p7 #content div
  {
-    width:  33%;
-    background: blue;
+    width:  10em;
  }
