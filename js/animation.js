@@ -12,12 +12,12 @@
 
 $(document).ready(function(){
 
-    /* Draw circles all over the splash screen */
     let number = [75, 30, 20];
     let layers = ['third', 'second', 'first'];
     let blurs = ['blur(1.00rem)', 'blur(0.30rem)', 'blur(0.10rem)'];
     let svg, circle, circles = [], svgs = [];
 
+    /* Draw circles all over the splash screen */
     for (let i = 0; i < 3; i++) {
         svg = d3.select("svg#" + layers[i]);
         circle = generate_circle_attributes(number[i]);
