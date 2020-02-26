@@ -35,6 +35,9 @@ $(document).ready(function(){
     //     })
     // });
 
+    alert({x : 9, y : 5};
+    // alert(distance({x : 5, y : 10}, {x : 9, y : 5}));
+
 });
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -256,3 +259,18 @@ function generate_circle_attributes(n, how = 'floor'){
     }
 
  }
+
+
+function distance(a, b){
+    /* Calculate the Euclidean distance between 2 points
+     *
+     * Parameters
+     * ----------
+     *      a (object): Contains x and y values
+     *      b (object): Contains x and y values
+     */
+
+     let x = a.x - b.x, y = a.y - b.y;
+
+     return Math.sqrt(x ** 2, y ** 2);
+}
