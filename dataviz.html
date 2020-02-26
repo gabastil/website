@@ -15,60 +15,14 @@
           rel="stylesheet" />
 
     <!-- JQuery Script Import -->
-    <script type="text/javascript"
-            src="https://code.jquery.com/jquery-3.4.1.js"
-            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
     <!-- D3 Script Import -->
-    <script type="text/javascript"
-            src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.8/require.min.js"></script>
+    <script type="text/javascript" src="./js/general.js"></script>
 
-    <script type="text/javascript">
-        let fileInput = $('input');
-        let readInput = function(){
-            let fileReader = new FileReader();
-            let destination = $('div #visualization');
-            console.log("Function entered");
-
-            fileReader.onload = function(){
-                console.log(fileReader.result);
-                destination.text(fileReader.result);
-            };
-
-            console.log(Object.keys(fileReader));
-            fileReader.readAsBinaryString(fileInput.files[0]);
-        };
-
-        console.log("Pre function");
-        // fileInput.on("change", readInput());
-
-
-        /**********************************************************************/
-        // TEST OF D3 OPENING FILES SERVED ON GODADDY 2/26/2020
-        // ERROR ENCOUNTERED WAS CORS SECURITY RELATED. COULD NOT LOAD DATA
-        // let data = d3.csv("http://www.glennabastillas.com/resources/data/thesis_data_.csv");
-        // let data = d3.csv("./resources/data/thesis_data_.csv", "text/csv");
-
-        // data = data.then(function(error, d){
-        //     console.log(error);
-        //     console.log(d);
-        //     return {region : d.region,
-        //             codeswitch : d.cs,
-        //             language : d.language,
-        //             lat : d.bucketed_lat,
-        //             lon : d.bucketed_lon};
-        // }, function(){
-        //     console.log("Could not get data");
-        // });
-
-        // console.log(data);
-        // console.log(data.region);
-
-
-    </script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.8/require.min.js"></script> -->
 </head>
 <body>
     <div id="root" class="frame">
@@ -78,9 +32,8 @@
             </svg>
         </div>
         <div id="controls" class="frame">
-            <input type="file" name="file-loader" onchange="readInput()">
+            <input type="file" onchange="readInputFile(this)">
         </div>
     </div>
-
 </body>
 </html>

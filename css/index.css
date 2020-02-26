@@ -182,12 +182,12 @@ html, head, body
 #p1 .sub-menu
 {
     background: white;
-    border-radius: 1em;
+    border-radius: 0.5em;
     font-size: 1em;
     height:  auto;
-    width:  150%;
+    width:  110%;
     text-align: left;
-    padding: 1em;
+    padding: 0.5em;
     display:  none;
 }
 
@@ -399,10 +399,9 @@ html, head, body
     font-weight: 400;
 }
 
-/* Page 5 - Education
- *
- *
- */
+/* * * * * * * * * * * */
+/*  Page 5 - Education */
+/* * * * * * * * * * * */
 
  #p5
  {

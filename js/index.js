@@ -49,14 +49,14 @@
 
     // Toggle 'about' menu visibility
     $('a[id="about"]').hover(function(){
-        about_menu.css("visibility", "show");
-        about_menu.slideDown();
+        // about_menu.css("visibility", "show");
+        about_menu.show();
     },
     function(){
         about_menu.hover(function(){
             $(this).stop();
         }, function(){
-            $(this).slideUp();
+            $(this).hide();
             });
         });
 
