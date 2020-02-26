@@ -36,14 +36,35 @@ svg
 .text
 {
     font-family: "Helvetica", "Arial", sans-serif;
-    font-size:  2em;
+    font-size:  3em;
+    font-weight:  600;
+    width:  auto;
+    height:  100%;
+}
+
+#title
+{
+    margin-right: 1em;
+}
+
+#menu
+{
+    font-size:  1em;
+    font-weight: 200;
+    line-height: 3em;
+    margin-right: 1em;
+}
+
+#controls
+{
+    font-size: 1em;
 }
 
 .frame
 {
     border: 1px solid black;
-    width: 100%;
     height: auto;
+    vertical-align: middle;
 }
 
 #root
@@ -66,6 +87,8 @@ svg
 
 #top-bar
 {
+    display: inline-flex;
+    flex-direction: row;
     background: blue;
     height: 3em;
 }

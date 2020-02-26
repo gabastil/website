@@ -10,9 +10,7 @@
 <html>
 <head>
     <title>Abastillas - Visualizations</title>
-    <link type="text/css"
-          href="./css/visualization.css"
-          rel="stylesheet" />
+    <link type="text/css" href="./css/dataviz.css" rel="stylesheet" />
 
     <!-- JQuery Script Import -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -20,19 +18,22 @@
     <!-- D3 Script Import -->
     <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
 
+    <!-- SCRIPT WITH GENERAL FUNCTIONS (E.G., LOAD FILE, RANGE) -->
     <script type="text/javascript" src="./js/general.js"></script>
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.8/require.min.js"></script> -->
 </head>
 <body>
     <div id="root" class="frame">
+        <div id="top-bar" class="frame">
+            <div id="title" class="text">Glenn Abastillas</div>
+            <div id="menu" class="text">Home</div>
+            <div id="controls" class="text"> HERE ARE MORE</div>
+            <!-- <input type="file" onchange="readInputFile(this)"> -->
+        </div>
         <div id="visualization" class="frame">
             <svg id="plot">
-
+                <path d="M100,100 L300,400 Q350,400 400,450" stroke="black" stroke-width="1em" fill="none"/>
             </svg>
-        </div>
-        <div id="controls" class="frame">
-            <input type="file" onchange="readInputFile(this)">
         </div>
     </div>
 </body>
