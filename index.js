@@ -43,13 +43,10 @@
 
     let about_menu = $("div .menu-item .sub-menu");
 
-    console.log(about_menu.text());
-    console.log(about_menu.attr('class'));
-    about_menu.css('visibility', 'show');
+    console.log(about_menu);
 
     // Toggle 'about' menu visibility
     $('a[id="about"]').hover(function(){
-        about_menu.css("visibility", "show");
         about_menu.slideDown();
     },
     function(){

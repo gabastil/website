@@ -12,28 +12,25 @@
 
 $(document).ready(function(){
 
-    /* Draw circles all over the splash screen */
-    let number = [100, 50, 10];
-    let svgs = ['third', 'second', 'first'];
-    let blurs = ['blur(1.00rem)', 'blur(0.30rem)', 'blur(0.05rem)'];
-    let svg, circle;
+    let number = [75, 30, 20];
+    let layers = ['third', 'second', 'first'];
+    let blurs = ['blur(1.00rem)', 'blur(0.30rem)', 'blur(0.10rem)'];
+    let svg, circle, circles = [], svgs = [];
 
+    /* Draw circles all over the splash screen */
     for (let i = 0; i < 3; i++) {
-        svg = d3.select("svg#" + svgs[i]);
+        svg = d3.select("svg#" + layers[i]);
         circle = generate_circle_attributes(number[i]);
 
         draw_circles(svg, circle);
         svg.style('filter', blurs[i]);
+        circles.push(circle);
+        svgs.push(svg);
     }
 
-    /* Enable hover action */
-    // $("svg circle").hover(function(){
-    //     $(this).animate(
-    //     {
-    //         cx : $(this).attr('cx'),
-    //         cy : parseInt($(this).attr('cy')) + 10,
-    //     })
-    // });
+    /* Draw the lines that connect circles all over the splash screen */
+    let connections = generate_circle_connections(circles.flat());
+    draw_circle_connections(connections, circles, svgs);
 
     alert({x : 9, y : 5};
     // alert(distance({x : 5, y : 10}, {x : 9, y : 5}));
@@ -134,7 +131,7 @@ function generate_styles(style, n = 100){
      *          - blur
      *
      */
-     let max_decimal = 16777215; // This is equal to a hex of 0xffffff
+     let max_decimal = 16777215;    // This is equal to a hex of 0xffffff
      let max_blur = 1;
 
      style = style.toLowerCase();
@@ -169,7 +166,7 @@ function generate_styles(style, n = 100){
      return styles_array;
 }
 
-function generate_circle_attributes(n, how = 'floor'){
+ function generate_circle_attributes(n, how = 'floor'){
     /* Return an object with circle dimensions and styels
      *
      * Parameters
@@ -193,8 +190,49 @@ function generate_circle_attributes(n, how = 'floor'){
      }
 
      return dimensions;
-}
+ }
 
+ function generate_circle_connections(circles, max_size = 20){
+    /* Return a list of circles that are close enough to warrant a connection
+     *
+     * Parameters
+     * ----------
+     *      circles (array) : List of circle objects to join
+     *      max_size (integer) : The number of segments the width of the
+     *                                 screen should be divided into.
+     *
+     * Notes
+     * -----
+     *      A random, even number of circles are chosen to be connected.
+     *      The euclidean distance between each circle is calculated.
+     */
+
+    let connections = pair(circles.flat());
+    let maximum_distance = $(window).width() / max_size;
+    let shortest_connections = {},
+        shortest_distances = {};
+
+    console.log(connections.length + " pairs found");
+
+    for (points of connections) {
+        let point1 = points[0],
+            point2 = points[1];
+
+        let key = JSON.stringify(point1),
+            value = distance(point1, point2);
+
+        let new_point_found = !(key in shortest_connections),
+            closer_point_found = shortest_distances[key] > value,
+            within_maximum_distance = value <= maximum_distance;
+
+        if ((new_point_found | closer_point_found) & within_maximum_distance){
+            shortest_connections[key] = point2;
+            shortest_distances[key] = value;
+        }
+    }
+
+    return shortest_connections;
+ }
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -229,13 +267,47 @@ function generate_circle_attributes(n, how = 'floor'){
 
  }
 
+
+ function draw_circle_connections(connections, circles, svgs, widths=[7, 5, 1]){
+    /* Draw SVG paths for each connection in connections
+     *
+     * Parameters
+     * ----------
+     *      connections (array) : List of circles to connect
+     *      circles (array) : List of circle layers
+     *      svgs (array) : List of d3 selections svgs
+     *      widths (array) : stroke-widths (px) for each layer
+     */
+
+    for (key in connections){
+        let point1 = JSON.parse(key),
+            point2 = connections[key];
+
+        let layer = detect_layer(circles, point1);
+        // console.log(layer);
+
+        svgs[layer].append("path")
+           .attr("stroke", "black")
+           .attr("opacity", 0.5)
+           .attr('stroke-width', widths[layer])
+           .transition()
+           .duration(5000)
+           .attr("d", "M" + point1.cx +
+                      "," + point1.cy +
+                      " L" + point2.cx +
+                      "," + point2.cy);
+
+    }
+ }
+
+
 /* - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Function definitions for retrieving shape attributes
  *
  * D3 function definitions for different shapes
  * - - - - - - - - - - - - - - - - - - - - - - - - - -*/
 
-// Circle functions
+ // Circle functions
  function get_cx(obj){return obj.cx;}
  function get_cy(obj){return obj.cy;}
  function get_r(obj){return obj.r;}
@@ -260,17 +332,139 @@ function generate_circle_attributes(n, how = 'floor'){
 
  }
 
-
-function distance(a, b){
-    /* Calculate the Euclidean distance between 2 points
+ function detect_layer(layers, shape){
+    /* Return an integer indicating which layer an svg belongs to
      *
      * Parameters
      * ----------
-     *      a (object): Contains x and y values
-     *      b (object): Contains x and y values
+     *      layers (array) : List of SVG selections
+     *      shape (d3 selection) : Current SVG selection to check
+     *
+     * Notes
+     * -----
+     *      Should return an integer indicating the layer. However, if there is
+     *      no match, then an undefined is returned.
+     *
      */
+     let layer, match_found = false;
 
-     let x = a.x - b.x, y = a.y - b.y;
+     for (i in layers) {
+        layer = i;
 
-     return Math.sqrt(x ** 2, y ** 2);
-}
+        // console.log("Index of " + i);
+        for (obj of layers[i]) {
+            if (objects_match(obj, shape)) {
+                // console.log(obj, shape);
+                match_found = true;
+                break;
+            }
+        }
+
+        if (match_found) {
+            break;
+        }
+     }
+
+     return layer;
+ }
+
+ function objects_match(a, b){
+    /* Determine whether or not all of two objects' keys and values match
+     *
+     * Parameters
+     * ----------
+     *      a (obj) : first object to match with b
+     *      b (obj) : second object to match with a
+     */
+     let matches = [];
+     let keys = Object.keys(a);
+     let keysb = Object.keys(b);
+     let key, value1, value2;
+
+     if (keys.length != keysb.length) {
+        return false;
+     }
+
+     for (i in keys){
+        key = keys[i];
+        value1 = a[key];
+        value2 = b[key];
+
+        if (value1 == value2) {
+            matches[i] = true;
+        } else {
+            matches[i] = false;
+        }
+     }
+
+     return matches.every(function(item, i, arr){
+        if (i === 0){
+            return true;
+        } else {
+            return item === true;
+        }
+     })
+
+ }
+
+ function distance(a, b){
+    /* Calculate the Euclidean distance between two points
+     *
+     * Parameters
+     * ----------
+     *      a (object) : first point to calculate
+     *      b (object) : second point to calculate
+     *
+     * Notes
+     * -----
+     *      Points are generated by the generate_circle_attributes() function.
+     *      They have the form: {cx : _, cy : _, fill : _, stroke : _}
+     */
+     if (a == undefined | b == undefined) {
+        return undefined;
+     }
+     let x = a.cx - b.cx;
+     let y = a.cy - b.cy;
+     return Math.sqrt(x ** 2 + y ** 2);
+ }
+
+ function pair(circles){
+    /* Create a new array of circle pairs
+     *
+     * Parameters
+     * ----------
+     *      circles (array) : List of circle objects
+     *
+     * Notes
+     * -----
+     *      Points are generated by the generate_circle_attributes() function.
+     *      They have the form: {cx : _, cy : _, fill : _, stroke : _}
+     */
+     let at_least_two_circles = circles.length > 1;
+     let exactly_two_circles = circles.length == 2;
+
+     if (exactly_two_circles) {
+        // console.log("Inside exactly_two_circles " + circles.length);
+        return [circles];
+     } else if (at_least_two_circles) {
+
+        // Create pairs of circles from the current Array of circles
+        let current = circles[0];
+        let new_circles = circles.slice(1, circles.length);
+        let current_pair, circle_pairs = [];
+
+        for (circle of new_circles) {
+            current_pair = [current, circle];
+
+            if (!circle_pairs.includes(current_pair)) {
+                circle_pairs.push(current_pair);
+            }
+        }
+
+        return circle_pairs.concat(pair(new_circles));
+
+     } else {
+        console.log("No background circles detected.");
+        return;
+     }
+ }

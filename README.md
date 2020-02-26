@@ -41,18 +41,18 @@ animation.js | Contains scripts to animate SVG elements in the splash page
 This website has the following structure:
 
 ```
-	`- root
-		`- index.html		// Main website
-		`- js
-			`- index.js		// Main JavaScript file
-			`- animation.js	// JavaScript file for D3 animations
+    `- root
+        `- index.html           // Main website
+        `- js
+            `- index.js         // Main JavaScript file
+            `- animation.js     // JavaScript file for D3 animations
 
-		`- css
-			`- index.css	// Main CSS file
+        `- css
+            `- index.css        // Main CSS file
 
-		`- resources
-			`- data			// Datasets used by this site
-			`- svg			// SVG graphics
-			`- txt			// Text documents
+        `- resources
+            `- data             // Datasets used by this site
+            `- svg              // SVG graphics
+            `- txt              // Text documents
 ```
 
