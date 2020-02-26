@@ -26,6 +26,7 @@
     <!-- Custom Script Import -->
     <script type="text/javascript" src="./js/index.js"></script>
     <script type="text/javascript" src="./js/animation.js"></script>
+    <!-- <script type="text/javascript" src="./js/content.js"></script> -->
 </head>
 <body>
 
@@ -33,22 +34,21 @@
         <div id="content">
             <div id="header">
                 <h1>Glenn Abastillas</h1>
-                <ul>
-                    <li>
+                <div id="menu">
+                    <div class="menu-item">
                         <a id="about">About</a>
-                        <ul id='pulldown'>
-                            <li><a href="#background">Background</a></li>
-                            <li><a href="#experience">Experience</a></li>
-                            <li><a href="#publications">Publications</a></li>
-                            <li><a href="#education">Education</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="https://www.linkedin.com/in/glennabastillas/" target="blank">LinkedIn</a></li>
-                    <li><a href="https://github.com/gabastil" target="blank">GitHub</a></li>
-                    <li><a href="https://doi.org/10.1007/978-981-10-8468-3" target="blank">Research</a></li>
-                    <!-- <li>Visualization Sample</li> -->
-                </ul>
+                        <div class="menu-item sub-menu">
+                            <a href="#background">Background</a><br/>
+                            <a href="#experience">Experience</a><br/>
+                            <a href="#publications">Publications</a><br/>
+                            <a href="#education">Education</a><br/>
+                            <a href="#links">Links</a>
+                        </div>
+                    </div>
+                    <div class="menu-item"><a href="https://www.linkedin.com/in/glennabastillas/" target="blank">LinkedIn</a></div>
+                    <div class="menu-item"><a href="https://github.com/gabastil" target="blank">GitHub</a></div>
+                    <div class="menu-item"><a href="https://doi.org/10.1007/978-981-10-8468-3" target="blank">Research</a></div>
+                </div>
             </div>
             <div id="header-screen"></div>
         </div>
@@ -57,76 +57,18 @@
         <svg id="third"></svg>
     </div>
 
-<!--     <div id="navigation">
-        <ul>
-            <li>Background</li>
-            <li>Experience</li>
-            <li>Skills</li>
-            <li>Publications</li>
-        </ul>
-    </div> -->
 
-    <div id="resume">
-        <div id="p2" class="page"><a id="background"></a>
-            <div class="resume">
-                <h2>
-                    Background.
-                    <span>
-                        <a href="#top">to top</a> &bull;
-                        <a href="#experience">to Experience</a>
-                    </span>
-                </h2>
-
-
-                <span id="background"><span class="term">
-                    <!-- <a href="https://datascience.berkeley.edu/about/what-is-data-science/" target="blank"> --><!-- </a> -->
-                    Data scientist</span>, natural language processing (NLP) developer, and computational linguist with over seven years of experience developing NLP and machine learning (ML) algorithms, dashboards,data visualizations, and supporting research in the health domain. He takes a human-centered design approach to developing solutions and software for clients.
+    <div id="resume"><a id="background"></a>
+        <div id="p2" class="page resume">
+            <h2>Background.
+                <span>
+                    <a href="#top">to top</a> &bull;
+                    <a href="#experience">to Experience</a>
                 </span>
-
-                <!--
-                    SKILLS TABLE
-                    THIS TABLE contains skills for the resume
-
-                    Star HTML Entity codes are
-                    &#9733; for a full star ★
-                    &#9734; for an empty star ☆
-                -->
-                <table>
-                    <tr>
-                        <th>Programming</th>
-                        <th>Formats</th>
-                        <th>Development IDEs</th>
-                    </tr>
-                    <tr>
-                        <td>Python, R, SQL, JavaScript, Java, Lua, PHP, VBA</td>
-                        <td>HTML, XML, YAML, CSS, Markdown, JSON, HL7, FHIR</td>
-                        <td>Anaconda, Spyder, Jupyter, SageMaker, RStudio, I2E, IntelliJ, Eclipse</td>
-                    </tr>
-                    <tr>
-                        <th>Distributed Computing</th>
-                        <th>Environments and Repos</th>
-                        <th>Dashboards</th>
-                    </tr>
-                    <tr>
-                        <td>Multithreading, multiprocessing, Spark, Hadoop</td>
-                        <td>Docker, Anaconda, GitHub, Azure, AWS</td>
-                        <td>Power BI, Tableau</td>
-                    </tr>
-                    <tr>
-                        <th>Visual Editing</th>
-                        <th>Office Software</th>
-                        <th>Certifications</th>
-                    </tr>
-                    <tr>
-                        <td>Visio, Draw.io, Photoshop, Vegas, Corel, Illustrator</td>
-                        <td>Word, PowerPoint, Excel, Access, Outlook, Visio</td>
-                        <td>Registered Nurse, Basic Life Support, Translator, Scrum Master</td>
-                    </tr>
-                </table>
-
+            </h2>
+            <div id="summary">Data scientist, natural language processing (NLP) developer, and computational linguist with over seven years of experience developing NLP and machine learning (ML) algorithms, dashboards, data visualizations, and supporting research in the health domain. He takes a human-centered design approach to developing solutions and software for clients.
             </div>
-
-
+            <div></div>
         </div>
 
         <!--
@@ -212,7 +154,6 @@
                     <li>Educated patients and family members on home care and medication upon discharge</li>
                 </ul>
             </div>
-
         </div>
 
         <!--
@@ -221,7 +162,6 @@
             Contains content related to publications, presentations, or posters
             done in a professional setting.
         -->
-
         <div id="p4" class="page"><a id="publications"></a>
             <div class="resume">
                 <h2>
