@@ -1,0 +1,481 @@
+/*
+    Filename: visualization.css
+    Author: Glenn Abastillas
+    Date: February 26, 2020
+
+    CSS definitions for the base style across all pages in the domain
+    www.glennabastillas.com/visualization
+*/
+
+
+html, head, body
+{
+    background: #efefef;
+
+    font-family: Helvetica, Arial, sans-serif;
+
+    padding: 0;
+    margin: 0;
+
+    scroll-behavior: smooth;
+
+    height: 100%;
+    width: 100%;
+}
+
+/* * * * * * * * * * * * * */
+/*  General   Definitions  */
+/* * * * * * * * * * * * * */
+
+.page
+{
+    height: auto;
+    padding:  0;
+    margin:  0;
+    height:  auto;
+}
+
+.page h2
+{
+    font-family:  "Garamond", "Bell MT", sans-serif;
+    font-size: 3em;
+    font-weight: 200;
+}
+
+.page h2 span
+{
+    font-size: 0.25em;
+}
+
+.page h2 a
+{
+    text-decoration: none;
+    font-weight: 100;
+    color: #888;
+}
+
+.page h2 a:hover
+{
+    color: #111;
+    transition: all 1s ease;
+    position: relative;
+}
+
+#resume
+{
+    background: #fff;
+}
+
+.resume
+{
+    font-family: "Helvetica", "Arial", sans-serif;
+    font-weight: 200;
+    margin: 0 auto;
+    padding: 0;
+
+    text-align: left;
+
+    width: 60%;
+    height: 100%;
+
+    cursor: default;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.resume li
+{
+    color: #555;
+}
+
+.resume li:hover
+{
+
+    color: #000;
+    font-weight: 400;
+}
+
+.resume h2 span
+{
+    font-family: "Helvetica", "Arial", sans-serif;
+    font-size: 0.3em;
+    font-weight: 100;
+    color:  #9a9a9a;
+}
+
+.remote
+{
+    display: block;
+    width: 5em;
+    height: 10em;
+    position: fixed;
+    background: red;
+    visibility: hidden;
+}
+
+/* * * * * * * * * * * * */
+/* Page 1 - Landing Page */
+/* * * * * * * * * * * * */
+
+#p1
+{
+    background: #efefef;
+    height: 90vh;
+    text-align: center;
+}
+
+#p1 #content
+{
+    border-radius: 1em;
+
+    display: block;
+    margin: auto;
+
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+
+    text-align: center;
+
+    width: 50%;
+
+    z-index: 1;
+}
+
+#p1 #header
+{
+    z-index: 100;
+}
+
+#p1 h1
+{
+    display: block;
+    position:  relative;
+    font-size:  5em;
+    color:  #222;
+    user-select: none;
+    -webkit-user-select:  none;
+}
+
+#p1 #menu
+{
+    font-size: 1.5em;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: space-evenly;
+}
+
+#p1 .menu-item
+{
+    /* background: red; */
+    width: 5em;
+    height: 2em;
+    margin: auto;
+}
+
+#p1 .menu-item:hover
+{
+    cursor: pointer;
+}
+
+#p1 .sub-menu
+{
+    background: white;
+    border-radius: 1em;
+    font-size: 1em;
+    height:  auto;
+    width:  150%;
+    text-align: left;
+    padding: 1em;
+    display:  none;
+}
+
+#p1 #header-screen
+{
+    border-radius: 1em;
+    opacity: 0.75;
+    display: block;
+    width: 100%;
+    height: 110%;
+    top:  -0.5%;
+    position:  absolute;
+    background: white;
+    z-index: -1;
+}
+
+/* #p1 .icon
+{
+    width: 3em;
+    height: 3em;
+    padding-right:  1em;
+    object-fit: cover;
+    filter:  opacity(50%);
+}
+
+#p1 .icon:hover
+{
+    filter:  opacity(100%);
+    transition: 1s;
+} */
+
+#p1 svg
+{
+    position: absolute;
+    display: block;
+    margin:  auto;
+    top:  0;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+    filter:  blur(0.05rem);
+}
+
+/* #p1 ul, #p1 li
+{
+    display: inline;
+    margin-right: 1em;
+    font-size:  1.2em;
+    text-align: left;
+} */
+
+
+#p1 a
+{
+    text-decoration: none;
+    font-family: "Helvetica", "Arial", sans-serif;
+    color:  #555;
+    left: -2em;
+}
+
+#p1 a:hover
+{
+    color:  #000;
+}
+
+
+/* * * * * * * * * * * * */
+/*  Page 2 - Background  */
+/* * * * * * * * * * * * */
+
+#p2
+{
+    height:  95vh;
+    background-image: url("https://miro.medium.com/max/1600/1*TURvrYWSTRQLGF6sJ025gw.png");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 100%;
+}
+
+
+#p2 div#summary
+{
+    font-size: 2em;
+    font-family: "Helvetica", "Arial", sans-serif;
+
+    text-align: left;
+
+    width: 100%;
+}
+
+#p2 span a
+{
+    text-decoration: none;
+}
+
+#p2 table
+{
+    /*display: block;*/
+    /*border: 1px solid black;*/
+    /*background: #efefef;*/
+    padding-top: 1em;
+    margin: auto;
+    font-family: "Arial", sans-serif;
+    width: 75%;
+    /* height: 80%; */
+}
+
+#p2 th
+{
+    font-style: "Helvetica", "Arial", sans-serif;
+    text-align: center;
+    width:  5em;
+}
+
+#p2 td
+{
+    /*border: none;*/
+    /*border:  1px solid black;*/
+    border-radius: 1em;
+    background: #eee;
+
+    padding: 1em;
+
+    text-align: left;
+    vertical-align: top;
+
+    width: 5em;
+    height: 5em;
+}
+
+#p2 .rating
+{
+    font-size: 1.25em;
+    text-align: left;
+    vertical-align: middle;
+    color: #ffcc00;
+}
+
+/* * * * * * * * * * * * */
+/*  Page 3 - Experience  */
+/* * * * * * * * * * * * */
+
+#p3
+{
+    background: #eee;
+}
+
+#p3 h3 span
+{
+    font-weight: 100;
+    color:  #9a9a9a;
+}
+
+#p3 .resume
+{
+    padding-bottom: 1em;
+}
+
+/* * * * * * * * * * * * * */
+/*  Page 4 - Publications  */
+/* * * * * * * * * * * * * */
+
+#p4
+{
+    height: 95vh;
+}
+
+#p4 .resume
+{
+    font-weight: 100;
+}
+
+#p4 li a
+{
+    text-decoration: none;
+    color: #777;
+}
+
+#p4 li a:hover
+{
+    color: #00abab;
+}
+
+#p4 li a:hover span
+{
+    color:  #00abdc;
+}
+
+#p4 ol
+{
+    font-size: 1.25em;
+}
+
+#p4 li
+{
+    color: #777;
+    padding-bottom: 3em;
+}
+
+#p4 li:hover
+{
+    color: #000;
+    font-weight: 100;
+}
+
+#p4 .publication-title
+{
+    color: #000;
+    font-weight: 400;
+}
+
+/* Page 5 - Education
+ *
+ *
+ */
+
+ #p5
+ {
+    height:  95vh;
+    background: #efefef;
+ }
+
+#p5 img
+{
+    position:  relative;
+    left:  0;
+    width: 2em;
+}
+
+#p5 li a
+{
+    text-decoration: none;
+    color: #555;
+}
+
+#p5 li a:hover
+{
+    color: #000;
+}
+
+#p5 li
+{
+    font-size: 1.5em;
+    list-style-type: none;
+    font-weight: 100;
+    color: #aaa;
+    margin-bottom: 2em;
+}
+
+#p5 .university-name
+{
+    font-size:  1.5em;
+    font-weight: 600;
+    color: #000;
+}
+
+
+/* Page 7 - Contact
+ *
+ *
+ */
+
+ #p7
+ {
+    height: 50vh;
+    background: #494545;
+    color: #fff;
+ }
+
+ #p7 h2
+ {
+    margin:  0;
+    padding:  0;
+ }
+
+ #p7 #content
+ {
+    display: flex;
+    flex-direction: row;
+    align-content: space-evenly;
+    background: red;
+    width:  100%;
+    margin: 0;
+    padding: 0;
+ }
+
+ #p7 #content div
+ {
+    width:  33%;
+    background: blue;
+ }
