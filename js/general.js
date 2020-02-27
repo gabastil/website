@@ -38,13 +38,8 @@
 
      reader.onload = function(e){
         input_data = JSON.parse(reader.result);
-
-        // $('#visualization').text(Object.keys(input_data));
-        $('#visualization').text(input_data.region);
         console.log(input_data);
-
-        // let data = parseCSV(input_data);
-        // arrayToJSON(data);
+        plot(input_data);
      }
 
      reader.onerror = function(e){
@@ -53,6 +48,7 @@
      }
 
      reader.readAsText(file.files[0]);
+
  }
 
 function splitLines(file, sep = '\n'){
@@ -150,4 +146,55 @@ function range(start, stop, step=1){
     }
 
     return numbers;
+}
+
+/* FUNCTIONS TO PLOT DATA ONTO SVG CANVAS ONCE LOADED */
+
+function plot(data = input_data){
+    let window_width = $(window).width();
+    let window_height = $(window).height();
+    let border_x = window_width * 0.1;
+    let border_y = window_height * 0.1;
+
+    let lat = [], lon = [];
+
+
+    for (let [k, v] of Object.entries(data.lat)){
+        lat.push(v);
+    }
+
+    for (let [k, v] of Object.entries(data.lon)){
+        lon.push(v);
+    }
+
+    // X-Axis
+    let a = Math.min(...lat),
+        b = Math.max(...lat),
+        c = border_x,
+        d = window_width - (4 * border_x);
+
+    console.log(`${c} ${d} ${window_width}`);
+
+    let scale_x = d3.scaleLinear().domain([a, b]).range([c, d]);
+
+    // Y-Axis
+    a = Math.min(...lon);
+    b = Math.max(...lon);
+    c = border_y;
+    d = window_height - (4 * c);
+
+    let scale_y = d3.scaleLinear().domain([a, b]).range([c, d]);
+
+    d3.select('svg').selectAll('circle')
+      .data(lat)
+      .enter()
+      .append('circle')
+      .attr('cx', function(d, i){return scale_x(i)})
+      .attr('cy', 300)
+      .attr('r', 5)
+      .attr('fill', 'red')
+      .attr('stroke', 'black')
+      .attr('stroke-width', '1px');
+
+
 }
