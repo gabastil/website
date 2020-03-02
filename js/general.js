@@ -333,7 +333,8 @@ $(document).ready(function(){
             datay.push(datax[value]);
         }
 
-        datay.push(datay.reduce(function(total, current){return total + current}))
+        // datay.push(Math.max(...datay))
+        // datay.push(datay.reduce(function(total, current){return total + current}))
         draw_axes(Object.keys(datax), datay);
         datax = InputData.transform_data_for_bar_plot(datax);
 
@@ -341,7 +342,7 @@ $(document).ready(function(){
         let cx = function(d, i){
             let full_x = SCALEX(Object.keys(d)[i]);
             console.log(Object.keys(d)[i]);
-            return full_x;
+            return full_x - 50;
         };
         let cy = function(d, i){
             let key = Object.keys(d)[i]
@@ -365,7 +366,7 @@ $(document).ready(function(){
            .append('rect')
            .attr("x", cx)
            .attr("y", cy)
-           .attr("width", 10)
+           .attr("width", 100)
            .attr("height", ch)
            .attr("fill", "red");
      }
@@ -412,13 +413,19 @@ $(document).ready(function(){
             }
         };
 
+        let idx = function(d, i){
+            return `line-segment-${i}`;
+        }
+
         // // Plot data
         g.selectAll("path")
            .data(datax)
            .enter()
            .append('path')
            .attr("d", cx)
+           .attr("id", idx)
            .attr("stroke-width", 5)
+           .attr("stroke-linecap", "round")
            .attr("stroke", "green");
 
 

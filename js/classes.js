@@ -84,7 +84,7 @@ class InputData {
      * Convert an incoming string into a number if it is numeric
      * @param {string} string - text to convert
      */
-    static covert_if_numeric(string){
+    static convert_if_numeric(string){
         let regex = /[0-9]+(\.[0-9]+)?/i;
         string = string.replace(",", "");
         if (string.match(regex) != null){
