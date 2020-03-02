@@ -54,6 +54,11 @@ svg circle:hover
     r: 1em;
 }
 
+svg rect:hover
+{
+    border: solid 1px black;
+}
+
 svg g#plot-field
 {
     width: 80%;

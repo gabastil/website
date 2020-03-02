@@ -19,6 +19,7 @@
     <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
 
     <!-- SCRIPT WITH GENERAL FUNCTIONS (E.G., LOAD FILE, RANGE) -->
+    <script type="text/javascript" src="./js/classes.js"></script>
     <script type="text/javascript" src="./js/general.js"></script>
     <!-- <script type="text/javascript" src="./js/dataviz.js"></script> -->
 
@@ -33,7 +34,7 @@
                 <input type="submit" name="plot-data" value="Plot">
 
                 <label for="file">Load Data</label>
-                <input type="file" name="file" accept=".json"/>
+                <input type="file" name="file" accept=".json, .csv"/>
 
                 <label for="chart-title">Chart Title</label>
                 <input type="text" name="chart-title">
@@ -42,8 +43,11 @@
                 <label for="scatter">Scatter</label>
                 <input type="checkbox" name="scatter" value="scatter"/>
 
-                <label id="coords" for="bar-plot"></label>
+                <label id="coords" for="bar-plot">Bar Plot &rightarrow;</label>
                 <input type="checkbox" name="bar-plot" value="bar-plot"/>
+
+                <label id="coords" for="line-plot">Line Plot &rightarrow;</label>
+                <input type="checkbox" name="line-plot" value="line-plot"/>
 
                 <label for="dataset axis-x axis-y">Visualization options</label>
                 <select id="select-data" name="dataset"></select>

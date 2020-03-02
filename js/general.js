@@ -19,6 +19,7 @@ $(document).ready(function(){
           CLEAR = $("button[id='clear-data']"),
           TITLE = $("input[name='chart-title']")
           CHECKBOX_BAR_PLOT = $("input[name='bar-plot']")
+          CHECKBOX_LINE_PLOT = $("input[name='line-plot']")
           ;
 
     const PLOT_W = SVG_.width(),
@@ -32,32 +33,52 @@ $(document).ready(function(){
     var SCALEX = d3.scaleLinear().range([MARGIN, WIDTH]),
         SCALEY = d3.scaleLinear().range([MARGIN, HEIGHT]);
 
-    var RAW_DATA;
+    var DATA;
 
-    // DELETE THESE LATER
-    // SVG.append("path").attr("d", `M${MARGIN},${MARGIN} H${WIDTH}`).attr("stroke", "black");
-    // SVG.append("path").attr("d", `M${MARGIN},${MARGIN} V${HEIGHT}`).attr("stroke", "black");
-    // SVG.append("path").attr("d", `M${MARGIN},${HEIGHT} H${WIDTH}`).attr("stroke", "black");
-    // SVG.append("path").attr("d", `M${WIDTH},${MARGIN} V${HEIGHT}`).attr("stroke", "black");
+    /**
+     * Determine whether or not the browser has the FileReader class
+     * and a valid FILE blob when load_*_file() methods are called.
+     * @returns
+     */
+    function filereader_exists(){
+        if (FileReader && INPUT_FILE){
+            return true;
+        }
+        return false;
+    }
+
 
     function load_file(e){
         // Load a specified JSON file from the input[type='file'] element
 
-        if(!FileReader && !FILE){
+        if(!filereader_exists()){
             console.warn("Unable to read file");
         } else {
             let reader = new FileReader();
+            let filename = INPUT_FILE[0].files[0].name;
+            let is_csv = filename.endsWith('csv');
+            let is_json = filename.endsWith('json');
+
             reader.onload = function(e){
-                RAW_DATA = JSON.parse(reader.result);
-                // console.log(RAW_DATA);
-                console.log(Object.keys(RAW_DATA).length);
-                update_select_options(RAW_DATA);
+                if (is_csv){
+                    DATA = InputData.parse_csv(reader.result);
+                } else if (is_json) {
+                    DATA = InputData.parse_json(reader.result);
+                } else {
+                    console.error("Please load either a .csv nor .json file.")
+                }
+                console.log(`in 'load_file'. Loaded:\n${DATA}`);
+                console.log(DATA);
+                console.log(DATA[0]);
             }
+
             reader.onerror = function(e){
-                console.warn("FileReader unable to read file");
+                console.error("FileReader unable to read file");
             }
+
             reader.readAsText(INPUT_FILE[0].files[0]);
 
+            // Set a default title for the graph
             if (TITLE.val() == "") {
                 TITLE.val(`${INPUT_FILE[0].files[0].name}`);
                 update_chart_title();
@@ -96,12 +117,12 @@ $(document).ready(function(){
          * -----
          *      This function processes the raw data input.
          */
-        let data = {[x] : RAW_DATA[x]};
+        let data = {[x] : DATA[x]};
         if (y != null){
-            data[y] = RAW_DATA[y];
+            data[y] = DATA[y];
         }
         if (z != null){
-            data[z] = RAW_DATA[z];
+            data[z] = DATA[z];
         }
         return object_to_list(data);
     }
@@ -140,8 +161,8 @@ $(document).ready(function(){
          *      converted into an array.
          */
         series = values(series, 'string');
-        console.log(series);
-        console.log(series.indexOf('false'));
+        // console.log(series);
+        // console.log(series.indexOf('false'));
 
         let onlyUnique = function(value, index, self){
            return self.indexOf(value) === index;
@@ -149,9 +170,7 @@ $(document).ready(function(){
 
         let subset = series.filter(onlyUnique);
         let counts = {};
-        let item_count = 0;
-
-        console.log(subset);
+        let item_count = 1;
 
         for (value of subset){
            for (item of series){
@@ -161,7 +180,7 @@ $(document).ready(function(){
                 }
             }
             counts[value] = item_count;
-            item_count = 0;
+            item_count = 1;
         }
 
         return counts;
@@ -247,8 +266,8 @@ $(document).ready(function(){
 
 
     // - - - - - - - - - - UPDATE GRAPH ELEMENTS OF THE PLOT - - - - - - - - - -
-    function scatter_plot(e=null, x='lat', y='lon'){
-        /* Draw a scatter plat using the custom data loaded.
+    function scatter_plot(e=null, x='a', y='b'){
+        /* Draw a scatter plot using the custom data loaded.
          *
          * Parameters
          * ----------
@@ -258,36 +277,33 @@ $(document).ready(function(){
          *
          * Notes
          * -----
-         *      Requires the RAW_DATA variable to have at least two
+         *      Requires the DATA variable to have at least two
          *      numeric columns.
          */
         clear_plot();
         let g = get_plot();
-        let data = get_data(x, y);
-        draw_axes(RAW_DATA[x], RAW_DATA[y]);
+        let datax = InputData.series(x, DATA);
+        let datay = InputData.series(y, DATA);
 
-        // console.log(get_domain(data[x]));
-        // console.log(x);
-        // console.log(data);
-        // console.log(data[x]);
+        draw_axes(datax, datay);
 
         // - - - - - - - - DRAW AXES AND DATA - - - - - - - - //
-        let cx = function(d){return SCALEX(d[x])};
-        let cy = function(d){return SCALEY(d[y])};
+        let cx = function(d){console.log(`${d[x]} scales to ${SCALEX(d[x])}`); return SCALEX(d[x])};
+        let cy = function(d){console.log(`${d[y]} scales to ${SCALEY(d[y])}`); return SCALEY(d[y])};
 
         // Plot data
         g.selectAll("circle")
-           .data(data)
+           .data(DATA)
            .enter()
            .append('circle')
            .attr("cx", cx)
            .attr("cy", cy)
-           .attr("r", 1)
+           .attr("r", 10)
            .attr("fill", "red");
     }
 
-    function bar_plot(e=null, x='cs', y=null){
-        /* Draw a bar plat using the custom data loaded.
+    function bar_plot(e=null, x='b', y=null){
+        /* Draw a bar plot using the custom data loaded.
          *
          * Parameters
          * ----------
@@ -297,7 +313,7 @@ $(document).ready(function(){
          *
          * Notes
          * -----
-         *      Requires the RAW_DATA variable to have one column with categ-
+         *      Requires the DATA variable to have one column with categ-
          *      orical data that can be counted.
          */
         if (this.checked === false){
@@ -306,48 +322,117 @@ $(document).ready(function(){
 
         clear_plot();
         let g = get_plot();
-        let data = get_data(x, y);
+        let datax = InputData.series(x, DATA),
+            datay = [];
+        // let datay = InputData.series(y, DATA);
 
-        let counts = value_counts(RAW_DATA[x]);
-        data = {[x] : Object.keys(counts), [y] : values(counts)}
+        datax = value_counts(datax);
 
-        console.log(counts);
 
-        draw_axes(data[x], data[y]);
+        for (value in datax){
+            datay.push(datax[value]);
+        }
 
-        // - - - - - - - - DRAW AXES AND DATA - - - - - - - - //
-        let cx = function(d){return SCALEX(d[x])};
-        let cy = function(d){return SCALEY(d[y])};
+        datay.push(datay.reduce(function(total, current){return total + current}))
+        draw_axes(Object.keys(datax), datay);
+        datax = InputData.transform_data_for_bar_plot(datax);
 
-        // Plot data
+        // // - - - - - - - - DRAW AXES AND DATA - - - - - - - - //
+        let cx = function(d, i){
+            let full_x = SCALEX(Object.keys(d)[i]);
+            console.log(Object.keys(d)[i]);
+            return full_x;
+        };
+        let cy = function(d, i){
+            let key = Object.keys(d)[i]
+            let full_y = SCALEY(d[key]);
+
+            console.log(d[key]);
+            return full_y;
+        };
+        let ch = function(d, i){
+            let key = Object.keys(d)[i]
+            let full_y = SCALEY(d[key]);
+            return HEIGHT - full_y;
+        }
+
+        let cw; // Function for width of a bar chart;
+
+        // // Plot data
         g.selectAll("rect")
-           .data(data)
+           .data(datax)
            .enter()
            .append('rect')
            .attr("x", cx)
            .attr("y", cy)
+           .attr("width", 10)
+           .attr("height", ch)
            .attr("fill", "red");
      }
 
-    function line_plot(){
-        /* Draw a scatter plat using the custom data loaded.
+    function line_plot(e = null, x = 'a', y ='b'){
+        /* Draw a line plot using the custom loaded data.
+         *
+         * Parameters
+         * ----------
+         *      e (event) : default parameter passed by jQuery.
+         *      x (string) : Name of the data element to mark along the x axis.
+         *      y (string) : Name of the data element to mark along the y axis.
          *
          * Notes
          * -----
-         *      Requires the RAW_DATA variable to have at least two columns.
+         *      Data will be joined by a line. Scale objects (*x and *x) are
+         *      defined outside of this function.
          */
+
         clear_plot();
         let g = get_plot();
+        let datax = InputData.series(x, DATA),
+            datay = InputData.series(y, DATA);
+
+        console.log(datax);
+        console.log(datay);
+        draw_axes(datax, datay);
+
+        // - - - - - - - - DRAW AXES AND DATA - - - - - - - - //
+        let cx = function(d, i){
+            console.log(`d : ${d} and i : ${i} and next is datax.indexOf(d) ${datax.indexOf(d)}`);
+            if (i === datax.length-1){
+                return '';
+            } else {
+                // Current data element
+                let next = datax.indexOf(d) + 1;
+                let next_data = DATA[next];
+
+                let this_x = SCALEX(d), this_y = SCALEY(DATA[i][y]);
+                let next_x = SCALEX(DATA[next][x]), next_y = SCALEY(DATA[next][y]);
+
+                // console.log(`M${this_x},${this_y} L${next_x},${next_y}`);
+                return `M${this_x},${this_y} L${next_x},${next_y}`
+            }
+        };
+
+        // // Plot data
+        g.selectAll("path")
+           .data(datax)
+           .enter()
+           .append('path')
+           .attr("d", cx)
+           .attr("stroke-width", 5)
+           .attr("stroke", "green");
+
+
      }
 
     // - - - - - - - - - - UPDATE GRAPH ELEMENTS OF THE PLOT - - - - - - - - - -
-    function draw_axes(x, y){
+    function draw_axes(x, y, start_domain_at_zero=true){
         /* Draw the x and y axes along the main plot.
          *
          * Parameters
          * ----------
          *     x (obj [array]) : an object containing all of the x-axis data.
          *     y (obj [array]) : an object containing all of the y-axis data.
+         *     start_domain_at_zero (bool) : Start each domain at 0.
          * Notes
          * -----
          *     The data from x and y are Objects because of the way that Pandas
@@ -356,8 +441,13 @@ $(document).ready(function(){
          *       {"index" : "value", ..., n : value-n}
          */
 
-        let domain_x = get_domain(x).sort(function(a,b){return b-a}),
-            domain_y = get_domain(y);
+        let domain_x = get_domain(x), //.sort(function(a,b){return b-a}),
+            domain_y = get_domain(y).sort(function(a,b){return b-a});
+
+        if (start_domain_at_zero){
+            domain_x[0] = 0;
+            domain_y[1] = 0;
+        }
 
         SCALEX.domain(domain_x);
         SCALEY.domain(domain_y);
@@ -381,9 +471,13 @@ $(document).ready(function(){
         return [SCALEX, SCALEY];
     }
 
+
+
+    // INPUT_FILE.change(load_csv_file);
     INPUT_FILE.change(load_file);
     PLOT_DATA.click(scatter_plot);
     CHECKBOX_BAR_PLOT.click(bar_plot);
+    CHECKBOX_LINE_PLOT.click(line_plot);
     CLEAR.click(clear_plot);
     TITLE.change(update_chart_title);
 });
@@ -418,14 +512,6 @@ class Scale {
 }
 
 
-class DataFromPandas {
-    construtor(data){
-        this.columns = Object.keys(data);
-        this.size = null;
-        this.data = null;
-    }
-    // Implement conversion functions
-}
 
 /* - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - */
 /* Methods to draw visualization elements onto the SVG area */
@@ -522,45 +608,45 @@ function object_to_list(data){
     return list;
 }
 
-function splitLines(file, sep = '\n'){
-    // Return a list of strings split by newline
-    return file.split(sep);
-}
+// function splitLines(file, sep = '\n'){
+//     // Return a list of strings split by newline
+//     return file.split(sep);
+// }
 
-function parseCSV(file, sep = ','){
-    /* Parses a comma separated string into an array containing arrays of values
+// function parseCSV(file, sep = ','){
+//     /* Parses a comma separated string into an array containing arrays of values
 
-        Parameters
-        ----------
-            file (string) : Comma separated data
-            sep (string) : Delimiter (default is a comma) used for the data
-     */
-    let data = [];
-    let size = 0;
-    let array, warning;
+//         Parameters
+//         ----------
+//             file (string) : Comma separated data
+//             sep (string) : Delimiter (default is a comma) used for the data
+//      */
+//     let data = [];
+//     let size = 0;
+//     let array, warning;
 
-    file = splitLines(file);
+//     file = splitLines(file);
 
-    // Split each line by a comma (default)
-    for (line of file){
-        array = line.split(sep);
+//     // Split each line by a comma (default)
+//     for (line of file){
+//         array = line.split(sep);
 
-        if (array.length > size) {
-            size = array.length;
-        }
+//         if (array.length > size) {
+//             size = array.length;
+//         }
 
-        if (array.length == size){
-            data.push(array);
-        } else {
-            warning = "Row " + line + " has " + array.length + " element(s). " +
-                      "Other data have " + size + " element(s)."
-            console.warn(warning);
-        }
-    }
+//         if (array.length == size){
+//             data.push(array);
+//         } else {
+//             warning = "Row " + line + " has " + array.length + " element(s). " +
+//                       "Other data have " + size + " element(s)."
+//             console.warn(warning);
+//         }
+//     }
 
-    console.log(data);
-    return data;
-}
+//     console.log(data);
+//     return data;
+// }
 
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
