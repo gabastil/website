@@ -23,6 +23,7 @@ $(document).ready(function(){
     const PLOT_W = SVG_.width(),
           PLOT_H = SVG_.height(),
           MARGIN = 50,
+          BUFFER = 10,
           WIDTH = PLOT_W - MARGIN,
           HEIGHT = PLOT_H - MARGIN
           ;
@@ -237,12 +238,12 @@ $(document).ready(function(){
 
         main.append("g")
              .attr("id", "axis")
-             .attr("transform", `translate(0, ${HEIGHT})`)
+             .attr("transform", `translate(0, ${HEIGHT + BUFFER})`)
              .call(x_axis);
 
         main.append("g")
              .attr("id", "axis")
-             .attr("transform", `translate(${MARGIN}, 0)`)
+             .attr("transform", `translate(${MARGIN - BUFFER}, 0)`)
              .call(y_axis);
 
         return [SCALEX, SCALEY];
