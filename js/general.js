@@ -23,14 +23,20 @@ $(document).ready(function(){
     const PLOT_W = SVG_.width(),
           PLOT_H = SVG_.height(),
           MARGIN = 50,
-          WIDTH = PLOT_W - (2 * MARGIN),
-          HEIGHT = PLOT_H - (2 * MARGIN)
+          WIDTH = PLOT_W - MARGIN,
+          HEIGHT = PLOT_H - MARGIN
           ;
 
     var SCALEX = d3.scaleLinear().range([MARGIN, WIDTH]),
         SCALEY = d3.scaleLinear().range([MARGIN, HEIGHT]);
 
     var RAW_DATA;
+
+    // DELETE THESE LATER
+    // SVG.append("path").attr("d", `M${MARGIN},${MARGIN} H${WIDTH}`).attr("stroke", "black");
+    // SVG.append("path").attr("d", `M${MARGIN},${MARGIN} V${HEIGHT}`).attr("stroke", "black");
+    // SVG.append("path").attr("d", `M${MARGIN},${HEIGHT} H${WIDTH}`).attr("stroke", "black");
+    // SVG.append("path").attr("d", `M${WIDTH},${MARGIN} V${HEIGHT}`).attr("stroke", "black");
 
     function load_file(e){
         // Load a specified JSON file from the input[type='file'] element
@@ -43,6 +49,7 @@ $(document).ready(function(){
                 RAW_DATA = JSON.parse(reader.result);
                 // console.log(RAW_DATA);
                 console.log(Object.keys(RAW_DATA).length);
+                update_select_options(RAW_DATA);
             }
             reader.onerror = function(e){
                 console.warn("FileReader unable to read file");
@@ -57,8 +64,68 @@ $(document).ready(function(){
         }
     }
 
+    // - - - - - - CALCULATE PLOT AREA NUMERS (E.G., RANGE, DOMAIN) - - - - - -
+    function update_select_options(data){
+        /* Update the <option> tags in each <select> tag group
+         *
+         * Parameters
+         * ----------
+         *      data (Object) : Data whose columns are to be insert into select
+         */
+        let columns = Object.keys(data);
+        let selects = d3.selectAll("select");
+
+        for (variable of columns){
+            selects.append("option")
+                   .text(variable);
+        }
+
+    }
+
+    // - - - - - - CALCULATE PLOT AREA NUMERS (E.G., RANGE, DOMAIN) - - - - - -
+    function get_domain(series){
+        /* Get the domain figures for an axis scale
+         *
+         * Parameters
+         * ----------
+         *      series (Array) : get the maximum and minimum input values
+         *
+         * Notes
+         * -----
+         *      Input series should be an array. If it is an object, it will be
+         *      converted into an array.
+         */
+
+        series = values(series);
+        let min = Math.min(...series), max = Math.max(...series);
+        return [Math.floor(min), Math.ceil(max)];
+    }
+
+    function get_range(){}
+
     // - - - - - - - GET D3 SVG ELEMENTS RELATED TO THE MAIN PLOT - - - - - - -
-    function get_main_area(){
+    function get_group(parent = SVG, id = 'main'){
+        /* Get the main plot group
+         *
+         * Parameters
+         * ----------
+         *      parent (Object) : Selection from d3.select
+         *      id (string) : ID name of the object to retrieve
+         *
+         * Notes
+         * -----
+         *      This function returns child elements of the parent or creates
+         *      them if they do not already exist.
+         */
+        let g = parent.select(`g[id='${id}']`);
+        if (g.size() === 0){
+            return parent.append("g").attr("id", id);
+        } else {
+            return g;
+        }
+    }
+
+    function get_main(){
         /* Get the main plot group
          *
          * Notes
@@ -66,47 +133,49 @@ $(document).ready(function(){
          *      This group will contain all of the visual elements related to
          *      the plot. This includes the title, axes, and main visual.
          */
-
-         let g = d3.select("g[id=main]");
-         if (g.size() == 0){
-            return SVG.append("g").attr("id", "main");
-         } else {
-            return g;
-         }
+        return get_group(SVG, "main");
     }
 
-    function get_main_title(){
-        /* Get the title group */
-        let main = get_main_area();
-        let g = main.select("g[id='title']");
-        if (g.size() === 0){
-            return main.append("g").attr("id", "title");
-        } else {
-            return g;
-        }
+    function get_title(){
+        /* Get the title group
+         *
+         * Notes
+         * -----
+         *      This group will contain the title for the chart.
+         */
+        return get_group(get_main(), "title");
+    }
+
+    function get_plot(){
+        /* Get the plot area
+         *
+         * Notes
+         * -----
+         *      This group will contain the drawing area for the plot
+         */
+         return get_group(get_main(), "plot")
     }
 
 
     // - - - - - - - - - UPDATE NON-GRAPH ELEMENTS OF THE PLOT - - - - - - - - -
     function update_chart_title(){
-        // Add or update the chart title
-        let main = get_main_area()
+        /* Update the SVG chart title based on input
+         *
+         * Notes
+         * -----
+         *      The title element is a group in the SVG field
+         */
 
-        let g = main.select("g[id='title']");
-
-        if (g.size() === 0){
-            g = main.append("g").attr("id", "title");
-        }
-
-        let text = g.select("text[id='title']");
+        let title = get_title();
+        let text = title.select("text[id='title']");
 
         if (text.size() === 0){
-            g.append("text")
-             .attr("id", "title")
-             .attr("x", MARGIN)
-             .attr("y", MARGIN)
-             .attr("width", WIDTH)
-             .text(TITLE.val());
+            title.append("text")
+                 .attr("id", "title")
+                 .attr("x", MARGIN)
+                 .attr("y", MARGIN)
+                 .attr("width", WIDTH)
+                 .text(TITLE.val());
         } else {
             text.text(TITLE.val());
         }
@@ -114,50 +183,19 @@ $(document).ready(function(){
 
 
     // - - - - - - - - - - UPDATE GRAPH ELEMENTS OF THE PLOT - - - - - - - - - -
-    function plot_data(){
+    function scatter_plot(){
         // Plot RAW_DATA onto the SVG field
         clear_svg_children();
-
-        let main = get_main_area()
-        // update_chart_title(INPUT_FILE.files[0]);
-
-        let g = main.select("g[id='plot']");
-
-        if (g.size() === 0){
-            g = main.append('g').attr('id', 'plot');
-        }
+        let g = get_plot();
 
         let data = listify_data({'lat' : RAW_DATA['lat'],
                                  'lon' : RAW_DATA['lon']});
 
         draw_axes(RAW_DATA['lat'], RAW_DATA['lon']);
 
-        let x = values(RAW_DATA['lon']),
-            y = values(RAW_DATA['lat']);
-
-        // - - - - - - - - DEFINE AXES AND BOUNDS - - - - - - - - //
-
-        let x1 = Math.min(...x),
-            x2 = Math.max(...x),
-            y1 = Math.min(...y),
-            y2 = Math.max(...y);
-
-        x1 = Math.floor(x1);
-        x2 = Math.ceil(x2);
-
-        y1 = Math.floor(y1);
-        y2 = Math.ceil(y2);
-
-        // Define D3 scaling object
-        let scale_x = SCALEX.domain([x1, x2]);
-        let scale_y = SCALEY.domain([y1, y2]);
-
         // - - - - - - - - DRAW AXES AND DATA - - - - - - - - //
-
-
-        // // Draw x and y axes first
-        let cx = function(d){return scale_y(d.lat)};
-        let cy = function(d){return scale_x(d.lon)};
+        let cx = function(d){return SCALEX(d.lat)};
+        let cy = function(d){return SCALEY(d.lon)};
 
         // Plot data
         g.selectAll("circle")
@@ -168,67 +206,50 @@ $(document).ready(function(){
            .attr("cy", cy)
            .attr("r", 1)
            .attr("fill", "red");
-
-        // - - - - - - - -
     }
 
     function draw_axes(x, y){
-        /*
-        Draw the x and y axes along the main plot.
-
-        Parameters
-        ----------
-            x (obj [array]) : an object containing all of the x-axis data.
-            y (obj [array]) : an object containing all of the y-axis data.
-
-        Notes
-        -----
-            The data from x and y are Objects because of the way that Pandas
-            in Python outputs CSV data as JSON formats.
-
-            They have the form:
-
-                {"index" : "value", ..., n : value-n}
+        /* Draw the x and y axes along the main plot.
+         *
+         * Parameters
+         * ----------
+         *     x (obj [array]) : an object containing all of the x-axis data.
+         *     y (obj [array]) : an object containing all of the y-axis data.
+         * Notes
+         * -----
+         *     The data from x and y are Objects because of the way that Pandas
+         *     in Python outputs CSV data as JSON formats.
+         *     They have the form:
+         *       {"index" : "value", ..., n : value-n}
          */
-        x = values(x);
-        y = values(y);
 
-        // - - - - - - - - DEFINE AXES AND BOUNDS - - - - - - - - //
-        let x1 = Math.min(...x), x2 = Math.max(...x),
-            y1 = Math.min(...y), y2 = Math.max(...y);
+        let domain_x = get_domain(x).sort(function(a,b){return b-a}),
+            domain_y = get_domain(y);
 
-        x1 = Math.floor(x1);
-        x2 = Math.ceil(x2);
+        SCALEX.domain(domain_x);
+        SCALEY.domain(domain_y);
 
-        y1 = Math.floor(y1);
-        y2 = Math.ceil(y2);
-
-        // Define D3 scaling object
-        let scale_x = SCALEX.domain([x1, x2]);
-        let scale_y = SCALEY.domain([y1, y2]);
-
-        let x_axis = d3.axisBottom([x1, x2]).scale(scale_x);
-        let y_axis = d3.axisLeft([y1, y2]).scale(scale_y);
+        let x_axis = d3.axisBottom(domain_x).scale(SCALEX);
+        let y_axis = d3.axisLeft(domain_y).scale(SCALEY);
 
         // Draw axes
-        let cx = function(d){return scale_x(d.lat)};
-        let cy = function(d){return scale_y(d.lat)};
-
-        let main = get_main_area()
+        let main = get_main()
 
         main.append("g")
              .attr("id", "axis")
-             .attr("transform", `translate(0, ${HEIGHT + MARGIN})`)
+             .attr("transform", `translate(0, ${HEIGHT})`)
              .call(x_axis);
 
         main.append("g")
              .attr("id", "axis")
-             .attr("transform", `translate(${MARGIN}, ${MARGIN})`)
+             .attr("transform", `translate(${MARGIN}, 0)`)
              .call(y_axis);
+
+        return [SCALEX, SCALEY];
     }
 
     INPUT_FILE.change(load_file);
-    PLOT_DATA.click(plot_data);
+    PLOT_DATA.click(scatter_plot);
     CLEAR.click(clear_svg_children);
     TITLE.change(update_chart_title);
 });
@@ -289,6 +310,10 @@ function items(obj){
 
 function values(obj){
     let values_ = [];
+
+    if (typeof obj === Array){
+        return obj;
+    }
 
     for (item in obj){
         values_.push(obj[item]);
