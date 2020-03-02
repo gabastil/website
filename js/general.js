@@ -18,6 +18,7 @@ $(document).ready(function(){
           PLOT_DATA = $("input[type='submit']"),
           CLEAR = $("button[id='clear-data']"),
           TITLE = $("input[name='chart-title']")
+          CHECKBOX_BAR_PLOT = $("input[name='bar-plot']")
           ;
 
     const PLOT_W = SVG_.width(),
@@ -80,7 +81,29 @@ $(document).ready(function(){
             selects.append("option")
                    .text(variable);
         }
+    }
 
+    function get_data(x=null, y=null, z=null){
+        /* Get the domain figures for an axis scale
+         *
+         * Parameters
+         * ----------
+         *      x (string) : variable name for the x axis
+         *      y (string) : variable name for the y axis
+         *      z (string) : variable name for the z axis. Default is null.
+         *
+         * Notes
+         * -----
+         *      This function processes the raw data input.
+         */
+        let data = {[x] : RAW_DATA[x]};
+        if (y != null){
+            data[y] = RAW_DATA[y];
+        }
+        if (z != null){
+            data[z] = RAW_DATA[z];
+        }
+        return object_to_list(data);
     }
 
     // - - - - - - CALCULATE PLOT AREA NUMERS (E.G., RANGE, DOMAIN) - - - - - -
@@ -103,6 +126,46 @@ $(document).ready(function(){
     }
 
     function get_range(){}
+
+    function value_counts(series){
+        /* Get the unique counts per unique data element in an array.
+         *
+         * Parameters
+         * ----------
+         *      series (Array) : array of values to count occurrence of
+         *
+         * Notes
+         * -----
+         *      Input series should be an array. If it is an object, it will be
+         *      converted into an array.
+         */
+        series = values(series, 'string');
+        console.log(series);
+        console.log(series.indexOf('false'));
+
+        let onlyUnique = function(value, index, self){
+           return self.indexOf(value) === index;
+        }
+
+        let subset = series.filter(onlyUnique);
+        let counts = {};
+        let item_count = 0;
+
+        console.log(subset);
+
+        for (value of subset){
+           for (item of series){
+               if (value === item){
+                   item_count++;
+                   series.pop(value);
+                }
+            }
+            counts[value] = item_count;
+            item_count = 0;
+        }
+
+        return counts;
+    }
 
     // - - - - - - - GET D3 SVG ELEMENTS RELATED TO THE MAIN PLOT - - - - - - -
     function get_group(parent = SVG, id = 'main'){
@@ -184,19 +247,33 @@ $(document).ready(function(){
 
 
     // - - - - - - - - - - UPDATE GRAPH ELEMENTS OF THE PLOT - - - - - - - - - -
-    function scatter_plot(){
-        // Plot RAW_DATA onto the SVG field
-        clear_svg_children();
+    function scatter_plot(e=null, x='lat', y='lon'){
+        /* Draw a scatter plat using the custom data loaded.
+         *
+         * Parameters
+         * ----------
+         *      e (event) : default parameter passed by jQuery.
+         *      x (string) : Name of the data element to mark along the x axis.
+         *      y (string) : Name of the data element to mark along the y axis.
+         *
+         * Notes
+         * -----
+         *      Requires the RAW_DATA variable to have at least two
+         *      numeric columns.
+         */
+        clear_plot();
         let g = get_plot();
+        let data = get_data(x, y);
+        draw_axes(RAW_DATA[x], RAW_DATA[y]);
 
-        let data = listify_data({'lat' : RAW_DATA['lat'],
-                                 'lon' : RAW_DATA['lon']});
-
-        draw_axes(RAW_DATA['lat'], RAW_DATA['lon']);
+        // console.log(get_domain(data[x]));
+        // console.log(x);
+        // console.log(data);
+        // console.log(data[x]);
 
         // - - - - - - - - DRAW AXES AND DATA - - - - - - - - //
-        let cx = function(d){return SCALEX(d.lat)};
-        let cy = function(d){return SCALEY(d.lon)};
+        let cx = function(d){return SCALEX(d[x])};
+        let cy = function(d){return SCALEY(d[y])};
 
         // Plot data
         g.selectAll("circle")
@@ -209,6 +286,61 @@ $(document).ready(function(){
            .attr("fill", "red");
     }
 
+    function bar_plot(e=null, x='cs', y=null){
+        /* Draw a bar plat using the custom data loaded.
+         *
+         * Parameters
+         * ----------
+         *      e (event) : default parameter passed by jQuery.
+         *      x (string) : Name of the data element to mark along the x axis.
+         *      y (string) : Name of the data element to mark along the y axis.
+         *
+         * Notes
+         * -----
+         *      Requires the RAW_DATA variable to have one column with categ-
+         *      orical data that can be counted.
+         */
+        if (this.checked === false){
+           return;
+        }
+
+        clear_plot();
+        let g = get_plot();
+        let data = get_data(x, y);
+
+        let counts = value_counts(RAW_DATA[x]);
+        data = {[x] : Object.keys(counts), [y] : values(counts)}
+
+        console.log(counts);
+
+        draw_axes(data[x], data[y]);
+
+        // - - - - - - - - DRAW AXES AND DATA - - - - - - - - //
+        let cx = function(d){return SCALEX(d[x])};
+        let cy = function(d){return SCALEY(d[y])};
+
+        // Plot data
+        g.selectAll("rect")
+           .data(data)
+           .enter()
+           .append('rect')
+           .attr("x", cx)
+           .attr("y", cy)
+           .attr("fill", "red");
+     }
+
+    function line_plot(){
+        /* Draw a scatter plat using the custom data loaded.
+         *
+         * Notes
+         * -----
+         *      Requires the RAW_DATA variable to have at least two columns.
+         */
+        clear_plot();
+        let g = get_plot();
+     }
+
+    // - - - - - - - - - - UPDATE GRAPH ELEMENTS OF THE PLOT - - - - - - - - - -
     function draw_axes(x, y){
         /* Draw the x and y axes along the main plot.
          *
@@ -251,7 +383,8 @@ $(document).ready(function(){
 
     INPUT_FILE.change(load_file);
     PLOT_DATA.click(scatter_plot);
-    CLEAR.click(clear_svg_children);
+    CHECKBOX_BAR_PLOT.click(bar_plot);
+    CLEAR.click(clear_plot);
     TITLE.change(update_chart_title);
 });
 
@@ -309,7 +442,7 @@ function items(obj){
     return items_;
 }
 
-function values(obj){
+function values(obj, type='number'){
     let values_ = [];
 
     if (typeof obj === Array){
@@ -317,7 +450,11 @@ function values(obj){
     }
 
     for (item in obj){
-        values_.push(obj[item]);
+        if (type.toLowerCase() === 'number'){
+            values_.push(obj[item]);
+        } else {
+            values_.push(obj[item].toString());
+        }
     }
 
     return values_;
@@ -327,9 +464,8 @@ function keys(obj){
     return Object.keys(obj);
 }
 
-function listify_data(data){
+function object_to_list(data){
     // Convert data saved in JSON format from Pandas into a D3 format
-
     let columns = Object.keys(data);
     let indices = Object.keys(data[columns[0]]).map(function(item){return +item});
     let size = indices.length;
@@ -485,7 +621,7 @@ function range(start, stop, step=1){
 
 /* FUNCTIONS TO PLOT DATA ONTO SVG CANVAS ONCE LOADED */
 
-function clear_svg_children(){
+function clear_plot(){
     // Delete all SVG visual elements
     let plot = $("g[id='plot']");
     let axes = $("g[id='axis']");
