@@ -1,0 +1,43 @@
+<!--
+    Filename: dataviz.html
+    Created: 2/26/2020
+    Author: Glenn Abastillas
+    Description: This page shows the end user a visualization depending on the type
+    of data loaded and the type of visualization selected. By default, this page
+    visualizes a single dataset.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link type="text/css" href="./css/dataviz_frame.css" rel="stylesheet" />
+
+    <!-- JQuery Script Import -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+    <!-- D3 Script Import -->
+    <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+</head>
+<body>
+    <div id='master-frame' class='frame'>
+
+        <!-- TOP BAR THAT CONTAINS BUTTONS TO LOAD, SAVE, AND TWEAK THE GRAPH -->
+        <div id='navigation-bar' class='frame menu'>
+            <!-- CLICKABLE INTERFACE TO NAVIGATE THE WEBSITE AND LOAD DATA -->
+            <div id='menu-file' class='frame menu'>
+                Menu File
+            </div>
+
+            <!-- CLICKABLE INTERFACE TO MODIFY THE VISUALIZATION AND ITS PROPERTIES -->
+            <div id='menu-settings' class='frame menu'>
+                <div id='settings-basic' class='frame menu data-controls'></div>
+                <div id='settings-basic' class='frame menu visualization-controls'></div>
+            </div>
+        </div>
+
+        <!-- BOTTOM AREA THAT WILL BE USED TO VISUALIZE LOADED DATA -->
+        <div id='visualization-area' class='frame'><svg id='plot'></svg></div>
+    </div>
+</body>
+</html>
