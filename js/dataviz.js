@@ -1,25 +1,56 @@
-/* Filename: dataviz.js
+/*
+ * Filename: dataviz_frame.js
  * Author: Glenn Abastillas
- * Created: February 27, 2020
+ * Date: February 25, 2020
  *
- * JavaScript for D3 animation on splashpage for
+ * JavaScript functionality for pages under the domain name
  * www.glennabastillas.com
  *
- * This script loads data and plots it on the dataviz.html page.
- *
+ * This module loads resume content onto the HTML.
  *
  */
 
 $(document).ready(function(){
+   const MENU = $("div[id='menu-icon']");
+   const LOGO = $("div[id='menu-logo']");
 
-    var input = $('input[name="file"]');
-    let input_file;
+   MENU.click(/* Define function here */);
+   LOGO.click(/* Define function here */);
 
-    input.on('change', function(){
-        input_file = readInputFile(input[0]);
-        console.log("Can read " + input_file);
-    });
-
-
+   draw_menu_icon();
 });
 
+function show_menu_dropdown(){}
+
+function open_file(){}
+
+function populate_axes_selectors(){}
+function populate_input_colors(){}
+function populate_input_chart_name(){}
+
+function draw_axes()
+function draw_plot()
+
+/**
+ * Draw the three stripe menu icon
+ * @params {float} buffer - percent of the icon area without graphics
+ * @params {int} nstripes - number of stripes to draw
+ */
+function draw_menu_icon(buffer = 0.20, nstripes=3){
+   const MENU_ICON = $("svg[id='menu-icon']");
+   const MENU_ICON_ = d3.select("svg[id='menu-icon']");
+   const H = $(MENU_ICON).width(),
+         W = $(MENU_ICON).height();
+   const STRIPE_HEIGHT = (H - (H * 3 * buffer)) / nstripes;
+   const STRIPE_PADDING = (H - (H * 3 * buffer)) - STRIPE_HEIGHT;
+   console.log(`stripe_height : ${STRIPE_HEIGHT}\tstripe_padding : ${STRIPE_PADDING}`);
+   MENU_ICON_.selectAll("rect")
+     .data([STRIPE_HEIGHT, STRIPE_HEIGHT, STRIPE_HEIGHT])
+     .enter()
+     .append("rect")
+     .attr("x", W * buffer)
+     .attr("y", function(d, i){return d * (i + 1) + (i > 0 ? STRIPE_PADDING : 0)})
+     .attr("height", function(d){return d})
+     .attr("width", W * (1 - buffer))
+     .attr("fill", 'black');
+}

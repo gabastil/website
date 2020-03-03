@@ -1,0 +1,64 @@
+<!--
+    Filename: dataviz.html
+    Created: 2/26/2020
+    Author: Glenn Abastillas
+    Description: This page shows the end user a visualization depending on the type
+    of data loaded and the type of visualization selected. By default, this page
+    visualizes a single dataset.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Abastillas - Visualizations</title>
+    <link type="text/css" href="./css/dataviz.css" rel="stylesheet" />
+
+    <!-- JQuery Script Import -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+    <!-- D3 Script Import -->
+    <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+    <!-- SCRIPT WITH GENERAL FUNCTIONS (E.G., LOAD FILE, RANGE) -->
+    <script type="text/javascript" src="./js/classes.js"></script>
+    <script type="text/javascript" src="./js/general.js"></script>
+    <!-- <script type="text/javascript" src="./js/dataviz.js"></script> -->
+
+</head>
+<body>
+    <div id="root" class="frame">
+        <div id="top-bar" class="frame">
+            <!-- <div id="title" class="text">Glenn Abastillas</div> -->
+            <div id="menu" class="text"><a href="index.html">Home</a></div>
+            <div id="controls" class="text">
+                <button id="clear-data" class='controls'>Clear Visual</button>
+                <input type="submit" name="plot-data" value="Plot">
+
+                <label for="file">Load Data</label>
+                <input type="file" name="file" accept=".json, .csv"/>
+
+                <label for="chart-title">Chart Title</label>
+                <input type="text" name="chart-title">
+
+
+                <label for="scatter">Scatter</label>
+                <input type="checkbox" name="scatter" value="scatter"/>
+
+                <label id="coords" for="bar-plot">Bar Plot &rightarrow;</label>
+                <input type="checkbox" name="bar-plot" value="bar-plot"/>
+
+                <label id="coords" for="line-plot">Line Plot &rightarrow;</label>
+                <input type="checkbox" name="line-plot" value="line-plot"/>
+
+                <label for="dataset axis-x axis-y">Visualization options</label>
+                <select id="select-data" name="dataset"></select>
+                <select id="select-axis-x" name="axis-x"></select>
+                <select id="select-axis-y" name="axis-y"></select>
+            </div>
+        </div>
+        <div id="visualization" class="frame">
+            <svg id="data-plot" >
+            </svg>
+        </div>
+    </div>
+</body>
+</html>

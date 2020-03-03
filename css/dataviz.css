@@ -7,173 +7,272 @@
     www.glennabastillas.com/visualization
 */
 
-
-/*------- HTML Tag Styles -------*/
-html, head, body, div
+html, body
 {
-    background: #fff;
+    background: none;
 
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 1em;
+    color: #333;
 
-    padding: 0;
     margin: 0;
+    padding: 0;
 
-    scroll-behavior: smooth;
-    /* overflow: hidden; */
-
-    height: 100%;
     width: 100%;
+    height: 100%;
 }
 
 select
 {
-    width: 5em;
+    width: 40%;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    border-radius: 1em;
 }
 
-svg
+
+form
 {
-    display: block;
-    position: relative;
-    margin:  0;
+    /*background: blue;*/
+    border: none;
     width: 100%;
-    height: 100%;
-    /*border: 1px solid #ddd;*/
-    box-sizing: border-box;
-    /* background: radial-gradient(#fff, #fefefe, #efefef, #999); */
-    background: #eee;
 }
 
-svg path:hover
+fieldset
 {
-    stroke-width: 1em;
+    width: auto;
+    border: none;
+    border-right: 1px solid #cdc;
+    margin: 0 auto;
+    justify-content: center;
 }
 
-svg circle:hover
+fieldset#axes
 {
-    fill:  blue;
-    r: 1em;
+    flex: 0 1 300px;
 }
 
-svg rect:hover
+fieldset#visual
 {
-    border: solid 1px black;
+    border-right: none;
 }
 
-svg g#plot-field
+legend
 {
-    width: 80%;
-    height: 100%;
-    fill: red;
-}
-
-svg g#title
-{
-    font-size: 2em;
+    font-family: sans-serif;
     font-weight: 600;
+    font-size: 0.75em;
+    color: #555;
 }
 
 label
 {
-    width: 10em;
+    font-size: 0.75em;
 }
 
-/*------- SVG Related Styles -------*/
-.container
+input[type=text]
 {
-    border: 10px solid #777;
-    padding: 10px;
     width: 100%;
-    height: auto;
-    fill: none;
 }
 
-/*------- Background Frame Styles -------*/
+input[type=text]:focus
+{
+    background: #dfefff;
+    border: none;
+}
+
+input[type=file]
+{
+    /* border: solid 2px red; */
+    font-family: 'Helvetica', sans-serif;
+    height: 2em;
+    margin: auto 0;
+    color: red;
+}
+
+input[type=color]
+{
+    width: 2em;
+    height: 2em;
+    border-radius: 1em;
+    border: none;
+    margin-right: 1em;
+}
+
+svg#plot
+{
+    width: 100%;
+    background: #fafafa;
+}
+
+svg rect
+{
+    border-radius: 1em;
+}
+
 .frame
 {
-    /*border: 1px solid black;*/
-    height: auto;
+    /* border: solid 1px black; */
+    /* background: green; */
+
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    height: 100%;
+}
+
+.menu
+{
+    height: 3em;
+    /*border-bottom: solid 1px gray;*/
+}
+
+.data-controls
+{
+    border-right: solid 1px #cdc;
+    /*margin-left: 1em;*/
+    width: 40%;
+}
+
+.visualization-controls
+{
+    /* margin-left: 1em; */
+    border: 1px solid black;
+}
+
+.input-invisible
+{
+    font-size: 2em;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    color: #333;
+    /*font-weight: 800;*/
+    text-align: center;
     vertical-align: middle;
-    padding: 0.5em;
-    margin: 0;
-    width: auto;
+    border: none;
+}
+
+.pulldown
+{
+    position: absolute;
+    width:  6em;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px black;
+    background: white;
+    /* padding: 1em; */
+    /* box-sizing: border; */
     height: auto;
-    box-sizing: border;
-    position: relative;
+    top:  3.75em;
 }
 
-.text
+.pulldown-menu-item
 {
-    font-family: "Helvetica", "Arial", sans-serif;
-    font-size:  3em;
-    font-weight:  600;
-    width:  auto;
-    height:  100%;
-    background: inherit;
-    padding: 0 0.5em;
+    background: red;
+    width: 100%;
+    font-size: 1em;
+    height: 100%;
 }
 
-.text:hover
+.pulldown-menu-item:hover
 {
-    background: #c2d9ff;
+    color: white;
     cursor: pointer;
 }
 
-.text a
+.settings-plot
 {
-    text-decoration: none;
-    font-family: inherit;
-    color: inherit;
-}
-
-
-#title
-{
-    /* margin-right: 1em; */
-}
-
-#menu
-{
-    font-size:  1em;
-    font-weight: 200;
-    line-height: 3em;
-    /* margin-right: 1em; */
-}
-
-#controls
-{
-    font-size: 1em;
-    line-height: 3em;
-    width: auto;
-}
-
-#root
-{
-    display: flex;
-    flex-direction: column;
-    width: auto;
-    height: 100%;
+    position: relative;
+    /*background: red;*/
+    /*top: -1;*/
     margin: 0;
     padding: 0;
+    /*border:  solid 1px black;*/
 }
 
-#visualization
+#master-frame
 {
+    flex-direction: column;
+}
+
+#navigation-bar
+{
+    overflow: hidden;
+    padding-bottom: 1em;
+}
+
+#menu-file
+{
+    width: 20%;
+    border-right: solid 1px #cdc;
+}
+
+#menu-icon
+{
+    width: 3em;
+}
+
+#menu-logo
+{
+    font-size: 2em;
+    /* line-height: 3em; */
+    text-align: center;
+    vertical-align: middle;
+    margin: auto;
+    width: 100%;
     /* background: red; */
+    padding: 0.25em 0;
     display:  block;
-    position:  relative;
-    height: auto;
-    /*bottom:  0;*/
-    flex:  1 0 auto;
-    padding: 1em;
-    box-sizing: border-box;
+    user-select: none;
+    font-weight: 200;
 }
 
-#top-bar
+#menu-icon svg
 {
-    /* border-bottom: 1px solid #999; */
-    display: inline-flex;
-    flex-direction: row;
-    color: #222;
-    /* background: #222; */
-    height: 3em;
+    /* background: yellow; */
+    display: block;
+    margin: 0;
+    top: 20%;
+    left: 20%;
+    /* width: 60%; */
+    height: auto;
+}
+
+#menu-icon svg:hover
+{
+    background: #dfefff; 
+    cursor: pointer;
+}
+
+#menu-icon svg:hover rect
+{
+    fill: #666;
+    cursor: pointer;
+}
+
+#settings-basic
+{
+    border: none;
+}
+
+#settings-plot-line
+{
+    top: 3em;
+}
+
+#settings-plot-bar
+{
+    top: 6em;
+}
+
+#settings-plot-histogram
+{
+    top: 9em;
+}
+
+#visualization-area
+{
+    /* background: yellow; */
 }

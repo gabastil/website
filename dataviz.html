@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Abastillas - Visualizations</title>
+    <title></title>
     <link type="text/css" href="./css/dataviz.css" rel="stylesheet" />
 
     <!-- JQuery Script Import -->
@@ -18,47 +18,71 @@
     <!-- D3 Script Import -->
     <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
 
-    <!-- SCRIPT WITH GENERAL FUNCTIONS (E.G., LOAD FILE, RANGE) -->
-    <script type="text/javascript" src="./js/classes.js"></script>
-    <script type="text/javascript" src="./js/general.js"></script>
-    <!-- <script type="text/javascript" src="./js/dataviz.js"></script> -->
+    <script type="text/javascript" src="js/dataviz.js"></script>
 
 </head>
 <body>
-    <div id="root" class="frame">
-        <div id="top-bar" class="frame">
-            <!-- <div id="title" class="text">Glenn Abastillas</div> -->
-            <div id="menu" class="text"><a href="index.html">Home</a></div>
-            <div id="controls" class="text">
-                <button id="clear-data" class='controls'>Clear Visual</button>
-                <input type="submit" name="plot-data" value="Plot">
+    <div id='master-frame' class='frame'>
 
-                <label for="file">Load Data</label>
-                <input type="file" name="file" accept=".json, .csv"/>
+        <!-- TOP BAR THAT CONTAINS BUTTONS TO LOAD, SAVE, AND TWEAK THE GRAPH -->
+        <div id='navigation-bar' class='frame menu'>
 
-                <label for="chart-title">Chart Title</label>
-                <input type="text" name="chart-title">
+            <!-- CLICKABLE INTERFACE TO NAVIGATE THE WEBSITE AND LOAD DATA -->
+            <div id='menu-file' class='frame menu'>
+                <div id='menu-icon' class='frame menu'>
+                    <svg id='menu-icon' height='3em' width='3em'>
+                        <g>
+                            <rect x='22.5%' y='22.5%' width='55%' height='15%'></rect>
+                            <rect x='22.5%' y='40%' width='55%' height='15%'></rect>
+                            <rect x='22.5%' y='58%' width='55%' height='15%'></rect>
+                        </g>
+                    </svg>
 
+                    <div id='menu' class='frame menu pulldown'>
+                        <div class='pulldown-menu-item'>Load Data</div>
+                        <div class='pulldown-menu-item'>Save Chart</div>
+                    </div>
+                </div>
+                <div id='menu-logo' class='frame menu'>Simple Plot</div>
+            </div>
 
-                <label for="scatter">Scatter</label>
-                <input type="checkbox" name="scatter" value="scatter"/>
+            <!-- CLICKABLE INTERFACE TO MODIFY THE VISUALIZATION AND ITS PROPERTIES -->
+            <div id='menu-settings' class='frame menu'>
+                <div id='settings-basic' class='frame menu data-controls'>
+                    <input id='chart-name' class='input-invisible' type="text" name="chart-name" placeholder="Chart Name">
+                </div>
+                <div id='settings-basic' class='frame menu visualization-controls'>
+                    <div id='settings-plot' class='frame menu settings-plot'>
+                        <form id='selector-axes' class='frame menu'>
+                            <fieldset id='data'>
+                                <legend>Data</legend>
+                                <button id='save-chart' name='save-chart' disabled='disabled'>Save Chart</button>
+                                <input type="file" name="input-file" text='Load Data'>
+                            </fieldset>
+                            <fieldset id='axes'>
+                                <legend>Axes</legend>
+                                <select id='selector-x-axis' placeholder="X Axis"><option>Scatter</option></select>
+                                <select id='selector-y-axis' placeholder="Y Axis"></select>
+                            </fieldset>
+                            <fieldset id='visual'>
+                                <legend>Color Settings</legend>
+                                <label for='color-data-fill'>Point Fill</label>
+                                <input type="color" name="color-data-fill">
 
-                <label id="coords" for="bar-plot">Bar Plot &rightarrow;</label>
-                <input type="checkbox" name="bar-plot" value="bar-plot"/>
+                                <label for='color-data-stroke'>Point Stroke</label>
+                                <input type="color" name="color-data-stroke">
 
-                <label id="coords" for="line-plot">Line Plot &rightarrow;</label>
-                <input type="checkbox" name="line-plot" value="line-plot"/>
-
-                <label for="dataset axis-x axis-y">Visualization options</label>
-                <select id="select-data" name="dataset"></select>
-                <select id="select-axis-x" name="axis-x"></select>
-                <select id="select-axis-y" name="axis-y"></select>
+                                <label for='color-axis-stroke'>Axis Stroke</label>
+                                <input type="color" name="color-axis-stroke"> 
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="visualization" class="frame">
-            <svg id="data-plot" >
-            </svg>
-        </div>
+
+        <!-- BOTTOM AREA THAT WILL BE USED TO VISUALIZE LOADED DATA -->
+        <div id='visualization-area' class='frame'><svg id='data-plot'></svg></div>
     </div>
 </body>
 </html>
