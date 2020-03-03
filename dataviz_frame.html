@@ -18,21 +18,47 @@
     <!-- D3 Script Import -->
     <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
 
+    <script type="text/javascript" src="js/dataviz_frame.js"></script>
+
 </head>
 <body>
     <div id='master-frame' class='frame'>
 
         <!-- TOP BAR THAT CONTAINS BUTTONS TO LOAD, SAVE, AND TWEAK THE GRAPH -->
         <div id='navigation-bar' class='frame menu'>
+
             <!-- CLICKABLE INTERFACE TO NAVIGATE THE WEBSITE AND LOAD DATA -->
             <div id='menu-file' class='frame menu'>
-                Menu File
+                <div id='menu-icon' class='frame menu'>
+                    <svg id='menu-icon'>
+                        <g>
+                            <rect x='15%' y='30%' width='70%' height='20%'></rect>
+                            <rect x='15%' y='55%' width='70%' height='20%'></rect>
+                            <rect x='15%' y='80%' width='70%' height='20%'></rect>
+                        </g>
+                    </svg>
+
+                    <div id='menu' class='frame menu pulldown'>
+                        <div class='pulldown-menu-item'>Load Data</div>
+                        <div class='pulldown-menu-item'>Save Chart</div>
+                    </div>
+                </div>
+                <div id='menu-logo' class='frame menu'>simplot.io</div>
             </div>
 
             <!-- CLICKABLE INTERFACE TO MODIFY THE VISUALIZATION AND ITS PROPERTIES -->
             <div id='menu-settings' class='frame menu'>
-                <div id='settings-basic' class='frame menu data-controls'></div>
-                <div id='settings-basic' class='frame menu visualization-controls'></div>
+                <div id='settings-basic' class='frame menu data-controls'>
+                    <input type="file" name="input-file">
+                </div>
+                <div id='settings-basic' class='frame menu visualization-controls'>
+                    <div id='settings-axes' class='frame menu'>
+                        <!-- <label for='selector-x-axis'>X Axis</label> -->
+                        <select id='selector-x-axis' placeholder="X Axis"></select>
+                        <!-- <label for='selector-y-axis'>Y Axis</label> -->
+                        <select id='selector-y-axis' placeholder="Y Axis"></select>
+                    </div>
+                </div>
             </div>
         </div>
 
