@@ -30,11 +30,11 @@
             <!-- CLICKABLE INTERFACE TO NAVIGATE THE WEBSITE AND LOAD DATA -->
             <div id='menu-file' class='frame menu'>
                 <div id='menu-icon' class='frame menu'>
-                    <svg id='menu-icon'>
+                    <svg id='menu-icon' height='3em' width='3em'>
                         <g>
-                            <rect x='15%' y='30%' width='70%' height='20%'></rect>
-                            <rect x='15%' y='55%' width='70%' height='20%'></rect>
-                            <rect x='15%' y='80%' width='70%' height='20%'></rect>
+                            <rect x='22.5%' y='22.5%' width='55%' height='15%'></rect>
+                            <rect x='22.5%' y='40%' width='55%' height='15%'></rect>
+                            <rect x='22.5%' y='58%' width='55%' height='15%'></rect>
                         </g>
                     </svg>
 
@@ -52,12 +52,48 @@
                     <input type="file" name="input-file">
                 </div>
                 <div id='settings-basic' class='frame menu visualization-controls'>
-                    <div id='settings-axes' class='frame menu'>
-                        <!-- <label for='selector-x-axis'>X Axis</label> -->
-                        <select id='selector-x-axis' placeholder="X Axis"></select>
-                        <!-- <label for='selector-y-axis'>Y Axis</label> -->
-                        <select id='selector-y-axis' placeholder="Y Axis"></select>
+                    <div id='settings-scatter-plot' class='frame menu settings-plot'>
+                        <div id='settings-scatter-axes' class='frame'>
+                            <select id='selector-x-axis' placeholder="X Axis"></select>
+                            <select id='selector-y-axis' placeholder="Y Axis"></select>
+                        </div>
+                        <div id='settings-data-points' class='frame axes'>
+                            <frame id='settings-data-points-frame'>
+
+                            </frame>
+                        </div>
                     </div>
+
+                    <div id='settings-line-plot' class='frame menu settings-plot'>
+                        <div id='settings-scatter-axes' class='frame'>
+                            <select id='selector-x-axis' placeholder="X Axis"></select>
+                            <select id='selector-y-axis' placeholder="Y Axis"></select>
+                        </div>
+                        <div id='settings-data-points' class='frame axes'>
+                            <frame id='settings-data-points-frame'>
+
+                            </frame>
+                        </div></div>
+                    <div id='settings-bar-plot' class='frame menu settings-plot'>
+                        <div id='settings-scatter-axes' class='frame'>
+                            <select id='selector-x-axis' placeholder="X Axis"></select>
+                            <select id='selector-y-axis' placeholder="Y Axis"></select>
+                        </div>
+                        <div id='settings-data-points' class='frame axes'>
+                            <frame id='settings-data-points-frame'>
+
+                            </frame>
+                        </div></div>
+                    <div id='settings-histogram-plot' class='frame menu settings-plot'>
+                        <div id='settings-scatter-axes' class='frame'>
+                            <select id='selector-x-axis' placeholder="X Axis"></select>
+                            <select id='selector-y-axis' placeholder="Y Axis"></select>
+                        </div>
+                        <div id='settings-data-points' class='frame axes'>
+                            <frame id='settings-data-points-frame'>
+
+                            </frame>
+                        </div></div>
                 </div>
             </div>
         </div>
