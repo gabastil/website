@@ -6,6 +6,7 @@
  * Classes used to build the background and resume on www.glennabastillas.com
  */
 
+console.log("Inside resume.js");
 
 class Organization {
 
@@ -37,22 +38,30 @@ class Organization {
      *
      */
     write_section(selection){
-
+        return `${this.write_header()}${this.write_body()}`
     }
 
+    /**
+     * Create the header containing the Organization / Job Title / Location
+     * @returns {string} Header (3) with all header information embedded.
+     */
     write_header(){
         let descriptor = this.write_header_descriptor();
         let title = `${this.name} <span>${descriptor}</span>`;
         return `<h3>${title}</h3>`;
     }
 
+    /**
+     * Create the header descriptor that is embedded in the header
+     * @returns {string} Descriptor with all the header
+     */
     write_header_descriptor(){
         let a = this.name,
             b = this.title,
             c = this.location,
-            d = this.description,
+            d = this.years,
             s = this.sep;
-        return `${s} ${a} ${s} ${b} ${s} ${c} ${s} ${d}`;
+        return `${s} ${a} ${s} ${b} ${s} ${c} ${s} ${d[0]} ${this.to_sep} ${d[1]}`;
     }
 
     write_body(){}

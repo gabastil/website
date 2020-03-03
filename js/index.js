@@ -7,8 +7,16 @@
  * www.glennabastillas.com
  */
 
- $(document).ready(function()
- {
+ $(document).ready(function(){
+
+    const SECTION_BACKGROUND = $("div[id='background']");
+
+    let org = new Organization('Org', 'Job', 'City, State', [1,2]);
+
+    SECTION_BACKGROUND.ready(function(){
+        console.log(org.write_header());
+    });
+
     // Enable scrolling for interactive cv
     $("#cv").click(function(){
         var cv_background = $("#p2");
