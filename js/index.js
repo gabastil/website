@@ -34,14 +34,9 @@
 
     });
 
-    $("rect").hover(function() {
-        $(this).attr("old_fill", $(this).attr("fill"));
-        $(this).attr("fill", "red");
-    }, function() {
-        $(this).attr("fill", $(this).attr("old_fill"));
-    });
 
     let about_menu = $("#pulldown");
+
 
     // Toggle 'about' menu visibility
     $('a[id="about"]').hover(function(){
@@ -54,6 +49,7 @@
             $(this).slideUp();
             });
         });
+
 
     // Scroll to Top
     $("a[href='top']").click(function(){

@@ -34,6 +34,24 @@ $(document).ready(function(){
 
 });
 
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Function definitions for retrieving shape attributes
+ *
+ * D3 function definitions for different shapes
+ * - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+
+ // Circle functions
+ function get_x(obj){return obj.x;}
+ function get_y(obj){return obj.y;}
+ function get_cy(obj){return obj.cy;}
+ function get_cy(obj){return obj.cy;}
+ function get_r(obj){return obj.r;}
+
+ // Style functions
+ function get_fill(obj){return obj.fill;}
+ function get_stroke(obj){return obj.stroke;}
+
 /* - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Plot Function Definitions for D3 data
  *
@@ -134,10 +152,11 @@ function generate_styles(style, n = 100){
      style = style.toLowerCase();
 
      let styles_array = [];
-     let style_uses_color = style == 'fill' | style == 'stroke';
+
+     let style_uses_color = ((style == 'fill') | 
+                             (style == 'stroke'));
 
      let max_value, current_value;
-
 
      if (style_uses_color) {
         max_value = max_decimal;
@@ -296,22 +315,6 @@ function generate_styles(style, n = 100){
 
     }
  }
-
-
-/* - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Function definitions for retrieving shape attributes
- *
- * D3 function definitions for different shapes
- * - - - - - - - - - - - - - - - - - - - - - - - - - -*/
-
- // Circle functions
- function get_cx(obj){return obj.cx;}
- function get_cy(obj){return obj.cy;}
- function get_r(obj){return obj.r;}
-
- // Style functions
- function get_fill(obj){return obj.fill;}
- function get_stroke(obj){return obj.stroke;}
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - -
