@@ -120,107 +120,11 @@ html, head, body
 #p1
 {
     background: #efefef;
-    height: 90%;
+    height: 90vh;
     text-align: center;
-    /* text-shadow: 0.2em  0.2em 0.05em #fff, */
-                /* -0.2em -0.2em 0.05em #ddd; */
 }
 
-#p1 .icon
-{
-    /* border-radius: 5em; */
-    width: 3em;
-    height: 3em;
-    /* background: red; */
-    padding-right:  1em;
-    object-fit: cover;
-    filter:  opacity(50%);
-}
-
-#p1 .icon:hover
-{
-    filter:  opacity(100%);
-    transition: 1s;
-}
-
-#p1 #header
-{
-    z-index: 100;
-    /* background: red; */
-}
-
-#p1 #header-screen
-{
-    border-radius: 1em;
-    opacity: 0.75;
-    display: block;
-    width: 100%;
-    height: 110%;
-    top:  -0.5%;
-    position:  absolute;
-    background: white;
-    z-index: -1;
-}
-
-#p1 h1
-{
-    display: block;
-    position:  relative;
-    font-size:  5em;
-    color:  #222;
-    user-select: none;
-    -webkit-user-select:  none;
-}
-
-#p1 svg
-{
-    position: absolute;
-    display: block;
-    margin:  auto;
-    top:  0;
-    height: 100%;
-    width: 100%;
-    z-index: 0;
-    filter:  blur(0.05rem);
-}
-
-#p1 ul, #p1 li
-{
-    display: inline;
-    margin-right: 1em;
-    font-size:  1.2em;
-    text-align: left;
-    /* background: red; */
-}
-
-
-#p1 a
-{
-    text-decoration: none;
-    font-family: "Helvetica", "Arial", sans-serif;
-    color:  #555;
-    left: -2em;
-}
-
-#p1 a:hover
-{
-    color:  #000;
-    /* text-shadow: 0em 0em 1em #00abab; */
-}
-
-#p1 #pulldown
-{
-    display: none;
-    border-radius: 0.5em;
-    width:  10em;
-    background: white;
-    /* border:  1px solid black; */
-    position: absolute;
-    left:  10%;
-    font-size: 0.75em;
-}
-
-#content
+#p1 #content
 {
     border-radius: 1em;
 
@@ -238,6 +142,118 @@ html, head, body
     z-index: 1;
 }
 
+#p1 #header
+{
+    z-index: 100;
+}
+
+#p1 h1
+{
+    display: block;
+    position:  relative;
+    font-size:  5em;
+    color:  #222;
+    user-select: none;
+    -webkit-user-select:  none;
+}
+
+#p1 #menu
+{
+    font-size: 1.5em;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: space-evenly;
+}
+
+#p1 .menu-item
+{
+    /* background: red; */
+    width: 5em;
+    height: 2em;
+    margin: auto;
+}
+
+#p1 .menu-item:hover
+{
+    cursor: pointer;
+}
+
+#p1 .sub-menu
+{
+    background: white;
+    border-radius: 0.5em;
+    font-size: 1em;
+    height:  auto;
+    width:  110%;
+    text-align: left;
+    padding: 0.5em;
+    display:  none;
+}
+
+#p1 #header-screen
+{
+    border-radius: 1em;
+    opacity: 0.75;
+    display: block;
+    width: 100%;
+    height: 110%;
+    top:  -0.5%;
+    position:  absolute;
+    background: white;
+    z-index: -1;
+}
+
+/* #p1 .icon
+{
+    width: 3em;
+    height: 3em;
+    padding-right:  1em;
+    object-fit: cover;
+    filter:  opacity(50%);
+}
+
+#p1 .icon:hover
+{
+    filter:  opacity(100%);
+    transition: 1s;
+} */
+
+#p1 svg
+{
+    position: absolute;
+    display: block;
+    margin:  auto;
+    top:  0;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+    filter:  blur(0.05rem);
+}
+
+/* #p1 ul, #p1 li
+{
+    display: inline;
+    margin-right: 1em;
+    font-size:  1.2em;
+    text-align: left;
+} */
+
+
+#p1 a
+{
+    text-decoration: none;
+    font-family: "Helvetica", "Arial", sans-serif;
+    color:  #555;
+    left: -2em;
+}
+
+#p1 a:hover
+{
+    color:  #000;
+}
+
+
 /* * * * * * * * * * * * */
 /*  Page 2 - Background  */
 /* * * * * * * * * * * * */
@@ -245,13 +261,16 @@ html, head, body
 #p2
 {
     height:  95vh;
-    background: #fff;
+    background-image: url("https://miro.medium.com/max/1600/1*TURvrYWSTRQLGF6sJ025gw.png");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 100%;
 }
 
 
-#p2 span#background
+#p2 div#summary
 {
-    font-size: 1.5em;
+    font-size: 2em;
     font-family: "Helvetica", "Arial", sans-serif;
 
     text-align: left;
@@ -322,13 +341,18 @@ html, head, body
     color:  #9a9a9a;
 }
 
+#p3 .resume
+{
+    padding-bottom: 1em;
+}
+
 /* * * * * * * * * * * * * */
 /*  Page 4 - Publications  */
 /* * * * * * * * * * * * * */
 
 #p4
 {
-    height: 100vh;
+    height: 95vh;
 }
 
 #p4 .resume
@@ -375,14 +399,13 @@ html, head, body
     font-weight: 400;
 }
 
-/* Page 5 - Education
- *
- *
- */
+/* * * * * * * * * * * */
+/*  Page 5 - Education */
+/* * * * * * * * * * * */
 
  #p5
  {
-    height:  50vh;
+    height:  95vh;
     background: #efefef;
  }
 
@@ -429,6 +452,8 @@ html, head, body
  #p7
  {
     height: 50vh;
+    background: #494545;
+    color: #fff;
  }
 
  #p7 h2

@@ -34,27 +34,28 @@
 
     });
 
+    $("rect").hover(function() {
+        $(this).attr("old_fill", $(this).attr("fill"));
+        $(this).attr("fill", "red");
+    }, function() {
+        $(this).attr("fill", $(this).attr("old_fill"));
+    });
 
     let about_menu = $("div .menu-item .sub-menu");
 
-    console.log(about_menu.text());
-    console.log(about_menu.attr('class'));
-    about_menu.css('visibility', 'show');
-
+    console.log(about_menu);
 
     // Toggle 'about' menu visibility
     $('a[id="about"]').hover(function(){
-        // about_menu.css("visibility", "show");
-        about_menu.show();
+        about_menu.slideDown();
     },
     function(){
         about_menu.hover(function(){
             $(this).stop();
         }, function(){
-            $(this).hide();
+            $(this).slideUp();
             });
         });
-
 
     // Scroll to Top
     $("a[href='top']").click(function(){

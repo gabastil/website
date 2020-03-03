@@ -12,12 +12,12 @@
 
 $(document).ready(function(){
 
-    /* Draw circles all over the splash screen */
     let number = [75, 30, 20];
     let layers = ['third', 'second', 'first'];
     let blurs = ['blur(1.00rem)', 'blur(0.30rem)', 'blur(0.10rem)'];
     let svg, circle, circles = [], svgs = [];
 
+    /* Draw circles all over the splash screen */
     for (let i = 0; i < 3; i++) {
         svg = d3.select("svg#" + layers[i]);
         circle = generate_circle_attributes(number[i]);
@@ -31,6 +31,9 @@ $(document).ready(function(){
     /* Draw the lines that connect circles all over the splash screen */
     let connections = generate_circle_connections(circles.flat());
     draw_circle_connections(connections, circles, svgs);
+
+    alert({x : 9, y : 5};
+    // alert(distance({x : 5, y : 10}, {x : 9, y : 5}));
 
 });
 

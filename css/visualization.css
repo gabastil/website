@@ -1,0 +1,71 @@
+/*
+    Filename: visualization.css
+    Author: Glenn Abastillas
+    Date: February 26, 2020
+
+    CSS definitions for the base style across all pages in the domain
+    www.glennabastillas.com/visualization
+*/
+
+
+/*------- HTML Tag Styles -------*/
+html, head, body, div
+{
+    background: #efefef;
+
+    font-family: Helvetica, Arial, sans-serif;
+
+    padding: 0;
+    margin: 0;
+
+    scroll-behavior: smooth;
+    /* overflow: hidden; */
+
+    height: 100%;
+    width: 100%;
+}
+
+svg
+{
+    width: 100%;
+    height: 100%;
+    background: green;
+}
+
+/*------- Background Frame Styles -------*/
+.text
+{
+    font-family: "Helvetica", "Arial", sans-serif;
+    font-size:  2em;
+}
+
+.frame
+{
+    border: 1px solid black;
+    width: 100%;
+    height: auto;
+}
+
+#root
+{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+#visualization
+{
+    background: red;
+    display:  block;
+    position:  relative;
+    height: auto;
+    bottom:  0;
+    flex:  1 0 auto;
+}
+
+#top-bar
+{
+    background: blue;
+    height: 3em;
+}
