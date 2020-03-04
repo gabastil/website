@@ -8,6 +8,22 @@
 
 console.log("Inside resume.js");
 
+var test = {
+    "name" : "Booz Allen Hamilton",
+    "title" : "Sr. Data Scientist",
+    "location" : "Washington, DC",
+    "years" : [2018, null],
+    "summary" : "Management Consulting firm where I work with cross-functional teams to deliver NLP, ML, and design thinking solutions to meet client needs at the National Institutes of Health (NIH) and Veterans Affairs (VA).",
+    "description" : [
+        "Lead data science efforts in collaboration with human centered design teams",
+        "Plan projects, elicit requirements, iterate on deliverables, and present reports to client",
+        "Develop NLP and machine learning algorithms, topic models, and automated pipelines",
+        "Develop browser-based tools for workshops, presentations, and client engagement",
+        "Conduct design thinking and requirements gathering workshops with stakeholders",
+        "Founded and led rapid response team to address urgent, ad-hoc client needs"
+    ]
+}
+
 class Organization {
 
     /**
@@ -21,14 +37,30 @@ class Organization {
      *
      * @constructor
      */
-    constructor(name, title, location, years, description){
+    constructor(name, title, location, years, description, summary){
         this.name = name;
         this.title = title;
         this.years = years;
         this.location = location;
         this.description = description;
+        this.summary = summary;
         this.sep = '/';
-        this.to_sep = '&rightarrow';
+        this.to_sep = '&rightarrow;';
+    }
+
+    /**
+     * Read in block resume text and parse out the different segments
+     * @param {string} text - Resume text read from file
+     *
+     */
+    parse(text){
+        let lines = text.split();
+        let header = lines[0].split(";");
+
+        this.name = header[0];
+        this.title = header[1]
+        this.summary = lines[1];
+        this.description = lines.slice(2,lines.length);
     }
 
     /**
@@ -53,17 +85,52 @@ class Organization {
 
     /**
      * Create the header descriptor that is embedded in the header
-     * @returns {string} Descriptor with all the header
+     * @returns {string} Descriptor with all header information
+     *
+     * @notes Header format is NAME / JOB TITLE / LOCATION / YEARS
+     *
      */
     write_header_descriptor(){
-        let a = this.name,
-            b = this.title,
-            c = this.location,
-            d = this.years,
+        let a = this.title,
+            b = this.location,
+            c = this.write_years(),
             s = this.sep;
-        return `${s} ${a} ${s} ${b} ${s} ${c} ${s} ${d[0]} ${this.to_sep} ${d[1]}`;
+        return `${s} ${a} ${s} ${b} ${s} ${c}`;
     }
 
-    write_body(){}
-    write_body_bullet(){}
+    /**
+     * Create the year's text and assign null values to 'Present'
+     * @returns {string} Descriptor of years with an organization
+     */
+    write_years(){
+        let start = this.years[0],
+            end = this.years[1];
+
+        if (end === null){
+            end = 'Present';
+        }
+        return `${start} ${this.to_sep} ${end}`;
+    }
+
+    /**
+     * Create the body text for an organization listing
+     * @returns {string} Body text, which includes the list.
+     *
+     */
+    write_body(){
+        let bullets = '', index;
+        for (index in this.description){
+            bullets += this.write_body_bullet(index);
+        }
+        return `<ul>${bullets}</ul>`;
+    }
+
+    /**
+     * Create the bullet text for the body text
+     * @returns {string} Each description element as a bullet
+     *
+     */
+    write_body_bullet(index){
+        return `<li>${this.description[index]}</li>`;
+    }
 }

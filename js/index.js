@@ -9,12 +9,15 @@
 
  $(document).ready(function(){
 
-    const SECTION_BACKGROUND = $("div[id='background']");
+    const SECTION_BACKGROUND = $("div[id='professional-experience']");
 
-    let org = new Organization('Org', 'Job', 'City, State', [1,2]);
+    let org = new Organization(...['Schreiber', 'Translator', 'Rockville, MD', [2015,2017], ['test', 'line 2']]);
 
     SECTION_BACKGROUND.ready(function(){
         console.log(org.write_header());
+        // SECTION_BACKGROUND.append(org.write_header());
+        // SECTION_BACKGROUND.append(org.write_body());
+        SECTION_BACKGROUND.append(org.write_section());
     });
 
     // Enable scrolling for interactive cv
