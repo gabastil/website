@@ -17,7 +17,7 @@
         console.log(org.write_header());
         // SECTION_BACKGROUND.append(org.write_header());
         // SECTION_BACKGROUND.append(org.write_body());
-        SECTION_BACKGROUND.append(org.write_section());
+        SECTION_BACKGROUND.append(org.write_organization());
     });
 
     // Enable scrolling for interactive cv

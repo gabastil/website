@@ -8,7 +8,7 @@
 
 console.log("Inside resume.js");
 
-var test = {
+var TEST = {
     "name" : "Booz Allen Hamilton",
     "title" : "Sr. Data Scientist",
     "location" : "Washington, DC",
@@ -24,10 +24,48 @@ var test = {
     ]
 }
 
+class Publication {
+
+    /**
+     * Publication represents the articles, posters, and presentations performed
+     * and creates the text for the publications section of a resume or CV.
+     *
+     * @param {string} authors - name of contributing authors of this work
+     * @param {string} year - year published or presented
+     * @param {string} work - name of article, presentation, or poster
+     * @param {string} context - conference, event, or publication
+     *
+     * @constructor
+     */
+    constructor(authors, year, work, context){
+        this.authors = authors;
+        this.year = year;
+        this.work = work;
+        this.context = context;
+    }
+
+    /**
+     * Create a string to be inserted into the publication section
+     * @returns {string} Representing a formatted publication entry.
+     */
+    write_publication(){
+        return `<ol>${this.write_entry()}</ol>`;
+    }
+
+    /**
+     * Create a single entry publication for the publication section
+     * @returns {string} Representing a single formatted publication entry.
+     */
+    write_entry(){
+        return `${this.authors} (${this.year}). "${this.work}". ${this.context}`
+    }
+}
+
 class Organization {
 
     /**
-     * Invoked with new Organization() declaration.
+     * Organization represents an employer and creates the text for the
+     * professional experience section of a resume or CV.
      *
      * @param {string} name - Name of the organization
      * @param {string} title - Job title at the organization
@@ -69,7 +107,7 @@ class Organization {
      *                 document the generated HTML is to be inserted into.
      *
      */
-    write_section(selection){
+    write_organization(selection){
         return `${this.write_header()}${this.write_body()}`
     }
 
