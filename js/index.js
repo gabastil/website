@@ -9,19 +9,16 @@
 
  $(document).ready(function(){
 
-    const SECTION_BACKGROUND = $("div[id='professional-experience']");
+    const BACKGROUND = $("div[id='background']");
+    const EXPERIENCE = $("div[id='professional-experience']");
+    const EDUCATION = $("div[id='education']");
+    const PUBLICATIONS = $("div[id='publications']");
 
-    let org = new Organization(...['Schreiber', 'Translator', 'Rockville, MD', [2015,2017], ['test', 'line 2']]);
-    let org2 = new Organization().parse(RESUME_JSON.experience.organizations);
-
-    console.log(org2);
-    // console.log(org2.parse(RESUME_JSON.experience.organizations));
-    SECTION_BACKGROUND.ready(function(){
-        console.log(org.write_header());
-        // SECTION_BACKGROUND.append(org.write_header());
-        // SECTION_BACKGROUND.append(org.write_body());
-        SECTION_BACKGROUND.append(org.write_organization());
-    });
+    // Load resume text
+    BACKGROUND.append(Background.write(RESUME.background));
+    EXPERIENCE.append(Experience.write(RESUME.experience));
+    EDUCATION.append(Education.write(RESUME.education));
+    PUBLICATIONS.append(Publications.write(RESUME.publications));
 
     // Enable scrolling for interactive cv
     $("#cv").click(function(){

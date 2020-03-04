@@ -8,8 +8,214 @@
 
 console.log("Inside resume.js");
 
-class Background {}
-class Education {}
+class Background {
+
+    /**
+     * Background represents an summary information about this CV and writes
+     * text for the education section of a resume or CV.
+     *
+     * @param {string} summary - brief summary of resume
+     * @param {array [object} skills - names of skills and applicable tools
+     *
+     * @constructor
+     */
+    constructor(summary, skills){
+        this.summary = summary;
+        this.skills = skills
+    }
+
+    /**
+     * Read in block resume text and parse out the different segments
+     * @param {array [json]} background - Resume text read from JSON objects
+     *
+     */
+    static parse(background){
+        let summary = background.summary;
+        let skills = background.skills;
+
+        let new_skills = [], A, k;
+
+        for (k of skills){
+            A = new Skill(k.skill, k.list);
+            new_skills.push(A);
+        }
+        return { summary : summary, skills : new_skills};
+    }
+
+    /**
+     * Read in block resume text and parse out the different segments
+     * @param {array [json]} skills - Resume text read from JSON objects
+     *
+     */
+    static write(background){
+        let skills_string = '', skill;
+        let skills = this.parse(background);
+
+        for (skill of skills.skills){
+            skills_string += skill.write_skill();
+        }
+
+        return `<span id="background">${skills.summary}</span><ul>${skills_string}</ul>`;
+    }
+}
+
+class Skill {
+
+    /**
+     * Skill represents a group of skills that can be bound under a single label
+     * and writes text for the background section of a resume or CV.
+     *
+     * @param {string} skill - title of skill
+     * @param {array [string]} items - names of skills and applicable tools
+     *
+     * @constructor
+     */
+    constructor(skill, items){
+        this.skill = skill;
+        this.items = items;
+    }
+
+    /**
+     * Create a string of the skill and its items
+     * @returns {string} skill and items in an HTML string
+     *
+     */
+    write_skill(){
+        return `<li>${this.skill}<br>${this.items.join(", ")}</li>`;
+    }
+}
+
+class Education {
+    /**
+     * Read in block resume text and parse out the different segments
+     * @param {array [json]} schools - Resume text read from JSON objects
+     *
+     */
+    static parse(schools){
+        let new_schools = [], A, k;
+
+        for (k of schools){
+            A = new School(k.school, k.years, k.degree, k.other);
+            new_schools.push(A);
+        }
+        return new_schools;
+    }
+
+    /**
+     * Read in block resume text and parse out the different segments
+     * @param {array [json]} schools - Resume text read from JSON objects
+     *
+     */
+    static write(schools){
+        let schools_string = '', school;
+        schools = this.parse(schools);
+
+        for (school of schools){
+            schools_string += school.write_school();
+        }
+        return `<ul>${schools_string}</ul>`;
+    }
+}
+
+class School {
+
+    /**
+     * School represents an academic instution attended and creates the text 
+     * for the education section of a resume or CV.
+     *
+     * @param {string} school - name of school
+     * @param {array [integer]} years - years attended
+     * @param {string} degree - name of degree obtained
+     * @param {string} other - other information that should be HTML formatted
+     *
+     * @constructor
+     */
+    constructor(school, years, degree, other){
+        this.school = school;
+        this.years = years;
+        this.degree = degree;
+        this.other = other;
+        this.to_sep = '&rightarrow;';
+    }
+
+    /**
+     * Create the HTML to be insert into the body of the document
+     * @param {Object} selection - jQuery or D3 selection of the region in the
+     *                 document the generated HTML is to be inserted into.
+     * @returns {string} Full HTML block text ready for insertion in the DOM
+     */
+    write_school(){
+        let school = `<span class="university-name">${this.write_name()}</span>`;
+        let degree = `${this.write_degree()}`;
+        let years = `${this.write_years()}`;
+        return `<li>${school}<br>${degree}, ${years}</li>`;
+    }
+
+    /**
+     * Create a string for the school attended
+     * @returns {string} Name of school attended
+     */
+    write_name(){
+        return this.school;
+    }
+
+    /**
+     * Create the year's text and assign null values to 'Present'
+     * @returns {string} Descriptor of years with an organization
+     */
+    write_years(){
+        let start = this.years[0],
+            end = this.years[1];
+
+        if (end === null){
+            end = 'Present';
+        } else if (start === null) {
+            return `${end}`;
+        } else {
+            return `${start} ${this.to_sep} ${end}`;
+        }
+    }
+
+    /**
+     * Create a string for the type of degree earned at this school
+     * @returns {string} Degree obtained
+     */
+    write_degree(){
+        return this.degree;
+    }
+}
+
+class Publications {
+    /**
+     * Read in block resume text and parse out the different segments
+     * @param {array [json]} publications - Resume text read from JSON objects
+     *
+     */
+    static parse(publications){
+        let new_publications = [], A, k;
+
+        for (k of publications){
+            A = new Publication(k.authors, k.year, k.name, k.other);
+            new_publications.push(A);
+        }
+        return new_publications;
+    }
+
+    /**
+     * Read in block resume text and parse out the different segments
+     * @param {array [json]} publications - Resume text read from JSON objects
+     *
+     */
+    static write(publications){
+        let publications_string = '', publication;
+        publications = this.parse(publications);
+
+        for (publication of publications){
+            publications_string += publication.write_publication();
+        }
+        return `${publications_string}`;
+    }
+}
 
 class Publication {
 
@@ -20,15 +226,15 @@ class Publication {
      * @param {string} authors - name of contributing authors of this work
      * @param {string} year - year published or presented
      * @param {string} work - name of article, presentation, or poster
-     * @param {string} context - conference, event, or publication
+     * @param {string} other - conference, event, or publication
      *
      * @constructor
      */
-    constructor(authors, year, name, context){
+    constructor(authors, year, name, other){
         this.authors = authors;
         this.year = year;
         this.name = name;
-        this.context = context;
+        this.other = other;
     }
 
     /**
@@ -44,7 +250,61 @@ class Publication {
      * @returns {string} Representing a single formatted publication entry.
      */
     write_entry(){
-        return `${this.authors} (${this.year}). "${this.name}". ${this.context}`
+        let other = this.write_other();
+        return `${this.authors} (${this.year}). "${this.name}". ${other}`
+    }
+
+    /**
+     * Create a single entry publication for the publication section
+     * @returns {string} Representing a formatted contextual publication info
+     */
+    write_other(){
+        let other = '', item;
+
+        for (item in this.other){
+            other += `${this.other[item]}. `
+        }
+
+        return other;
+    }
+}
+
+class Experience {
+
+    /**
+     * Read in block resume text and parse out the different segments
+     * @param {array [json]} organizations - Resume text read from JSON objects
+     *
+     */
+    static parse(organizations){
+        let new_organizations = [], A, k;
+
+        for (k of organizations){
+            A = new Organization(k.name, 
+                                 k.title, 
+                                 k.location,
+                                 k.years,  
+                                 k.description,
+                                 k.summary);
+
+            new_organizations.push(A);
+        }
+        return new_organizations;
+    }
+
+    /**
+     * Read in block resume text and parse out the different segments
+     * @param {array [json]} organizations - Resume text read from JSON objects
+     *
+     */
+    static write(organizations){
+        let organizations_string = '', organization;
+        organizations = this.parse(organizations);
+
+        for (organization of organizations){
+            organizations_string += organization.write_organization();
+        }
+        return `<ul>${organizations_string}</ul>`;
     }
 }
 
@@ -74,30 +334,10 @@ class Organization {
     }
 
     /**
-     * Read in block resume text and parse out the different segments
-     * @param {array [json]} organizations - Resume text read from JSON objects
-     *
-     */
-    parse(organizations){
-
-        // console.log(`In parse ${organizations}`);
-
-        for (let organization of organizations){
-            // console.log(`In parse loop - ${organization}`);
-            this.name = organization.name;
-            this.title = organization.title;
-            this.years = organization.years;
-            this.location = organization.location;
-            this.summary = organization.summary;
-            this.description = organization.description;
-        }
-    }
-
-    /**
      * Create the HTML to be insert into the body of the document
      * @param {Object} selection - jQuery or D3 selection of the region in the
      *                 document the generated HTML is to be inserted into.
-     *
+     * @returns {string} Full HTML block text ready for insertion in the DOM
      */
     write_organization(selection){
         return `${this.write_header()}${this.write_body()}`
@@ -110,7 +350,20 @@ class Organization {
     write_header(){
         let descriptor = this.write_header_descriptor();
         let title = `${this.name} <span>${descriptor}</span>`;
-        return `<h3>${title}</h3>`;
+        let summary = `${this.write_summary()}`;
+        return `<h3>${title}</h3> ${summary}`;
+    }
+
+    /**
+     * Create the summar containing a brief description of the background
+     * @returns {string} Summary blurb of brief description of position
+     */
+    write_summary(){
+        if (this.summary != undefined || this.summary != null){
+            return this.summary;
+        } else {
+            return '';
+        }
     }
 
     /**
