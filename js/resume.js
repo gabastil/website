@@ -8,22 +8,6 @@
 
 console.log("Inside resume.js");
 
-var TEST = {
-    "name" : "Booz Allen Hamilton",
-    "title" : "Sr. Data Scientist",
-    "location" : "Washington, DC",
-    "years" : [2018, null],
-    "summary" : "Management Consulting firm where I work with cross-functional teams to deliver NLP, ML, and design thinking solutions to meet client needs at the National Institutes of Health (NIH) and Veterans Affairs (VA).",
-    "description" : [
-        "Lead data science efforts in collaboration with human centered design teams",
-        "Plan projects, elicit requirements, iterate on deliverables, and present reports to client",
-        "Develop NLP and machine learning algorithms, topic models, and automated pipelines",
-        "Develop browser-based tools for workshops, presentations, and client engagement",
-        "Conduct design thinking and requirements gathering workshops with stakeholders",
-        "Founded and led rapid response team to address urgent, ad-hoc client needs"
-    ]
-}
-
 class Publication {
 
     /**
@@ -37,10 +21,10 @@ class Publication {
      *
      * @constructor
      */
-    constructor(authors, year, work, context){
+    constructor(authors, year, name, context){
         this.authors = authors;
         this.year = year;
-        this.work = work;
+        this.name = name;
         this.context = context;
     }
 
@@ -57,7 +41,7 @@ class Publication {
      * @returns {string} Representing a single formatted publication entry.
      */
     write_entry(){
-        return `${this.authors} (${this.year}). "${this.work}". ${this.context}`
+        return `${this.authors} (${this.year}). "${this.name}". ${this.context}`
     }
 }
 

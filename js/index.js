@@ -13,6 +13,7 @@
 
     let org = new Organization(...['Schreiber', 'Translator', 'Rockville, MD', [2015,2017], ['test', 'line 2']]);
 
+    console.log(RESUME_JSON);
     SECTION_BACKGROUND.ready(function(){
         console.log(org.write_header());
         // SECTION_BACKGROUND.append(org.write_header());
