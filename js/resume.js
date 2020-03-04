@@ -8,6 +8,9 @@
 
 console.log("Inside resume.js");
 
+class Background {}
+class Education {}
+
 class Publication {
 
     /**
@@ -72,17 +75,22 @@ class Organization {
 
     /**
      * Read in block resume text and parse out the different segments
-     * @param {string} text - Resume text read from file
+     * @param {array [json]} organizations - Resume text read from JSON objects
      *
      */
-    parse(text){
-        let lines = text.split();
-        let header = lines[0].split(";");
+    parse(organizations){
 
-        this.name = header[0];
-        this.title = header[1]
-        this.summary = lines[1];
-        this.description = lines.slice(2,lines.length);
+        // console.log(`In parse ${organizations}`);
+
+        for (let organization of organizations){
+            // console.log(`In parse loop - ${organization}`);
+            this.name = organization.name;
+            this.title = organization.title;
+            this.years = organization.years;
+            this.location = organization.location;
+            this.summary = organization.summary;
+            this.description = organization.description;
+        }
     }
 
     /**

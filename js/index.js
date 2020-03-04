@@ -12,8 +12,10 @@
     const SECTION_BACKGROUND = $("div[id='professional-experience']");
 
     let org = new Organization(...['Schreiber', 'Translator', 'Rockville, MD', [2015,2017], ['test', 'line 2']]);
+    let org2 = new Organization().parse(RESUME_JSON.experience.organizations);
 
-    console.log(RESUME_JSON);
+    console.log(org2);
+    // console.log(org2.parse(RESUME_JSON.experience.organizations));
     SECTION_BACKGROUND.ready(function(){
         console.log(org.write_header());
         // SECTION_BACKGROUND.append(org.write_header());
