@@ -1,24 +1,75 @@
-/*
+/**
  * Filename: index.js
  * Author: Glenn Abastillas
  * Date: February 18, 2020
  *
  * JavaScript functionality for pages under the domain name
  * www.glennabastillas.com
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ *
+ * All functions are encapsulated in the $(document).ready() call.
+ * The sections of this call are as follows:
+ *      1. Populate Text
+ *      2. Populate SVG
+ *      3. Functionality - Navigation
+ *      4. Functionality - Interactivity
+ *
+ * Variables from other scripts:
+ *      1. RESUME is a JSON constant with resume data from the script
+ *         resume_resource.js
+ *      2.
+ *
+ *
  */
 
- $(document).ready(function(){
-
+$(document).ready(function(){
+    /**
+     * 1. POPULATE TEXT FUNCTIONS
+     *
+     * This section contains procedures and functions to populate the HTML
+     * document with HTML blocks that show content.
+     */
     const BACKGROUND = $("div[id='background']");
-    const EXPERIENCE = $("div[id='professional-experience']");
+    const EXPERIENCE = $("div[id='experience']");
     const EDUCATION = $("div[id='education']");
     const PUBLICATIONS = $("div[id='publications']");
+    const CONTACTS = $("div[id='contacts']");
 
-    // Load resume text
-    BACKGROUND.append(Background.write(RESUME.background));
-    EXPERIENCE.append(Experience.write(RESUME.experience));
-    EDUCATION.append(Education.write(RESUME.education));
-    PUBLICATIONS.append(Publications.write(RESUME.publications));
+    const SECTIONS = [BACKGROUND, EXPERIENCE, EDUCATION, PUBLICATIONS, CONTACTS];
+    const CLASSES = [Background, Experience, Education, Publications];
+    const STRINGS = ['background', 'experience', 'education', 'publications', 'contacts'];
+
+    // Main process to populate the HTML document
+    for (var i = 0; i < STRINGS.length; i++){
+        SECTIONS[i].append(insert_header(STRINGS[i], STRINGS[i + 1]));
+
+        if (i < STRINGS.length - 1){
+            SECTIONS[i].append(CLASSES[i].write(RESUME[STRINGS[i]]));
+        }
+    }
+
+    function insert_header(title, next=null){
+        let navigation = `<a href="top">top</a>`
+        if (next != null){
+            navigation = `${navigation} <a href="${next}">${next}</a>`;
+        }
+        return `<h2>${title} ${navigation}</h2>`;
+    }
+
+    /**
+     * 2. POPULATE SVG FUNCTIONS
+     *
+     * This section contains procedures and functions to draw on the SVG canvas
+     *
+     */
+
+
+    /**
+     * 3. FUNCTIONALITY - NAVIGATION
+     *
+     * This section contains procedures and functions to draw on the SVG canvas
+     *
+     */
 
     // Enable scrolling for interactive cv
     $("#cv").click(function(){
@@ -71,7 +122,7 @@
         $("html, body").animate({scrollTop: 0}, 1000);
     });
 
- })
+})
 
 
 // Functions

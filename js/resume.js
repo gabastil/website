@@ -120,7 +120,7 @@ class Education {
 class School {
 
     /**
-     * School represents an academic instution attended and creates the text 
+     * School represents an academic instution attended and creates the text
      * for the education section of a resume or CV.
      *
      * @param {string} school - name of school
@@ -148,7 +148,7 @@ class School {
         let school = `<span class="university-name">${this.write_name()}</span>`;
         let degree = `${this.write_degree()}`;
         let years = `${this.write_years()}`;
-        return `<li>${school}<br>${degree}, ${years}</li>`;
+        return `<li>${school}${degree}, ${years}</li>`;
     }
 
     /**
@@ -156,7 +156,7 @@ class School {
      * @returns {string} Name of school attended
      */
     write_name(){
-        return this.school;
+        return `<h3>${this.school}</h3>`;
     }
 
     /**
@@ -280,10 +280,10 @@ class Experience {
         let new_organizations = [], A, k;
 
         for (k of organizations){
-            A = new Organization(k.name, 
-                                 k.title, 
+            A = new Organization(k.name,
+                                 k.title,
                                  k.location,
-                                 k.years,  
+                                 k.years,
                                  k.description,
                                  k.summary);
 
