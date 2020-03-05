@@ -34,11 +34,12 @@ h2
     font-family: "Garamond", "Times New Roman", serif;
     font-size: 3em;
     font-weight: 100;
+    margin-top: 0;
 }
 
 h3
 {
-    margin: 0 auto;
+    margin-bottom: 0;
 }
 
 ul
@@ -78,6 +79,9 @@ ul
     /* width: 75%; */
     margin: auto;
     padding: 1em 20%;
+    cursor: default;
+    -webkit-user-select: none;
+    user-select: none;
 
 }
 
@@ -89,11 +93,7 @@ ul
 
 #experience
 {
-    background: white;
     font-weight: 100;
-    cursor: default;
-    -webkit-user-select: none;
-    user-select: none;
 }
 
 #experience span
@@ -116,11 +116,10 @@ ul
 
 #publications
 {
-    background: white;
 }
 
 #contacts
 {
     color: #fff;
-    background: #444;
+    background: #333;
 }

@@ -49,9 +49,9 @@ $(document).ready(function(){
     }
 
     function insert_header(title, next=null){
-        let navigation = `<a href="top">top</a>`
+        let navigation = `<a id="${title}"></a><a href="top">top</a>`
         if (next != null){
-            navigation = `${navigation} <a href="${next}">${next}</a>`;
+            navigation = `${navigation} <a href="#${next}">${next}</a>`;
         }
         return `<h2>${title} ${navigation}</h2>`;
     }
@@ -70,6 +70,15 @@ $(document).ready(function(){
      * This section contains procedures and functions to draw on the SVG canvas
      *
      */
+
+    const TOP = $("a[href='top']");
+    const BACKGROUND_ = $("a[href='background']");
+    const EXPERIENCE_ = $("a[href='experience']");
+    const EDUCATION_ = $("a[href='education']");
+
+    // Scroll to Top
+    TOP.click(function(){$("html, body").animate({scrollTop: 0}, 1000);});
+    EXPERIENCE_.click(function(){$("html, body").animate({scrollTop: EXPERIENCE.position().top}, 1000);});
 
     // Enable scrolling for interactive cv
     $("#cv").click(function(){
@@ -116,11 +125,6 @@ $(document).ready(function(){
             $(this).slideUp();
             });
         });
-
-    // Scroll to Top
-    $("a[href='top']").click(function(){
-        $("html, body").animate({scrollTop: 0}, 1000);
-    });
 
 })
 
