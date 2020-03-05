@@ -35,9 +35,22 @@ $(document).ready(function(){
     const PUBLICATIONS = $("div[id='publications']");
     const CONTACTS = $("div[id='contacts']");
 
-    const SECTIONS = [BACKGROUND, EXPERIENCE, EDUCATION, PUBLICATIONS, CONTACTS];
-    const CLASSES = [Background, Experience, Education, Publications];
-    const STRINGS = ['background', 'experience', 'education', 'publications', 'contacts'];
+    const STRINGS = ['background',
+                     'experience',
+                     'education',
+                     'publications',
+                     'contacts'];
+
+    const SECTIONS = [BACKGROUND,
+                      EXPERIENCE,
+                      EDUCATION,
+                      PUBLICATIONS,
+                      CONTACTS];
+
+    const CLASSES = [Background,
+                     Experience,
+                     Education,
+                     Publications];
 
     // Main process to populate the HTML document
     for (var i = 0; i < STRINGS.length; i++){
@@ -48,6 +61,7 @@ $(document).ready(function(){
         }
     }
 
+    // Insert section headers
     function insert_header(title, next=null){
         let navigation = `<a id="${title}"></a><a href="top">top</a>`
         if (next != null){
@@ -92,18 +106,27 @@ $(document).ready(function(){
         window.scrollTo(0, cv_background_top);
     });
 
-    $(document).scroll(function(){
-        var cv_y = $("#p3").position().top;
-        var pg_y = window.pageYOffset;
-        var cv_menu = $(".remote");
 
-        if (pg_y > cv_y + 10) {
-            cv_menu.css("visibility", "visible");
-        } else {
-            cv_menu.css("visibility", "hidden");
-        }
+    /**
+     * 4. FUNCTIONALITY - INTERACTIVITY
+     *
+     * This section contains procedures and functions to enable interactivity
+     *
+     */
 
-    });
+     // [DEPRECATE] Function for a floating navigation bar
+    // $(document).scroll(function(){
+    //     var cv_y = $("#p3").position().top;
+    //     var pg_y = window.pageYOffset;
+    //     var cv_menu = $(".remote");
+
+    //     if (pg_y > cv_y + 10) {
+    //         cv_menu.css("visibility", "visible");
+    //     } else {
+    //         cv_menu.css("visibility", "hidden");
+    //     }
+
+    // });
 
     $("rect").hover(function() {
         $(this).attr("old_fill", $(this).attr("fill"));

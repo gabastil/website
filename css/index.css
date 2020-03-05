@@ -27,6 +27,9 @@ svg
 {
     height: 100%;
     width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 0;
 }
 
 h2
@@ -53,10 +56,10 @@ ul
 
 .page
 {
-    height: auto;
+    height: 100%;
     padding:  0;
     margin:  0;
-    height:  auto;
+    border-top: solid 1px #777;
 }
 
 .page h2 a
@@ -85,15 +88,58 @@ ul
 
 }
 
+.skill
+{
+    background: #fafafa;
+    border: solid 1px #aaa;
+    border-radius: 1em;
+    margin: 0.25em;
+    display: block;
+    padding: 0.75em;
+    /* text-align: center; */
+    width: 15%;
+}
+
+.skill-name
+{
+    font-size: 1em;
+    margin-bottom: 0.5em;
+    font-weight: 800;
+}
+
+.skill-items
+{
+    font-size: 0.75em;
+    width: auto;
+    /* text-align: left; */
+    margin-left: 1.25em;
+    list-style-type: none;
+}
+
+#content
+{
+    /* background: cornflowerblue; */
+}
+
 #background span
 {
     font-size: 2em;
     font-weight: 100;
 }
 
+#all-skills
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    /* text-align: center; */
+}
+
 #experience
 {
     font-weight: 100;
+    /* border-left:  solid 3em rgba(0.9375, 0.875, 1, 0.25); */
 }
 
 #experience span

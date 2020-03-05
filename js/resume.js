@@ -48,14 +48,14 @@ class Background {
      *
      */
     static write(background){
-        let skills_string = '', skill;
-        let skills = this.parse(background);
+        let skills = '', skill;
+        let skills_json = this.parse(background);
 
-        for (skill of skills.skills){
-            skills_string += skill.write_skill();
+        for (skill of skills_json.skills){
+            skills += skill.write_skill();
         }
-
-        return `<span id="background">${skills.summary}</span><ul>${skills_string}</ul>`;
+        skills = `<div id='all-skills'>${skills}</div>`
+        return `<span id="background">${skills_json.summary}</span>${skills}`;
     }
 }
 
@@ -78,10 +78,14 @@ class Skill {
     /**
      * Create a string of the skill and its items
      * @returns {string} skill and items in an HTML string
+     * @since 3/6/2020 - each skill will be contained in a div
      *
      */
     write_skill(){
-        return `<li>${this.skill}<br>${this.items.join(", ")}</li>`;
+        let skill = `<div class='skill-name'>${this.skill}</div>`;
+        let items = `<li>${this.items.join("</li><li>")}</li>`;
+        items = `<div class='skill-items'>${items}</div>`;
+        return `<div class='skill'>${skill}${items}</div>`;
     }
 }
 
