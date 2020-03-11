@@ -18,23 +18,42 @@
     <link type="text/css" href="./css/index.css" rel="stylesheet" />
 
     <!-- JQuery Script Import -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script> -->
+    <script type="text/javascript" src="../javascript/jquery-3.4.1.js"></script>
 
     <!-- D3 Script Import -->
-    <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script> -->
+    <script type="text/javascript" src="../javascript/d3.v5.min.js"></script>
 
     <!-- Custom Script Import -->
     <script type="text/javascript" src="./js/resume_resource.js"></script>
     <script type="text/javascript" src="./js/resume.js"></script>
     <script type="text/javascript" src="./js/index.js"></script>
-    <!-- <script type="text/javascript" src="./js/animation.js"></script> -->
+    <script type="text/javascript" src="./js/animation.js"></script>
 </head>
 <body>
+    <div id="landing-page" class="page">
+        <div id="content" class="page">
+            <svg id="first"></svg>
+            <svg id="second"></svg>
+            <svg id="third"></svg>
+            <div id="header"></div>
+            <div id="header-screen"></div>
+        </div>
+    </div>
 
-    <div id="p1" class="page">
-        <div id="content">
-            <div id="header" style="display: none;">
-                <!-- <h1>Glenn Abastillas</h1> -->
+    <div id='resume' class='page'>
+        <div id='background' class='page section'></div>
+        <div id='experience' class='page section'></div>
+        <div id='education' class='page section'></div>
+        <div id='publications' class='page section'></div>
+        <div id='contacts' class='page section'></div>
+    </div>
+</body>
+</html>
+
+<!-- ARCHIVE -->
+ <!--                <h1>Glenn Abastillas</h1>
                 <ul>
                     <li>
                         <a id="about">About</a>
@@ -48,20 +67,4 @@
                     <li><a href="https://www.linkedin.com/in/glennabastillas/" target="blank">LinkedIn</a></li>
                     <li><a href="https://github.com/gabastil" target="blank">GitHub</a></li>
                     <li><a href="https://doi.org/10.1007/978-981-10-8468-3" target="blank">Research</a></li>
-                    <!-- <li>Visualization Sample</li> -->
-                </ul>
-            </div>
-            <div id="header-screen"></div>
-        </div>
-        <svg id="first"></svg>
-        <svg id="second"></svg>
-        <svg id="third"></svg>
-    </div>
-
-    <div id='background' class='page'></div>
-    <div id='professional-experience' class='page'></div>
-    <div id='publications' class='page'></div>
-    <div id='education' class='page'></div>
-    <div id='contacts' class='page'></div>
-</body>
-</html>
+                </ul> -->

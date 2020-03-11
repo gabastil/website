@@ -48,14 +48,14 @@ class Background {
      *
      */
     static write(background){
-        let skills_string = '', skill;
-        let skills = this.parse(background);
+        let skills = '', skill;
+        let skills_json = this.parse(background);
 
-        for (skill of skills.skills){
-            skills_string += skill.write_skill();
+        for (skill of skills_json.skills){
+            skills += skill.write_skill();
         }
-
-        return `<span id="background">${skills.summary}</span><ul>${skills_string}</ul>`;
+        skills = `<div id='all-skills'>${skills}</div>`
+        return `<span id="background">${skills_json.summary}</span>${skills}`;
     }
 }
 
@@ -78,10 +78,14 @@ class Skill {
     /**
      * Create a string of the skill and its items
      * @returns {string} skill and items in an HTML string
+     * @since 3/6/2020 - each skill will be contained in a div
      *
      */
     write_skill(){
-        return `<li>${this.skill}<br>${this.items.join(", ")}</li>`;
+        let skill = `<div class='skill-name'>${this.skill}</div>`;
+        let items = `<li>${this.items.join("</li><li>")}</li>`;
+        items = `<div class='skill-items'>${items}</div>`;
+        return `<div class='skill'>${skill}${items}</div>`;
     }
 }
 
@@ -120,7 +124,7 @@ class Education {
 class School {
 
     /**
-     * School represents an academic instution attended and creates the text 
+     * School represents an academic instution attended and creates the text
      * for the education section of a resume or CV.
      *
      * @param {string} school - name of school
@@ -148,7 +152,7 @@ class School {
         let school = `<span class="university-name">${this.write_name()}</span>`;
         let degree = `${this.write_degree()}`;
         let years = `${this.write_years()}`;
-        return `<li>${school}<br>${degree}, ${years}</li>`;
+        return `<li>${school}${degree}, ${years}</li>`;
     }
 
     /**
@@ -156,7 +160,7 @@ class School {
      * @returns {string} Name of school attended
      */
     write_name(){
-        return this.school;
+        return `<h3>${this.school}</h3>`;
     }
 
     /**
@@ -280,10 +284,10 @@ class Experience {
         let new_organizations = [], A, k;
 
         for (k of organizations){
-            A = new Organization(k.name, 
-                                 k.title, 
+            A = new Organization(k.name,
+                                 k.title,
                                  k.location,
-                                 k.years,  
+                                 k.years,
                                  k.description,
                                  k.summary);
 
