@@ -15,7 +15,7 @@ $(document).ready(function(){
     /* Draw circles all over the splash screen */
     let number = [100, 50, 10];
     let svgs = ['third', 'second', 'first'];
-    let blurs = ['blur(1.00rem)', 'blur(0.30rem)', 'blur(0.05rem)'];
+    let blurs = ['blur(1.00rem)', 'blur(0.30rem)', 'blur(0.01rem)'];
     let svg, circle;
 
     for (let i = 0; i < 3; i++) {
@@ -25,7 +25,22 @@ $(document).ready(function(){
         Circle.draw_circles(svg, circle);
         svg.style('filter', blurs[i]);
     }
+
+    // let title = d3.select("div#content").insert('svg', ':first-child').attr('id', 'zeroeth');
+
+    // Title.title(d3.select(`svg#${svgs[2]}`));
 });
+
+class Title {
+    constructor(){}
+    static title(selection, title = "Glenn Abastillas"){
+        selection.append("text")
+                 .text(title)
+                 .attr("id", "landing-page-title")
+                 .attr("x", $(window).width() / 2)
+                 .attr("y", $(window).height() / 2);
+    }
+}
 
 class Circle {
 
