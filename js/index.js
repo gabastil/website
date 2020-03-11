@@ -29,17 +29,18 @@ $(document).ready(function(){
      * This section contains procedures and functions to populate the HTML
      * document with HTML blocks that show content.
      */
-    const BACKGROUND = $("div[id='background']");
-    const EXPERIENCE = $("div[id='experience']");
-    const EDUCATION = $("div[id='education']");
-    const PUBLICATIONS = $("div[id='publications']");
-    const CONTACTS = $("div[id='contacts']");
 
     const STRINGS = ['background',
                      'experience',
                      'education',
                      'publications',
                      'contacts'];
+
+    const BACKGROUND = $("div[id='background']");
+    const EXPERIENCE = $("div[id='experience']");
+    const EDUCATION = $("div[id='education']");
+    const PUBLICATIONS = $("div[id='publications']");
+    const CONTACTS = $("div[id='contacts']");
 
     const SECTIONS = [BACKGROUND,
                       EXPERIENCE,
@@ -95,7 +96,7 @@ $(document).ready(function(){
     TOP.click(function(){$("html, body").animate({scrollTop: 0}, 1000);});
     EXPERIENCE_.click(function(){$("html, body").animate({scrollTop: EXPERIENCE.position().top}, 1000);});
     EDUCATION_.click(function(){$("html, body").animate({scrollTop: EDUCATION.position().top}, 1000);});
-    PUBLCIATIONS_.click(function(){$("html, body").animate({scrollTop: PUBLCIATIONS.position().top}, 1000);});
+    PUBLICATIONS_.click(function(){$("html, body").animate({scrollTop: PUBLICATIONS.position().top}, 1000);});
 
     // Enable scrolling for interactive cv
     $("#cv").click(function(){
