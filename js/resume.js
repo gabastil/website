@@ -349,9 +349,9 @@ class Organization {
      */
     write_header(){
         let descriptor = this.write_header_descriptor();
-        let title = `${this.name} <span>${descriptor}</span>`;
+        let title = `${this.name}<span> ${descriptor}</span>`;
         let summary = `${this.write_summary()}`;
-        return `<h3>${title}</h3> ${summary}`;
+        return `<h3>${title}</h3>${summary}`;
     }
 
     /**
