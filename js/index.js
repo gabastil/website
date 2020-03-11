@@ -65,7 +65,7 @@ $(document).ready(function(){
     function insert_header(title, next=null){
         let navigation = `<a id="${title}"></a><a href="top">top</a>`
         if (next != null){
-            navigation = `${navigation} <a href="#${next}">${next}</a>`;
+            navigation = `${navigation} <a href="${next}">${next}</a>`;
         }
         return `<h2>${title} ${navigation}</h2>`;
     }
@@ -89,10 +89,13 @@ $(document).ready(function(){
     const BACKGROUND_ = $("a[href='background']");
     const EXPERIENCE_ = $("a[href='experience']");
     const EDUCATION_ = $("a[href='education']");
+    const PUBLICATIONS_ = $("a[href='publications']");
 
     // Scroll to Top
     TOP.click(function(){$("html, body").animate({scrollTop: 0}, 1000);});
     EXPERIENCE_.click(function(){$("html, body").animate({scrollTop: EXPERIENCE.position().top}, 1000);});
+    EDUCATION_.click(function(){$("html, body").animate({scrollTop: EDUCATION.position().top}, 1000);});
+    PUBLCIATIONS_.click(function(){$("html, body").animate({scrollTop: PUBLCIATIONS.position().top}, 1000);});
 
     // Enable scrolling for interactive cv
     $("#cv").click(function(){
