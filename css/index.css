@@ -29,15 +29,20 @@ svg
     width: 100%;
     position: absolute;
     top: 0;
-    z-index: 0;
 }
 
 h2
 {
-    font-family: "Garamond", "Times New Roman", serif;
+    font-family: "Helvetica", "Garamond", "Times New Roman", serif;
     font-size: 3em;
-    font-weight: 100;
+    font-weight: 800;
     margin-top: 0;
+}
+
+h2 a
+{
+    font-size: 3em;
+    font-variant: all-small-caps;
 }
 
 h3
@@ -77,6 +82,13 @@ ul
     position: relative;
 }
 
+.section svg
+{
+    position: fixed;
+    left: 0;
+    z-index: -1;
+}
+
 .section
 {
     /* width: 75%; */
@@ -90,8 +102,8 @@ ul
 
 .skill
 {
-    background: #fafafa;
-    border: solid 1px #aaa;
+    background: rgba(0.1,0.1,0.1,0.25);
+    border: solid 1px #eee;
     border-radius: 1em;
     margin: 0.25em;
     display: block;
@@ -202,6 +214,9 @@ ul
 #background
 {
     min-height: 100vh;
+    /* background: bottom no-repeat url("https://pngimg.com/uploads/mountain/mountain_PNG18.png"); */
+    /* background: #bed8ff; */
+    /* position: relative; */
 }
 
 #background span
@@ -210,6 +225,11 @@ ul
     font-weight: 100;
     margin-bottom: 2em;
 }
+/*
+#background svg
+{
+    position: relative;
+} */
 
 #all-skills
 {
@@ -224,6 +244,7 @@ ul
 #experience
 {
     font-weight: 100;
+    /* background: #98ff73; */
     /* border-left:  solid 3em rgba(0.9375, 0.875, 1, 0.25); */
 }
 

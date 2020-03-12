@@ -17,9 +17,7 @@
  * Variables from other scripts:
  *      1. RESUME is a JSON constant with resume data from the script
  *         resume_resource.js
- *      2.
- *
- *
+ *      2. Functions and drawings from animation.js are automatically launched.
  */
 
 $(document).ready(function(){
@@ -54,8 +52,11 @@ $(document).ready(function(){
         SECTIONS.push(section);
     }
 
+    SECTIONS[SECTIONS.length - 1].append(insert_header());
+
     const [BACKGROUND, EXPERIENCE, EDUCATION, PUBLICATIONS, CONTACTS] = SECTIONS;
 
+    insert_landing_page_title();
 
     /**
      * 2. POPULATE SVG FUNCTIONS
@@ -64,8 +65,6 @@ $(document).ready(function(){
      *
      */
 
-    // --- draw_svg_on_landing_page();
-
 
     /**
      * 3. FUNCTIONALITY - NAVIGATION
@@ -73,7 +72,6 @@ $(document).ready(function(){
      * This section contains procedures and functions to draw on the SVG canvas
      *
      */
-    insertHeader();
 
     const TOP = $("a[href='#top']");
     const NAV_ABOUT = $("a[id='menu-about']");
@@ -82,26 +80,11 @@ $(document).ready(function(){
     const EDUCATION_ = $("a[href='#education']");
     const PUBLICATIONS_ = $("a[href='#publications']");
 
-    NAV_ABOUT.click(scrollToBackground);
-
-    // Scroll to Top
     TOP.click(scrollTo);
+    NAV_ABOUT.click(scrollToBackground);
     EXPERIENCE_.click(scrollToExperience);
     EDUCATION_.click(scrollToEducation);
     PUBLICATIONS_.click(scrollToPublications);
-
-    // Enable scrolling for interactive cv
-    $("#cv").click(function(){
-        var cv_background = $("#p2");
-        var cv_background_top = cv_background.position().top;
-
-        var scrollTo = {top : cv_background_top,
-                        left : 0,
-                        behavior : 'smooth'};
-
-        window.scrollTo(0, cv_background_top);
-    });
-
 
     /**
      * 4. FUNCTIONALITY - INTERACTIVITY
@@ -110,41 +93,6 @@ $(document).ready(function(){
      *
      */
 
-     // [DEPRECATE] Function for a floating navigation bar
-    // $(document).scroll(function(){
-    //     var cv_y = $("#p3").position().top;
-    //     var pg_y = window.pageYOffset;
-    //     var cv_menu = $(".remote");
-
-    //     if (pg_y > cv_y + 10) {
-    //         cv_menu.css("visibility", "visible");
-    //     } else {
-    //         cv_menu.css("visibility", "hidden");
-    //     }
-
-    // });
-
-    $("rect").hover(function() {
-        $(this).attr("old_fill", $(this).attr("fill"));
-        $(this).attr("fill", "red");
-    }, function() {
-        $(this).attr("fill", $(this).attr("old_fill"));
-    });
-
-    let about_menu = $("#pulldown");
-
-    // Toggle 'about' menu visibility
-    $('a[id="about"]').hover(function(){
-        about_menu.slideDown();
-    },
-    function(){
-        about_menu.hover(function(){
-            $(this).stop();
-        }, function(){
-            $(this).slideUp();
-            });
-        });
-
 })
 
 /**
@@ -152,12 +100,12 @@ $(document).ready(function(){
  *
  * @param {string} title - Main landing page title. Default is "Glenn Abastillas"
  */
-function insertHeader(title = "Glenn Abastillas"){
+function insert_landing_page_title(title = "Glenn Abastillas"){
     let header = $("div[id='header']");
     let labels = {About : '#background',
+                  CV : "#experience",
                   LinkedIn : 'https://www.linkedin.com/in/glennabastillas/',
-                  GitHub : 'https://github.com/gabastil',
-                  Visualization : null};
+                  GitHub : 'https://github.com/gabastil'};
     let menu_item;
 
     header.append(`<h1>${title}</h1>`);
@@ -178,7 +126,7 @@ function insertHeader(title = "Glenn Abastillas"){
  */
 function scrollTo(e, selection = 0, duration = 1000){
     let body = $("html, body");
-    body.animate({scrollTop : selection.position().top, duration});
+    body.animate({scrollTop : selection, duration});
 }
 
 /**
@@ -189,7 +137,7 @@ function scrollTo(e, selection = 0, duration = 1000){
  * @param {integer} duration - lenght of time to animate scroll
  */
 function scrollToBackground(e, id = "background", duration = 1000){
-    scrollTo(e, $(`div[id='${id}']`), duration);
+    scrollTo(e, $(`div[id='${id}']`).position().top, duration);
 }
 
 /**
@@ -200,7 +148,7 @@ function scrollToBackground(e, id = "background", duration = 1000){
  * @param {integer} duration - lenght of time to animate scroll
  */
 function scrollToExperience(e, id = "experience", duration = 1000){
-    scrollTo(e, $(`div[id='${id}']`), duration);
+    scrollTo(e, $(`div[id='${id}']`).position().top, duration);
 }
 
 /**
@@ -211,7 +159,7 @@ function scrollToExperience(e, id = "experience", duration = 1000){
  * @param {integer} duration - lenght of time to animate scroll
  */
 function scrollToEducation(e, id = "education", duration = 1000){
-    scrollTo(e, $(`div[id='${id}']`), duration);
+    scrollTo(e, $(`div[id='${id}']`).position().top, duration);
 }
 
 /**
@@ -221,11 +169,9 @@ function scrollToEducation(e, id = "education", duration = 1000){
  * @param {integer} duration - lenght of time to animate scroll
  */
 function scrollToPublications(e, id = "publications", duration = 1000){
-    scrollTo(e, $(`div[id='${id}']`), duration);
+    scrollTo(e, $(`div[id='${id}']`).position().top, duration);
 }
 
-
-// Insert section headers
 /**
  * Insert section headers for each "page" or "section" on the website with links
  * for going to the top of the page or to the top of various sections.
@@ -234,11 +180,12 @@ function scrollToPublications(e, id = "publications", duration = 1000){
  * @param {string} next - Next section name for linking.
  *
  */
-function insert_header(title, next=null){
+function insert_header(title = "contacts", next=null){
     let navigation = `<a id="${title}"></a><a href="#top">top</a>`
     if (next != null){
         navigation = `${navigation} <a href="#${next}">${next}</a>`;
     }
+    title = title[0].toUpperCase() + title.slice(1);
     return `<h2>${title} ${navigation}</h2>`;
 }
 
