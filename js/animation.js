@@ -27,7 +27,6 @@ $(document).ready(function(){
     }
 
     // let title = d3.select("div#content").insert('svg', ':first-child').attr('id', 'zeroeth');
-
     // Title.title(d3.select(`svg#${svgs[2]}`));
 });
 
