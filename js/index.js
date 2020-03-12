@@ -32,30 +32,32 @@ $(document).ready(function(){
                      'experience',
                      'education',
                      'publications',
-                     'contacts'];
+                     'resources',
+                     null];
 
-    const CLASSES = [Background, Experience, Education, Publications];
+    const CLASSES = [Background, Experience, Education, Publications, Resources];
     const SECTIONS = [];
 
-    let i, section;
+    let i, section, header, content;
 
     // Main process to populate the HTML document
     for (i in STRINGS){
-        section = $(`div[id='${STRINGS[i]}']`);
         i = parseInt(i);
+        if (i === STRINGS.length - 1){
+            break;
+        } else {
+            section = $(`div[id='${STRINGS[i]}']`);
 
-        // Add Section headers and section content with classes from resume.js
-        if (i < STRINGS.length - 1){
-            section.append(insert_header(STRINGS[i], STRINGS[i + 1]));
-            section.append(CLASSES[i].write(RESUME[STRINGS[i]]));
+            header = insert_header(STRINGS[i], STRINGS[i + 1]);
+            content = CLASSES[i].write(RESUME[STRINGS[i]]);
+
+            section.append(header);
+            section.append(content);
+
+            SECTIONS.push(section);
         }
-        SECTIONS.push(section);
     }
-
-    SECTIONS[SECTIONS.length - 1].append(insert_header());
-
     const [BACKGROUND, EXPERIENCE, EDUCATION, PUBLICATIONS, CONTACTS] = SECTIONS;
-
     insert_landing_page_title();
 
     /**
@@ -125,7 +127,7 @@ function insert_landing_page_title(title = "Glenn Abastillas"){
  * @param {integer} location - Y coordinate of the screen to scroll to.
  * @param {integer} duration - length of time to animate scroll
  */
-function scrollTo(e, selection = 0, duration = 1000){
+function scrollTo(e, selection = 0, duration = 500){
     let body = $("html, body");
     body.animate({scrollTop : selection, duration});
 }
@@ -137,7 +139,7 @@ function scrollTo(e, selection = 0, duration = 1000){
  * @param {string} location - name of div to scroll to top of
  * @param {integer} duration - lenght of time to animate scroll
  */
-function scrollToBackground(e, id = "background", duration = 1000){
+function scrollToBackground(e, id = "background", duration = 500){
     scrollTo(e, $(`div[id='${id}']`).position().top, duration);
 }
 
@@ -148,7 +150,7 @@ function scrollToBackground(e, id = "background", duration = 1000){
  * @param {string} location - name of div to scroll to top of
  * @param {integer} duration - lenght of time to animate scroll
  */
-function scrollToExperience(e, id = "experience", duration = 1000){
+function scrollToExperience(e, id = "experience", duration = 500){
     scrollTo(e, $(`div[id='${id}']`).position().top, duration);
 }
 
@@ -159,7 +161,7 @@ function scrollToExperience(e, id = "experience", duration = 1000){
  * @param {string} location - name of div to scroll to top of
  * @param {integer} duration - lenght of time to animate scroll
  */
-function scrollToEducation(e, id = "education", duration = 1000){
+function scrollToEducation(e, id = "education", duration = 500){
     scrollTo(e, $(`div[id='${id}']`).position().top, duration);
 }
 
@@ -169,7 +171,7 @@ function scrollToEducation(e, id = "education", duration = 1000){
  * @param {string} location - name of div to scroll to top of
  * @param {integer} duration - lenght of time to animate scroll
  */
-function scrollToPublications(e, id = "publications", duration = 1000){
+function scrollToPublications(e, id = "publications", duration = 500){
     scrollTo(e, $(`div[id='${id}']`).position().top, duration);
 }
 

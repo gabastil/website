@@ -203,7 +203,8 @@ const RESUME =
             other : {
                 "book" : "Language & Literature in a Glocal World",
                 "publisher" : "Singapore: Springer"
-            }
+            },
+            link : "https://doi.org/10.1007/978-981-10-8468-3"
         },
         {
             authors : ["Abastillas, G. L.",
@@ -220,7 +221,8 @@ const RESUME =
                 "meeting" : "Poster presented at: American Medical " +
                             "Informatics Association Annual Symposium",
                 "meeting-date" : "2017 November 4 - 8: Washington, DC"
-            }
+            },
+            link : null
         },
         {
             authors : ["Abastillas, G.",
@@ -240,7 +242,8 @@ const RESUME =
                             "Association of Central Cancer Regist" +
                             "ries (NAACCR) Annual Conference",
                 "meeting-date" : "2017 June 19 - 22; Albuquerque, NM"
-            }
+            },
+            link : null
         },
         {
             authors : ["Abastillas, G.",
@@ -251,7 +254,8 @@ const RESUME =
             other : {
                 "meeting" : "Presented at: Georgetown NLP Summit",
                 "meeting-date" : "2017 June 28; Washington, DC"
-            }
+            },
+            link : null
         }
     ],
 
@@ -268,7 +272,25 @@ const RESUME =
             degree : "Bachelor's Degree in Science",
             other : ""
         },
+    ],
+
+    resources : [
+        {
+            type : "LinkedIn",
+            link : "https://www.linkedin.com/in/glennabastillas/"
+        },
+        {
+            type : "GitHub",
+            link : "https://github.com/gabastil"
+        },
+        {
+            type : "General Assembly Instructor Profile",
+            link : "https://generalassemb.ly/instructors/glenn-abastillas/19478"
+        },
+        {
+            type : "Linguistics Book Chapter",
+            link : "https://doi.org/10.1007/978-981-10-8468-3"
+        },
     ]
 
 };
-

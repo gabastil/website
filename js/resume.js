@@ -89,6 +89,86 @@ class Skill {
     }
 }
 
+class Resources {
+
+    /**
+     * Resource represents a resource to be added in the Contacts section
+     *
+     * @param {string} contact - contact type
+     * @param {string} link - link to contact
+     *
+     * @constructor
+     */
+    constructor(contact, link){
+        this.contact = contact;
+        this.link = link;
+    }
+
+    /**
+     * Read in block resume text and parse out the different segments
+     * @param {array [json]} resources - Resume text read from JSON objects
+     *
+     */
+    static parse(resources){
+
+        // console.log(resources);
+        // let type = resources.type;
+        // let link = resources.link;
+
+        let parsed_resources = [], A, k;
+
+        for (k of resources){
+            A = new Resource(k.type, k.link);
+            parsed_resources.push(A);
+        }
+        return parsed_resources;
+    }
+
+    /**
+     * Read in block resume text and parse out the different segments
+     * @param {array [json]} skills - Resume text read from JSON objects
+     *
+     */
+    static write(resources){
+        let resources_string = '', resource;
+        resources = this.parse(resources);
+
+        for (resource of resources){
+            resources_string += resource.write_resource();
+        }
+        return `<ul>${resources_string}</ul>`;
+    }
+}
+
+class Resource {
+
+    /**
+     * Resource represents a resource to be added in the Resources section
+     *
+     * @param {string} type - contact type
+     * @param {string} link - link to contact
+     *
+     * @constructor
+     */
+    constructor(type, link){
+        this.type = type;
+        this.link = link;
+    }
+
+    /**
+     * Create the HTML to be insert into the body of the document
+     * @param {Object} selection - jQuery or D3 selection of the region in the
+     *                 document the generated HTML is to be inserted into.
+     * @returns {string} Full HTML block text ready for insertion in the DOM
+     */
+    write_resource(){
+        let id = `id='resource-${this.type}'`;
+        let href = `href='${this.link}'`;
+        let resource = `<a ${id} ${href} target='_blank'>${this.type}</a>`;
+        return `<li>${resource}</li>`;
+    }
+}
+
 class Education {
     /**
      * Read in block resume text and parse out the different segments
@@ -199,7 +279,7 @@ class Publications {
         let new_publications = [], A, k;
 
         for (k of publications){
-            A = new Publication(k.authors, k.year, k.name, k.other);
+            A = new Publication(k.authors, k.year, k.name, k.other, k.link);
             new_publications.push(A);
         }
         return new_publications;
@@ -217,7 +297,7 @@ class Publications {
         for (publication of publications){
             publications_string += publication.write_publication();
         }
-        return `${publications_string}`;
+        return `<ol>${publications_string}</ol>`;
     }
 }
 
@@ -231,14 +311,16 @@ class Publication {
      * @param {string} year - year published or presented
      * @param {string} work - name of article, presentation, or poster
      * @param {string} other - conference, event, or publication
+     * @param {string} link - URL to online resource if available
      *
      * @constructor
      */
-    constructor(authors, year, name, other){
+    constructor(authors, year, name, other, link = null){
         this.authors = authors;
         this.year = year;
         this.name = name;
         this.other = other;
+        this.link = link;
     }
 
     /**
@@ -246,7 +328,7 @@ class Publication {
      * @returns {string} Representing a formatted publication entry.
      */
     write_publication(){
-        return `<ol>${this.write_entry()}</ol>`;
+        return `<li>${this.write_entry()}</li>`;
     }
 
     /**
@@ -255,7 +337,15 @@ class Publication {
      */
     write_entry(){
         let other = this.write_other();
-        return `${this.authors} (${this.year}). "${this.name}". ${other}`
+        let entry;
+
+        entry = `${this.authors} (${this.year}). "${this.name}". ${other}`
+
+        if (this.link != null){
+            entry = `<a href='${this.link}' target='_blank'>${entry}</a>`;
+        }
+
+        return entry;
     }
 
     /**
