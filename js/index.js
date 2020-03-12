@@ -182,9 +182,9 @@ function scrollToPublications(e, id = "publications", duration = 1000){
  *
  */
 function insert_header(title = "contacts", next=null){
-    let navigation = `<a id="${title}"></a><a href="#top">top</a>`
+    let navigation = `<a id="${title}"></a><a href="#top">&uarr;</a>`
     if (next != null){
-        navigation = `${navigation} <a href="#${next}">${next}</a>`;
+        navigation = `${navigation} <a href="#${next}">${next} &darr;</a>`;
     }
     title = title[0].toUpperCase() + title.slice(1);
     return `<h2>${title} ${navigation}</h2>`;

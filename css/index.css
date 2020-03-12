@@ -33,7 +33,7 @@ svg
 
 h2
 {
-    font-family: "Helvetica", "Garamond", "Times New Roman", serif;
+    font-family: "Helvetica", "Arial", sans-serif;
     font-size: 3em;
     font-weight: 100;
     margin-top: 0;
@@ -43,6 +43,7 @@ h2 a
 {
     font-size: 3em;
     font-variant: all-small-caps;
+    font-weight: 400;
 }
 
 h3
