@@ -105,7 +105,8 @@ function insert_landing_page_title(title = "Glenn Abastillas"){
     let labels = {About : '#background',
                   CV : "#experience",
                   LinkedIn : 'https://www.linkedin.com/in/glennabastillas/',
-                  GitHub : 'https://github.com/gabastil'};
+                  GitHub : 'https://github.com/gabastil',
+                  Research : 'https://doi.org/10.1007/978-981-10-8468-3'};
     let menu_item;
 
     header.append(`<h1>${title}</h1>`);

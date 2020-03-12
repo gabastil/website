@@ -35,7 +35,7 @@ h2
 {
     font-family: "Helvetica", "Garamond", "Times New Roman", serif;
     font-size: 3em;
-    font-weight: 800;
+    font-weight: 100;
     margin-top: 0;
 }
 
@@ -102,7 +102,7 @@ ul
 
 .skill
 {
-    background: rgba(0.1,0.1,0.1,0.25);
+    background: #fafafa;
     border: solid 1px #eee;
     border-radius: 1em;
     margin: 0.25em;
@@ -188,6 +188,16 @@ ul
     opacity: 0.3;
     transition: 0.5s all ease;
     text-decoration: none;
+}
+
+#header a:link
+{
+    color: black;
+}
+
+#header a:active
+{
+    color: black;
 }
 
 #header a:hover
