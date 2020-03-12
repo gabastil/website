@@ -85,18 +85,22 @@ $(document).ready(function(){
      * This section contains procedures and functions to draw on the SVG canvas
      *
      */
+    insertHeader();
 
     const TOP = $("a[href='top']");
+    const NAV_ABOUT = $("a[id='menu-about']");
     const BACKGROUND_ = $("a[href='background']");
     const EXPERIENCE_ = $("a[href='experience']");
     const EDUCATION_ = $("a[href='education']");
     const PUBLICATIONS_ = $("a[href='publications']");
 
+    NAV_ABOUT.click(scrollToBackground);
+
     // Scroll to Top
-    TOP.click(function(){$("html, body").animate({scrollTop: 0}, 1000);});
-    EXPERIENCE_.click(function(){$("html, body").animate({scrollTop: EXPERIENCE.position().top}, 1000);});
-    EDUCATION_.click(function(){$("html, body").animate({scrollTop: EDUCATION.position().top}, 1000);});
-    PUBLICATIONS_.click(function(){$("html, body").animate({scrollTop: PUBLICATIONS.position().top}, 1000);});
+    TOP.click(scrollTo);
+    EXPERIENCE_.click(scrollToExperience);
+    EDUCATION_.click(scrollToEducation);
+    PUBLICATIONS_.click(scrollToPublications);
 
     // Enable scrolling for interactive cv
     $("#cv").click(function(){
@@ -154,6 +158,75 @@ $(document).ready(function(){
         });
 
 })
+
+/**
+ * Insert the main title of the webpage and navigation links
+ *
+ * @param {string} title - Main landing page title. Default is "Glenn Abastillas"
+ */
+function insertHeader(title = "Glenn Abastillas"){
+    let header = $("div[id='header']");
+    let labels = ['About', 'LinkedIn', 'GitHub', 'Visualization'];
+    let menu_item;
+
+    header.append(`<h1>${title}</h1>`);
+
+    for (let i in labels){
+        menu_item = `<a id='menu-${labels[i].toLowerCase()}'>${labels[i]}</a>`
+        header.append(menu_item);
+    }
+}
+
+/**
+ * Automatically scroll the screen to a predetermined spot on the page.
+ * @param {event} - default argument passed through
+ * @param {integer} location - Y coordinate of the screen to scroll to.
+ * @param {integer} duration - length of time to animate scroll
+ */
+function scrollTo(e, selection = 0, duration = 1000){
+    let body = $("html, body");
+    body.animate({scrollTop : selection.position().top, duration});
+}
+
+/**
+ * Automatically scroll to the background section
+ * @param {event} - default argument passed through
+ * @param {string} location - name of div to scroll to top of
+ * @param {integer} duration - lenght of time to animate scroll
+ */
+function scrollToBackground(e, id = "background", duration = 1000){
+    scrollTo(e, $(`div[id='${id}']`), duration);
+}
+
+/**
+ * Automatically scroll to the experience section
+ * @param {event} - default argument passed through
+ * @param {string} location - name of div to scroll to top of
+ * @param {integer} duration - lenght of time to animate scroll
+ */
+function scrollToExperience(e, id = "experience", duration = 1000){
+    scrollTo(e, $(`div[id='${id}']`), duration);
+}
+
+/**
+ * Automatically scroll to the education section
+ * @param {event} - default argument passed through
+ * @param {string} location - name of div to scroll to top of
+ * @param {integer} duration - lenght of time to animate scroll
+ */
+function scrollToEducation(e, id = "education", duration = 1000){
+    scrollTo(e, $(`div[id='${id}']`), duration);
+}
+
+/**
+ * Automatically scroll to the publications section
+ * @param {event} - default argument passed through
+ * @param {string} location - name of div to scroll to top of
+ * @param {integer} duration - lenght of time to animate scroll
+ */
+function scrollToPublications(e, id = "publications", duration = 1000){
+    scrollTo(e, $(`div[id='${id}']`), duration);
+}
 
 
 // Functions
