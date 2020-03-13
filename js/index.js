@@ -48,7 +48,7 @@ $(document).ready(function(){
         } else {
             section = $(`div[id='${STRINGS[i]}']`);
 
-            header = insert_header(STRINGS[i], STRINGS[i + 1]);
+            header = insert_header(STRINGS[i], STRINGS.slice(i+1));
             content = CLASSES[i].write(RESUME[STRINGS[i]]);
 
             section.append(header);
@@ -183,11 +183,16 @@ function scrollToPublications(e, id = "publications", duration = 500){
  * @param {string} next - Next section name for linking.
  *
  */
-function insert_header(title = "contacts", next=null){
-    let navigation = `<a id="${title}"></a><a href="#top">top</a>`
+function insert_header(title = "contacts", next = null){
+    let navigation = `<a id="${title}"></a>`
     if (next != null){
-        navigation = `${navigation} <a href="#${next}">${next}</a>`;
+        for (let item of next){
+            if (item != null){
+                navigation = `${navigation}<a href="#${item}"> | ${item}</a>`;
+            }
+        }
     }
+    navigation += ' <a href="#top">| top</a>';
     title = title[0].toUpperCase() + title.slice(1);
     return `<h2>${title} ${navigation}</h2>`;
 }

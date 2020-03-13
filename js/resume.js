@@ -89,70 +89,68 @@ class Skill {
     }
 }
 
-class Resources {
+class Experience {
 
     /**
-     * Resource represents a resource to be added in the Contacts section
+     * Read in block resume text and parse out the different segments
+     * @param {array [json]} organizations - Resume text read from JSON objects
      *
-     * @param {string} contact - contact type
-     * @param {string} link - link to contact
-     *
-     * @constructor
      */
-    constructor(contact, link){
-        this.contact = contact;
-        this.link = link;
+    static parse(organizations){
+        let new_organizations = [], A, k;
+
+        for (k of organizations){
+            A = new Organization(k.name,
+                                 k.title,
+                                 k.location,
+                                 k.years,
+                                 k.description,
+                                 k.summary);
+
+            new_organizations.push(A);
+        }
+        return new_organizations;
     }
 
     /**
      * Read in block resume text and parse out the different segments
-     * @param {array [json]} resources - Resume text read from JSON objects
+     * @param {array [json]} organizations - Resume text read from JSON objects
      *
      */
-    static parse(resources){
+    static write(organizations){
+        let organizations_string = '', organization;
+        organizations = this.parse(organizations);
 
-        // console.log(resources);
-        // let type = resources.type;
-        // let link = resources.link;
-
-        let parsed_resources = [], A, k;
-
-        for (k of resources){
-            A = new Resource(k.type, k.link);
-            parsed_resources.push(A);
+        for (organization of organizations){
+            organizations_string += organization.write_organization();
         }
-        return parsed_resources;
-    }
-
-    /**
-     * Read in block resume text and parse out the different segments
-     * @param {array [json]} skills - Resume text read from JSON objects
-     *
-     */
-    static write(resources){
-        let resources_string = '', resource;
-        resources = this.parse(resources);
-
-        for (resource of resources){
-            resources_string += resource.write_resource();
-        }
-        return `<ul>${resources_string}</ul>`;
+        return `<ul>${organizations_string}</ul>`;
     }
 }
 
-class Resource {
+class Organization {
 
     /**
-     * Resource represents a resource to be added in the Resources section
+     * Organization represents an employer and creates the text for the
+     * professional experience section of a resume or CV.
      *
-     * @param {string} type - contact type
-     * @param {string} link - link to contact
+     * @param {string} name - Name of the organization
+     * @param {string} title - Job title at the organization
+     * @param {array} years - Array of years spent at the organization.
+     * @param {array, string} location - Location of the organization
+     * @param {array, string} description - Job description at the organization
      *
      * @constructor
      */
-    constructor(type, link){
-        this.type = type;
-        this.link = link;
+    constructor(name, title, location, years, description, summary){
+        this.name = name;
+        this.title = title;
+        this.years = years;
+        this.location = location;
+        this.description = description;
+        this.summary = summary;
+        this.sep = '/';
+        this.to_sep = '&rightarrow;';
     }
 
     /**
@@ -161,11 +159,82 @@ class Resource {
      *                 document the generated HTML is to be inserted into.
      * @returns {string} Full HTML block text ready for insertion in the DOM
      */
-    write_resource(){
-        let id = `id='resource-${this.type}'`;
-        let href = `href='${this.link}'`;
-        let resource = `<a ${id} ${href} target='_blank'>${this.type}</a>`;
-        return `<li>${resource}</li>`;
+    write_organization(selection){
+        return `${this.write_header()}${this.write_body()}`
+    }
+
+    /**
+     * Create the header containing the Organization / Job Title / Location
+     * @returns {string} Header (3) with all header information embedded.
+     */
+    write_header(){
+        let descriptor = this.write_header_descriptor();
+        let title = `${this.name}<span> ${descriptor}</span>`;
+        let summary = `${this.write_summary()}`;
+        return `<h3>${title}</h3>${summary}`;
+    }
+
+    /**
+     * Create the summar containing a brief description of the background
+     * @returns {string} Summary blurb of brief description of position
+     */
+    write_summary(){
+        if (this.summary != undefined || this.summary != null){
+            return this.summary;
+        } else {
+            return '';
+        }
+    }
+
+    /**
+     * Create the header descriptor that is embedded in the header
+     * @returns {string} Descriptor with all header information
+     *
+     * @notes Header format is NAME / JOB TITLE / LOCATION / YEARS
+     *
+     */
+    write_header_descriptor(){
+        let a = this.title,
+            b = this.location,
+            c = this.write_years(),
+            s = this.sep;
+        return `${s} ${a} ${s} ${b} ${s} ${c}`;
+    }
+
+    /**
+     * Create the year's text and assign null values to 'Present'
+     * @returns {string} Descriptor of years with an organization
+     */
+    write_years(){
+        let start = this.years[0],
+            end = this.years[1];
+
+        if (end === null){
+            end = 'Present';
+        }
+        return `${start} ${this.to_sep} ${end}`;
+    }
+
+    /**
+     * Create the body text for an organization listing
+     * @returns {string} Body text, which includes the list.
+     *
+     */
+    write_body(){
+        let bullets = '', index;
+        for (index in this.description){
+            bullets += this.write_body_bullet(index);
+        }
+        return `<ul>${bullets}</ul>`;
+    }
+
+    /**
+     * Create the bullet text for the body text
+     * @returns {string} Each description element as a bullet
+     *
+     */
+    write_body_bullet(index){
+        return `<li>${this.description[index]}</li>`;
     }
 }
 
@@ -363,68 +432,70 @@ class Publication {
     }
 }
 
-class Experience {
+class Resources {
 
     /**
-     * Read in block resume text and parse out the different segments
-     * @param {array [json]} organizations - Resume text read from JSON objects
+     * Resource represents a resource to be added in the Contacts section
      *
-     */
-    static parse(organizations){
-        let new_organizations = [], A, k;
-
-        for (k of organizations){
-            A = new Organization(k.name,
-                                 k.title,
-                                 k.location,
-                                 k.years,
-                                 k.description,
-                                 k.summary);
-
-            new_organizations.push(A);
-        }
-        return new_organizations;
-    }
-
-    /**
-     * Read in block resume text and parse out the different segments
-     * @param {array [json]} organizations - Resume text read from JSON objects
-     *
-     */
-    static write(organizations){
-        let organizations_string = '', organization;
-        organizations = this.parse(organizations);
-
-        for (organization of organizations){
-            organizations_string += organization.write_organization();
-        }
-        return `<ul>${organizations_string}</ul>`;
-    }
-}
-
-class Organization {
-
-    /**
-     * Organization represents an employer and creates the text for the
-     * professional experience section of a resume or CV.
-     *
-     * @param {string} name - Name of the organization
-     * @param {string} title - Job title at the organization
-     * @param {array} years - Array of years spent at the organization.
-     * @param {array, string} location - Location of the organization
-     * @param {array, string} description - Job description at the organization
+     * @param {string} contact - contact type
+     * @param {string} link - link to contact
      *
      * @constructor
      */
-    constructor(name, title, location, years, description, summary){
-        this.name = name;
-        this.title = title;
-        this.years = years;
-        this.location = location;
-        this.description = description;
-        this.summary = summary;
-        this.sep = '/';
-        this.to_sep = '&rightarrow;';
+    constructor(contact, link){
+        this.contact = contact;
+        this.link = link;
+    }
+
+    /**
+     * Read in block resume text and parse out the different segments
+     * @param {array [json]} resources - Resume text read from JSON objects
+     *
+     */
+    static parse(resources){
+
+        // console.log(resources);
+        // let type = resources.type;
+        // let link = resources.link;
+
+        let parsed_resources = [], A, k;
+
+        for (k of resources){
+            A = new Resource(k.type, k.link);
+            parsed_resources.push(A);
+        }
+        return parsed_resources;
+    }
+
+    /**
+     * Read in block resume text and parse out the different segments
+     * @param {array [json]} skills - Resume text read from JSON objects
+     *
+     */
+    static write(resources){
+        let resources_string = '', resource;
+        resources = this.parse(resources);
+
+        for (resource of resources){
+            resources_string += resource.write_resource();
+        }
+        return `<ul>${resources_string}</ul>`;
+    }
+}
+
+class Resource {
+
+    /**
+     * Resource represents a resource to be added in the Resources section
+     *
+     * @param {string} type - contact type
+     * @param {string} link - link to contact
+     *
+     * @constructor
+     */
+    constructor(type, link){
+        this.type = type;
+        this.link = link;
     }
 
     /**
@@ -433,81 +504,10 @@ class Organization {
      *                 document the generated HTML is to be inserted into.
      * @returns {string} Full HTML block text ready for insertion in the DOM
      */
-    write_organization(selection){
-        return `${this.write_header()}${this.write_body()}`
-    }
-
-    /**
-     * Create the header containing the Organization / Job Title / Location
-     * @returns {string} Header (3) with all header information embedded.
-     */
-    write_header(){
-        let descriptor = this.write_header_descriptor();
-        let title = `${this.name}<span> ${descriptor}</span>`;
-        let summary = `${this.write_summary()}`;
-        return `<h3>${title}</h3>${summary}`;
-    }
-
-    /**
-     * Create the summar containing a brief description of the background
-     * @returns {string} Summary blurb of brief description of position
-     */
-    write_summary(){
-        if (this.summary != undefined || this.summary != null){
-            return this.summary;
-        } else {
-            return '';
-        }
-    }
-
-    /**
-     * Create the header descriptor that is embedded in the header
-     * @returns {string} Descriptor with all header information
-     *
-     * @notes Header format is NAME / JOB TITLE / LOCATION / YEARS
-     *
-     */
-    write_header_descriptor(){
-        let a = this.title,
-            b = this.location,
-            c = this.write_years(),
-            s = this.sep;
-        return `${s} ${a} ${s} ${b} ${s} ${c}`;
-    }
-
-    /**
-     * Create the year's text and assign null values to 'Present'
-     * @returns {string} Descriptor of years with an organization
-     */
-    write_years(){
-        let start = this.years[0],
-            end = this.years[1];
-
-        if (end === null){
-            end = 'Present';
-        }
-        return `${start} ${this.to_sep} ${end}`;
-    }
-
-    /**
-     * Create the body text for an organization listing
-     * @returns {string} Body text, which includes the list.
-     *
-     */
-    write_body(){
-        let bullets = '', index;
-        for (index in this.description){
-            bullets += this.write_body_bullet(index);
-        }
-        return `<ul>${bullets}</ul>`;
-    }
-
-    /**
-     * Create the bullet text for the body text
-     * @returns {string} Each description element as a bullet
-     *
-     */
-    write_body_bullet(index){
-        return `<li>${this.description[index]}</li>`;
+    write_resource(){
+        let id = `id='resource-${this.type}'`;
+        let href = `href='${this.link}'`;
+        let resource = `<a ${id} ${href} target='_blank'>${this.type}</a>`;
+        return `<li>${resource}</li>`;
     }
 }

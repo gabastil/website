@@ -26,7 +26,7 @@ const RESUME =
                   "h to developing solutions and software for clients.",
         skills : [
             {
-                skill : "Languages",
+                skill : "&#x1F310;<br>Languages",
                 list : ["English",
                         "German",
                         "Spanish",
@@ -37,7 +37,7 @@ const RESUME =
                         "Mandarin"]
             },
             {
-                skill : "Languages and Markup",
+                skill : "&#x1F4BB;<br>Languages",
                 list : ["Python",
                         "R",
                         "SQL",
@@ -48,7 +48,7 @@ const RESUME =
                         "Visual Basic"]
             },
             {
-                skill : "Markup and Data Formats",
+                skill : "&#x1F4BE;<br>Markup & Formats",
                 list : ["HTML",
                         "XML",
                         "YAML",
@@ -59,7 +59,7 @@ const RESUME =
                         "FHIR"]
             },
             {
-                skill : "Development IDEs",
+                skill : "&#x1f468;&#x200d;&#x1f4bb;<br>IDEs",
                 list : ["Anaconda",
                         "Spyder",
                         "Jupyter",
@@ -68,24 +68,24 @@ const RESUME =
                         "I2E"]
             },
             {
-                skill : "Distributed Computing",
+                skill : "&#x1F5A7;<br>Distributed",
                 list : ["Spark",
                         "Hadoop",
                         "Multithreading"]
             },
             {
-                skill : "Environments and Repos",
+                skill : "&#x1F5A5;&#xFE0F;<br>Envs and Repos",
                 list : ["Docker",
                         "Anaconda",
                         "GitHub",
                         "Azure Repository"]
             },
             {
-                skill : "Dashboards",
+                skill : "&#x1F4CA;<br>Dashboards",
                 list : ["Power BI", "Tableau"]
             },
             {
-                skill : "Visual Editing",
+                skill : "&#x1F58C;&#xFE0F;<br>Visual Editing",
                 list : ["Visio",
                         "Draw.io",
                         "Photoshop",
@@ -94,7 +94,7 @@ const RESUME =
                         "Illustrator"]
             },
             {
-                skill : "Office Software",
+                skill : "&#x1F4C0;<br>Office Software",
                 list : ["Word",
                         "PowerPoint",
                         "Excel",
@@ -103,7 +103,7 @@ const RESUME =
                         "Visio"]
             },
             {
-                skill : "Certifications",
+                skill : "&#x1F4DC;<br>Certifications",
                 list : ["Registered Nurse",
                         "Basic Life Support",
                         "Translator",
@@ -256,6 +256,20 @@ const RESUME =
                 "meeting-date" : "2017 June 28; Washington, DC"
             },
             link : null
+        },
+        {
+            authors : ["Abastillas, G."],
+            year : 2016,
+            name : "You are what you tweet: A Divergence in " +
+                   "code-switching practices in Cebuano and " +
+                   "English speakers in the Philippines",
+            other : {
+                "meeting" : "Presented at: Sultan Qaboos University Connecting the Dots in a Glocalized World Conference ",
+                "meeting-date" : "2016 November 3; &#x62c;&#x627;&#x645;&#x639;&#x629;&#x20;&#x627;&#x644;&#x633;&#x644;&#x637;&#x627;&#x646;&#x20;&#x642;&#x627;&#x628;&#x648;&#x633; (Sultan Qaboos University), Muscat, Oman"
+            },
+            link : "https://www.squ.edu.om/Portals/50/conferences/" +
+                   "ConnectingTheDots/ConncetTheDots.PDF?ver=2016-" +
+                   "11-02-113925-197"
         }
     ],
 

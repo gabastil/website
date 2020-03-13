@@ -57,7 +57,8 @@ ul
 
 li:hover
 {
-    text-shadow: 0 0 0.25em #aaa;
+    text-shadow: 0 0 0.1em #aaa;
+    background: yellow;
 }
 
 /* * * * * * * * * * * * * */
@@ -137,8 +138,9 @@ li:hover
 {
     font-size: 1em;
     margin-bottom: 0.5em;
-    font-weight: 800;
+    font-weight: 200;
     word-wrap: break-word;
+    text-align: center;
 }
 
 .skill-items
@@ -299,6 +301,11 @@ li:hover
 {
     list-style-type: none;
     margin-top: 0;
+}
+
+#publications li
+{
+    margin-top: 1em;
 }
 
 #publications li a
