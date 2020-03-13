@@ -48,7 +48,7 @@ $(document).ready(function(){
         } else {
             section = $(`div[id='${STRINGS[i]}']`);
 
-            header = insert_header(STRINGS[i], STRINGS.slice(i+1));
+            header = insert_header(STRINGS[i], STRINGS);
             content = CLASSES[i].write(RESUME[STRINGS[i]]);
 
             section.append(header);
@@ -95,7 +95,17 @@ $(document).ready(function(){
      *
      */
 
+     $(".skill li").hover(toggle_checkmark);
+     // $("div[id='experience'] li").hover(toggle_arrow_up);
+
 })
+
+const EMOJI = {
+                arrow_up : { hex : '\u2b06\ufe0f', html : '&#x2b06;&#xfe0f;'},
+                arrow_down : { hex : '\u2b07\ufe0f', html : '&#x2b07;&#xfe0f;'},
+                checkmark : { hex : '\u2714\ufe0f', html : '&#x2714;&#xfe0f;'},
+                point_left : { hex : '\ud83d\udc48', html : '&#xd83d;&#xdc48;'}
+              };
 
 /**
  * Insert the main title of the webpage and navigation links
@@ -118,6 +128,74 @@ function insert_landing_page_title(title = "Glenn Abastillas"){
         menu_item = `${menu_item}${i}</a>`;
         header.append(menu_item);
     }
+}
+
+/**
+ * Insert section headers for each "page" or "section" on the website with links
+ * for going to the top of the page or to the top of various sections.
+ *
+ * @param {string} title - Section name
+ * @param {string} next - Next section name for linking.
+ *
+ */
+function insert_header(title = "contacts", next = null){
+    let navigation = `<a id="${title}"></a>`;
+
+    if (next != null){
+        for (let item of next){
+            if (item != title && item != null){
+                navigation = `${navigation}<a href="#${item}"> | ${item}</a>`;
+            }
+        }
+    }
+    navigation += `<a href="#top">| ${EMOJI.arrow_up.hex}</a>`;
+    title = title[0].toUpperCase() + title.slice(1);
+    return `<h2>${title} ${navigation}</h2>`;
+}
+
+/**
+ * Add and remove a character from the end of a string
+ * @param {string} character - the character to toggle on a string
+ */
+function toggle_character(object, character){
+    let text = object.text();
+
+    console.log(`${text} and character is ${character}`);
+
+    if (text.endsWith(character)) {
+        text = text.replace(character, '');
+    } else {
+        text = `${text} ${character}`;
+    }
+    object.text(text);
+}
+
+/**
+ * Toggle a checkmark emoji from the end of a string
+ */
+function toggle_checkmark(){
+    toggle_character($(this), EMOJI.checkmark.hex);
+}
+
+/**
+ * Toggle a point_left emoji from the end of a string
+ */
+function toggle_point_left(){
+    toggle_character($(this), EMOJI.point_left.hex);
+}
+
+/**
+ * Toggle a arrown_down emoji from the end of a string
+ */
+function toggle_arrown_down(){
+    toggle_character($(this), EMOJI.arrown_down.hex);
+}
+
+/**
+ * Toggle a arrow_up emoji from the end of a string
+ */
+function toggle_arrow_up(){
+    toggle_character($(this), EMOJI.arrow_up.hex);
 }
 
 /**
@@ -173,28 +251,6 @@ function scrollToEducation(e, id = "education", duration = 500){
  */
 function scrollToPublications(e, id = "publications", duration = 500){
     scrollTo(e, $(`div[id='${id}']`).position().top, duration);
-}
-
-/**
- * Insert section headers for each "page" or "section" on the website with links
- * for going to the top of the page or to the top of various sections.
- *
- * @param {string} title - Section name
- * @param {string} next - Next section name for linking.
- *
- */
-function insert_header(title = "contacts", next = null){
-    let navigation = `<a id="${title}"></a>`
-    if (next != null){
-        for (let item of next){
-            if (item != null){
-                navigation = `${navigation}<a href="#${item}"> | ${item}</a>`;
-            }
-        }
-    }
-    navigation += ' <a href="#top">| top</a>';
-    title = title[0].toUpperCase() + title.slice(1);
-    return `<h2>${title} ${navigation}</h2>`;
 }
 
 /**
