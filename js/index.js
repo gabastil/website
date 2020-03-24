@@ -110,7 +110,8 @@ $(document).ready(function(){
 
     // Visibility of the banner on scroll
     $(window).on('scroll', function(){
-       let threshold = background.position().top - banner.height() * 2;
+       let header = $('div[id="header"]');
+       let threshold = header.position().top + header.height();
        let position = $(window).scrollTop();
        if (position >= threshold){
            banner.show();
