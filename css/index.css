@@ -365,6 +365,12 @@ li:hover
     text-decoration: none;
 }
 
+#publications li a:hover
+{
+    color: #5b9dff;
+    text-decoration: underline;
+}
+
 #publications li a:visited
 {
     text-decoration: none;
@@ -377,20 +383,25 @@ li:hover
     background: #333;
 }
 
+#resources li:hover
+{
+    background: none;
+}
+
 #resources li a
 {
     text-decoration: none;
     color: #fff;
 }
 
+#resources li:hover a:hover
+{
+    color: #5b9dff;
+}
+
 #resources li a:active
 {
     color: #fff;
-}
-
-#resources li a:hover
-{
-    color: #dfefff;
 }
 
 #resources li a:visited

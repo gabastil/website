@@ -118,10 +118,18 @@ $(document).ready(function(){
            banner.hide();
        }
 
-       if (position >= background.position().top && position < experience.position().top) {
-        $('.banner a[href="#background"]').css('color', '#555');
-       } else if (position >= experience.position().top && position < education.position().top){
-        $('.banner a[href="#experience"]').css('color', '#555');
+       // console.log(pageLocationBetween(background, experience));
+
+       if (pageLocationBetween(background.position().top, experience.position().top)) {
+            updateBannerMenu('background');
+       } else if (pageLocationBetween(experience.position().top, education.position().top)){
+            updateBannerMenu('experience');
+       } else if (pageLocationBetween(education.position().top, publications.position().top)){
+            updateBannerMenu('education');
+       } else if (pageLocationBetween(publications.position().top, resources.position().top)){
+            updateBannerMenu('publications');
+       } else if (pageLocationBetween(resources.position().top, $(window).height())){
+            updateBannerMenu('resources');
        }
 
     });
@@ -315,4 +323,28 @@ function scrollToEducation(e, id = "education", duration = 500){
  */
 function scrollToPublications(e, id = "publications", duration = 500){
     scrollTo(e, $(`div[id='${id}']`).position().top, duration);
+}
+
+/**
+ * Determine if the viewer is between two different sections in the document
+ * @param {selection} current - name of current section the viewer could be in
+ * @param {selection} next - name of next section the viewer could be in
+ * @returns {boolean} True if the viewer is on the current section, else False
+ */
+function pageLocationBetween(current, next){
+    let top = $(window).scrollTop(), banner = $('.banner').height() * 5;
+    return (top > current - banner && top <= next - banner);
+}
+
+
+/**
+ * Determine if the viewer is between two different sections in the document
+ * @param {string} href - name of href link to update in the banner
+ */
+function updateBannerMenu(href){
+    let banner = $(`.banner a[href="#${href}"]`),
+        others = $(`.banner a[href!="#${href}"]`);
+
+    banner.css('text-decoration', 'underline');
+    others.css('text-decoration', 'none');
 }
