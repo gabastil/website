@@ -35,7 +35,12 @@ $(document).ready(function(){
                      'resources',
                      null];
 
-    const CLASSES = [Background, Experience, Education, Publications, Resources];
+    const CLASSES = [Background,
+                     Experience,
+                     Education,
+                     Publications,
+                     Resources];
+
     const SECTIONS = [];
 
     let i, section, header, content;
@@ -51,14 +56,14 @@ $(document).ready(function(){
             header = insert_header(STRINGS[i], STRINGS);
             content = CLASSES[i].write(RESUME[STRINGS[i]]);
 
-            section.append(header);
-            section.append(content);
-
+            section.append(header, content);
             SECTIONS.push(section);
         }
     }
+
     const [BACKGROUND, EXPERIENCE, EDUCATION, PUBLICATIONS, CONTACTS] = SECTIONS;
     insert_landing_page_title();
+    insert_static_banner();
 
     /**
      * 2. POPULATE SVG FUNCTIONS
@@ -94,10 +99,35 @@ $(document).ready(function(){
      * This section contains procedures and functions to enable interactivity
      *
      */
+    let banner = $('.banner'),
+        background = $('#background'),
+        experience = $('#experience'),
+        education = $('#education'),
+        publications = $('#publications'),
+        resources = $('#resources')
+        ;
+    banner.hide();
 
-     $(".skill li").hover(toggle_checkmark);
-     // $("div[id='experience'] li").hover(toggle_arrow_up);
+    // Visibility of the banner on scroll
+    $(window).on('scroll', function(){
+       let threshold = background.position().top - banner.height() * 2;
+       let position = $(window).scrollTop();
+       if (position >= threshold){
+           banner.show();
+       } else {
+           banner.hide();
+       }
 
+       if (position >= background.position().top && position < experience.position().top) {
+        $('.banner a[href="#background"]').css('color', '#555');
+       } else if (position >= experience.position().top && position < education.position().top){
+        $('.banner a[href="#experience"]').css('color', '#555');
+       }
+
+    });
+
+
+    $(".skill li").hover(toggle_checkmark);
 })
 
 const EMOJI = {
@@ -107,6 +137,23 @@ const EMOJI = {
                 point_left : { hex : '\ud83d\udc48', html : '&#xd83d;&#xdc48;'}
               };
 
+const MENU = {
+                About : '#background',
+                CV : "#experience",
+                LinkedIn : 'https://www.linkedin.com/in/glennabastillas/',
+                GitHub : 'https://github.com/gabastil',
+                Research : 'https://doi.org/10.1007/978-981-10-8468-3'
+             };
+
+const MENU_BANNER = {
+                        Home : '#top',
+                        Background : '#background',
+                        Experience : '#experience',
+                        Education : '#education',
+                        Publications : '#publications',
+                        Resources : '#resources',
+                    };
+
 /**
  * Insert the main title of the webpage and navigation links
  *
@@ -114,19 +161,36 @@ const EMOJI = {
  */
 function insert_landing_page_title(title = "Glenn Abastillas"){
     let header = $("div[id='header']");
-    let labels = {About : '#background',
-                  CV : "#experience",
-                  LinkedIn : 'https://www.linkedin.com/in/glennabastillas/',
-                  GitHub : 'https://github.com/gabastil',
-                  Research : 'https://doi.org/10.1007/978-981-10-8468-3'};
     let menu_item;
 
     header.append(`<h1>${title}</h1>`);
 
-    for (let i in labels){
-        menu_item = `<a id='menu-${i.toLowerCase()}' href='${labels[i]}'>`;
+    for (let i in MENU){
+        menu_item = `<a id='menu-${i.toLowerCase()}' href='${MENU[i]}'>`;
         menu_item = `${menu_item}${i}</a>`;
         header.append(menu_item);
+    }
+}
+
+/**
+ * Insert the fixed bannerto webpage starting in background
+ *
+ * @param {string} title - Main landing page title. Default is "Glenn Abastillas"
+ */
+function insert_static_banner(title = "Glenn Abastillas", links=undefined){
+    let banner = $("div[id='banner']");
+    let menu_item;
+
+    banner.append(`<span><a href='#top'>${title}</a></span>`);
+
+    for (let i in MENU_BANNER){
+        if (['About', 'CV'].indexOf(i) > -1){
+            continue;
+        }
+
+        menu_item = `<a id='menu-${i.toLowerCase()}' href='${MENU_BANNER[i]}'>`;
+        menu_item = `${menu_item}${i}</a>`;
+        banner.append(menu_item);
     }
 }
 
@@ -141,14 +205,14 @@ function insert_landing_page_title(title = "Glenn Abastillas"){
 function insert_header(title = "contacts", next = null){
     let navigation = `<a id="${title}"></a>`;
 
-    if (next != null){
-        for (let item of next){
-            if (item != title && item != null){
-                navigation = `${navigation}<a href="#${item}"> | ${item}</a>`;
-            }
-        }
-    }
-    navigation += `<a href="#top">| ${EMOJI.arrow_up.hex}</a>`;
+    // if (next != null){
+    //     for (let item of next){
+    //         if (item != title && item != null){
+    //             navigation = `${navigation}<a href="#${item}"> | ${item}</a>`;
+    //         }
+    //     }
+    // }
+    // navigation += `<a href="#top">| ${EMOJI.arrow_up.hex}</a>`;
     title = title[0].toUpperCase() + title.slice(1);
     return `<h2>${title} ${navigation}</h2>`;
 }
@@ -160,7 +224,7 @@ function insert_header(title = "contacts", next = null){
 function toggle_character(object, character){
     let text = object.text();
 
-    console.log(`${text} and character is ${character}`);
+    // console.log(`${text} and character is ${character}`);
 
     if (text.endsWith(character)) {
         text = text.replace(character, '');
@@ -251,12 +315,4 @@ function scrollToEducation(e, id = "education", duration = 500){
  */
 function scrollToPublications(e, id = "publications", duration = 500){
     scrollTo(e, $(`div[id='${id}']`).position().top, duration);
-}
-
-/**
- * [TO BE DEVELOPED or DEPRECATED]
- */
-function showExperienceMenu(){
-    var doc = window;
-    alert(doc.pageYOffset);
 }

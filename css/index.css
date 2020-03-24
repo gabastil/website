@@ -66,12 +66,44 @@ li:hover
 {
     text-shadow: 0 0 0.1em #aaa;
     border: solid 5px yellow, 0;
-    background: yellow;
+    background: #dfefff;
 }
 
 /* * * * * * * * * * * * * */
 /*  General   Definitions  */
 /* * * * * * * * * * * * * */
+
+.banner
+{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: #333;
+    color: white;
+    display: inline;
+    border-bottom: solid 1px black;
+}
+
+.banner span
+{
+    font-size: 2.5em;
+}
+
+.banner a
+{
+    text-decoration: none;
+    color: white;
+    margin-right: 1em;
+}
+
+.banner a:active
+{
+}
+
+.banner a:hover
+{
+    color: #5b9dff;
+}
 
 .page
 {
