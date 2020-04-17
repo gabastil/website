@@ -290,21 +290,36 @@ const RESUME =
 
     resources : [
         {
+            group : "General",
             type : "LinkedIn",
             link : "https://www.linkedin.com/in/glennabastillas/"
         },
         {
+            group : "General",
             type : "GitHub",
             link : "https://github.com/gabastil"
         },
         {
+            group : "General",
             type : "General Assembly Instructor Profile",
             link : "https://generalassemb.ly/instructors/glenn-abastillas/19478"
         },
         {
+            group : "General",
             type : "Linguistics Book Chapter",
             link : "https://doi.org/10.1007/978-981-10-8468-3"
         },
+        {
+            group : "Volunteer Work",
+            type : "Overseas Development Institute's (ODI) COVID Response in Guinea-Bissau",
+            link : "https://gabastil.github.io/odi-covid-19"
+        },
+        {
+            group : "Volunteer Work",
+            type : "DC Language Immersion's Mission to Increase Access to Language Programs in DC",
+            link : "https://github.com/gabastil/dc-language-immersion"
+        }
+
     ]
 
 };

@@ -121,15 +121,21 @@ $(document).ready(function(){
 
        // console.log(pageLocationBetween(background, experience));
 
-       if (pageLocationBetween(background.position().top, experience.position().top)) {
+       let position1 = [background.position().top, experience.position().top],
+           position2 = [experience.position().top, education.position().top],
+           position3 = [education.position().top, publications.position().top],
+           position4 = [publications.position().top, resources.position().top],
+           position5 = [resources.position().top, $(window).height()];
+
+       if (pageLocationBetween(...position1)) {
             updateBannerMenu('background');
-       } else if (pageLocationBetween(experience.position().top, education.position().top)){
+       } else if (pageLocationBetween(...position2)){
             updateBannerMenu('experience');
-       } else if (pageLocationBetween(education.position().top, publications.position().top)){
+       } else if (pageLocationBetween(...position3)){
             updateBannerMenu('education');
-       } else if (pageLocationBetween(publications.position().top, resources.position().top)){
+       } else if (pageLocationBetween(...position4)){
             updateBannerMenu('publications');
-       } else if (pageLocationBetween(resources.position().top, $(window).height())){
+       } else if (pageLocationBetween(...position5)){
             updateBannerMenu('resources');
        }
 
@@ -151,6 +157,7 @@ const MENU = {
                 CV : "#experience",
                 LinkedIn : 'https://www.linkedin.com/in/glennabastillas/',
                 GitHub : 'https://github.com/gabastil',
+                Viz : "https://gabastil.github.io/odi-covid-19",
                 Research : 'https://doi.org/10.1007/978-981-10-8468-3'
              };
 
@@ -279,8 +286,8 @@ function toggle_arrow_up(){
  * @param {integer} duration - length of time to animate scroll
  */
 function scrollTo(e, selection = 0, duration = 500){
-    let body = $("html, body");
-    body.animate({scrollTop : selection, duration});
+    let body = $("html, body"), banner = $("div[id='banner']");
+    body.animate({scrollTop : selection - banner.height(), duration});
 }
 
 /**
