@@ -51,11 +51,10 @@ $(document).ready(function(){
         if (i === STRINGS.length - 1){
             break;
         } else {
-            section = $(`div[id='${STRINGS[i]}']`);
-
             header = insert_header(STRINGS[i], STRINGS);
             content = CLASSES[i].write(RESUME[STRINGS[i]]);
 
+            section = $(`div[id='${STRINGS[i]}']`);
             section.append(header, content);
             SECTIONS.push(section);
         }
@@ -121,24 +120,38 @@ $(document).ready(function(){
 
        // console.log(pageLocationBetween(background, experience));
 
-       let position1 = [background.position().top, experience.position().top],
-           position2 = [experience.position().top, education.position().top],
-           position3 = [education.position().top, publications.position().top],
-           position4 = [publications.position().top, resources.position().top],
-           position5 = [resources.position().top, $(window).height()];
+       // let position1 = [background.position().top, experience.position().top],
+       //     position2 = [experience.position().top, education.position().top],
+       //     position3 = [education.position().top, publications.position().top],
+       //     position4 = [publications.position().top, resources.position().top],
+       //     position5 = [resources.position().top, $(window).height()];
 
-       if (pageLocationBetween(...position1)) {
-            updateBannerMenu('background');
-       } else if (pageLocationBetween(...position2)){
-            updateBannerMenu('experience');
-       } else if (pageLocationBetween(...position3)){
-            updateBannerMenu('education');
-       } else if (pageLocationBetween(...position4)){
-            updateBannerMenu('publications');
-       } else if (pageLocationBetween(...position5)){
-            updateBannerMenu('resources');
-       }
+       // if (pageLocationBetween(...position1)) {
+       //      updateBannerMenu('background');
+       // } else if (pageLocationBetween(...position2)){
+       //      updateBannerMenu('experience');
+       // } else if (pageLocationBetween(...position3)){
+       //      updateBannerMenu('education');
+       // } else if (pageLocationBetween(...position4)){
+       //      updateBannerMenu('publications');
+       // } else if (pageLocationBetween(...position5)){
+       //      updateBannerMenu('resources');
+       // }
 
+       let positions = [
+                        [background.position().top, experience.position().top],
+                        [experience.position().top, education.position().top],
+                        [education.position().top, publications.position().top],
+                        [publications.position().top, resources.position().top],
+                        [resources.position().top, $(window).height()]
+                       ];
+
+        for (i in STRINGS){
+            i = parseInt(i);
+            if (pageLocationBetween(...positions[i])){
+                updateBannerMenu(STRINGS[i]);
+            }
+        }
     });
 
 

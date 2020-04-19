@@ -461,7 +461,7 @@ class Resources {
         let parsed_resources = [], A, k;
 
         for (k of resources){
-            A = new Resource(k.type, k.link);
+            A = new Resource(k.group, k.type, k.link);
             parsed_resources.push(A);
         }
         return parsed_resources;
@@ -473,12 +473,24 @@ class Resources {
      *
      */
     static write(resources){
-        let resources_string = '', resource;
+        let resources_string = '', resources_groups = {}, resource;
         resources = this.parse(resources);
 
         for (resource of resources){
+
+            if (~resources_groups.hasOwnProperty(resource.group)){
+                resources_groups[resource.group] = [];
+            }
+
+
+            resources_groups[resource.group].push(resource.write_resource());
+
+            // Replace below line with new groupings line above
             resources_string += resource.write_resource();
         }
+
+        console.log(resources_groups);
+
         return `<ul>${resources_string}</ul>`;
     }
 }
@@ -488,14 +500,36 @@ class Resource {
     /**
      * Resource represents a resource to be added in the Resources section
      *
+     * @param {string} category - resource grouping (e.g., projects, contact)
      * @param {string} type - contact type
      * @param {string} link - link to contact
      *
      * @constructor
      */
-    constructor(type, link){
+    constructor(group, type, link){
+        this.group = group;
+        this.id = `resources-group-${group.toLowerCase().replace(' ', '-')}`;
         this.type = type;
         this.link = link;
+    }
+
+    /**
+     * Retrieve the div corresponding to this Resource's group and create one
+     * if necessary
+     * @returns {object} - JQuery object for this Resource's group
+     */
+    get_group(){
+        let group = $(`div[id='${this.id}']`);
+
+        if (group.length === 0){
+            let resources = $(`div[id='resources-groups']`);
+            console.log(resources);
+            resources.append(`<div id='${this.id}'></div>`);
+            group = $(`div[id='${this.id}']`);
+            group.append(`<h3>${this.group}</h3>`)
+        }
+
+        return group;
     }
 
     /**
