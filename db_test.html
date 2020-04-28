@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DB Access Test</title>
+</head>
+<body>
+    <div>
+        <h1>Page Instructions</h1>
+        <p>This page will display some results from asynchronous pulls of data.</p>
+        <table id="insert-data-here">
+
+        </table>
+    </div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+    // Insert script to read from mysql here
+    $.ajax(
+    {
+        method : 'GET',
+        url : 'php/db_test.php'
+    }).done(
+        // Insert done code here
+    )
+
+</script>
+</body>
+</html>

@@ -489,6 +489,13 @@ class Resources {
             resources_string += resource.write_resource();
         }
 
+        $("div[id='resources']").append("<div id='resources-groups'></div>");
+        let container = ;
+
+        for (group in resources_groups){
+
+        }
+
         console.log(resources_groups);
 
         return `<ul>${resources_string}</ul>`;
@@ -515,7 +522,8 @@ class Resource {
 
     /**
      * Retrieve the div corresponding to this Resource's group and create one
-     * if necessary
+     * if necessary. Intended for use with the Resources class.
+     *
      * @returns {object} - JQuery object for this Resource's group
      */
     get_group(){
@@ -534,6 +542,7 @@ class Resource {
 
     /**
      * Create the HTML to be insert into the body of the document
+     *
      * @param {Object} selection - jQuery or D3 selection of the region in the
      *                 document the generated HTML is to be inserted into.
      * @returns {string} Full HTML block text ready for insertion in the DOM
